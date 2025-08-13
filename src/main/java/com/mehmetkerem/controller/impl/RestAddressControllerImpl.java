@@ -32,4 +32,16 @@ public class RestAddressControllerImpl implements IRestAddressController {
     public ResponseEntity<List<AddressResponse>> findAllAddress() {
         return ResponseEntity.status(HttpStatus.OK).body(addressService.findAllAddress());
     }
+
+    @PutMapping("/{id}")
+    @Override
+    public ResponseEntity<AddressResponse> updateAddress(@PathVariable("id") String id, @RequestBody AddressRequest request) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(addressService.updateAddress(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    @Override
+    public ResponseEntity<String> deleteAddress(@PathVariable("id") String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.deleteAddress(id));
+    }
 }

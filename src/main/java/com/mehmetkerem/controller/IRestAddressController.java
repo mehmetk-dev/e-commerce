@@ -10,4 +10,7 @@ public interface IRestAddressController {
 
     ResponseEntity<AddressResponse> saveAddress(AddressRequest request);
     ResponseEntity<List<AddressResponse>> findAllAddress();
+    ResponseEntity<AddressResponse> updateAddress(String id,AddressRequest request);
+    ResponseEntity<String> deleteAddress(String id);
+
 }

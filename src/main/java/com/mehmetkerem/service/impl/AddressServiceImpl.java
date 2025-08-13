@@ -8,6 +8,7 @@ import com.mehmetkerem.mapper.AddressMapper;
 import com.mehmetkerem.model.Address;
 import com.mehmetkerem.repository.AddressRepository;
 import com.mehmetkerem.service.IAddressService;
+import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +46,18 @@ public class AddressServiceImpl implements IAddressService {
         return addressList.stream().
                 map(addressMapper::toResponse).
                 toList();
+    }
+
+    @Override
+    public AddressResponse updateAddress(String id, AddressRequest request) {
+        Address currentAddress = getAddressById(id);
+        addressMapper.update(currentAddress, request);
+        return addressMapper.toResponse(addressRepository.save(currentAddress));
+    }
+
+    @Override
+    public String deleteAddress(String id) {
+        addressRepository.delete(getAddressById(id));
+        return String.format(Messages.DELETE_VALUE, id, "adres");
     }
 }

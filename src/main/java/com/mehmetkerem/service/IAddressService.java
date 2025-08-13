@@ -9,4 +9,6 @@ public interface IAddressService {
 
     AddressResponse saveAddress(AddressRequest request);
     List<AddressResponse> findAllAddress();
+    AddressResponse updateAddress(String id, AddressRequest request);
+    String deleteAddress(String id);
 }
