@@ -1,4 +1,4 @@
-package com.mehmetkerem.exception;
+package com.mehmetkerem.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;

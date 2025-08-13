@@ -1,5 +1,6 @@
-package com.mehmetkerem.exception;
+package com.mehmetkerem.handler;
 
+import com.mehmetkerem.exception.BaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

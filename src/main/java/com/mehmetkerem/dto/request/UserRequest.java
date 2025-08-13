@@ -27,5 +27,5 @@ public class UserRequest {
     @NotNull(message = "Kullanıcı rolü boş olamaz.")
     private Role role;
 
-    private List<String> addressIds; // Artık burada sadece referans tutuyoruz
+    private List<String> addressIds;
 }

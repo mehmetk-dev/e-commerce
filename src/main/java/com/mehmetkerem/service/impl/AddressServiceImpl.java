@@ -1,8 +1,49 @@
 package com.mehmetkerem.service.impl;
 
+import com.mehmetkerem.dto.request.AddressRequest;
+import com.mehmetkerem.dto.response.AddressResponse;
+import com.mehmetkerem.exception.ExceptionMessages;
+import com.mehmetkerem.exception.NotFoundException;
+import com.mehmetkerem.mapper.AddressMapper;
+import com.mehmetkerem.model.Address;
+import com.mehmetkerem.repository.AddressRepository;
 import com.mehmetkerem.service.IAddressService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AddressServiceImpl implements IAddressService {
+
+    private final AddressMapper addressMapper;
+    private final AddressRepository addressRepository;
+
+    public AddressServiceImpl(AddressMapper addressMapper, AddressRepository addressRepository) {
+        this.addressMapper = addressMapper;
+        this.addressRepository = addressRepository;
+    }
+
+    private Address createAddress(AddressRequest request) {
+        Address address = new Address();
+        return addressMapper.toEntity(request);
+    }
+
+    public Address getAddressById(String id) {
+        return addressRepository.findById(id).orElseThrow(()
+                -> new NotFoundException(String.format(ExceptionMessages.ADDRESS_NOT_FOUND, id)));
+    }
+
+    @Override
+    public AddressResponse saveAddress(AddressRequest request) {
+        return addressMapper.toResponse(addressRepository.save(createAddress(request)));
+    }
+
+    @Override
+    public List<AddressResponse> findAllAddress() {
+        List<Address> addressList = addressRepository.findAll();
+        return addressList.stream().
+                map(addressMapper::toResponse).
+                toList();
+    }
 }
