@@ -26,7 +26,6 @@ public class AddressServiceImpl implements IAddressService {
     }
 
     private Address createAddress(AddressRequest request) {
-        Address address = new Address();
         return addressMapper.toEntity(request);
     }
 
