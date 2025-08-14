@@ -73,7 +73,9 @@ public class UserServiceImpl implements IUserService {
         if (userRepository.existsByEmail(request.getEmail()) && !request.getEmail().equalsIgnoreCase(currentUser.getEmail())){
             throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS,request.getEmail()));
         }
-        return null;
+        userMapper.update(currentUser,request);
+
+        return userMapper.toResponseWithAddresses(userRepository.save(currentUser),addressService.getAddressesByUser(currentUser));
     }
 
     @Override
@@ -84,7 +86,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserResponse getUserResponseById(String id) {
-        return userMapper.toResponse(getUserById(id));
+        User user = getUserById(id);
+        return userMapper.toResponseWithAddresses(user,addressService.getAddressesByUser(user));
     }
 
     @Override
@@ -92,12 +95,12 @@ public class UserServiceImpl implements IUserService {
         List<User> allUsers = userRepository.findAll();
 
         List<UserResponse> userResponses = new ArrayList<>();
-        for (User user : allUsers) {
-            List<AddressResponse> addressResponses = addressService.addressToResponse(addressService.getAddressesByUser(user));
-            UserResponse response = userMapper.toResponse(user);
-            response.setAddresses(addressResponses);
-            userResponses.add(response);
-        }
-        return userResponses;
+        return allUsers.stream()
+                .map(user -> userMapper.toResponseWithAddresses(
+                        user,
+                        addressService.getAddressesByUser(user)
+                ))
+                .toList();
+
     }
 }

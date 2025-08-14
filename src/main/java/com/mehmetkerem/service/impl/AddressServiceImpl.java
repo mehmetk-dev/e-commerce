@@ -26,9 +26,6 @@ public class AddressServiceImpl implements IAddressService {
         this.addressRepository = addressRepository;
     }
 
-    private Address createAddress(AddressRequest request) {
-        return addressMapper.toEntity(request);
-    }
 
     public Address getAddressById(String id) {
         return addressRepository.findById(id).orElseThrow(()
@@ -37,7 +34,7 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public AddressResponse saveAddress(AddressRequest request) {
-        return addressMapper.toResponse(addressRepository.save(createAddress(request)));
+        return addressMapper.toResponse(addressRepository.save(addressMapper.toEntity(request)));
     }
 
     @Override
@@ -61,11 +58,12 @@ public class AddressServiceImpl implements IAddressService {
         return String.format(Messages.DELETE_VALUE, id, "adres");
     }
 
-    public List<Address> getAddressesByUser(User user){
-        return  user.getAddressIds().stream().map(this::getAddressById).toList();
+    public List<AddressResponse> getAddressesByUser(User user){
+        return  user.getAddressIds().stream()
+                .map(this::getAddressById)
+                .map(addressMapper::toResponse)
+                .toList();
+
     }
 
-    public List<AddressResponse> addressToResponse(List<Address> addresses){
-        return addresses.stream().map(addressMapper::toResponse).toList();
-    }
 }
