@@ -36,7 +36,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public String deleteCProduct(String id) {
+    public String deleteProduct(String id) {
         productRepository.delete(getProductById(id));
         return String.format(Messages.DELETE_VALUE,id,"ürün");
     }

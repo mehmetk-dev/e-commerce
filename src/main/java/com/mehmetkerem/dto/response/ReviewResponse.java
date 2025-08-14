@@ -1,6 +1,5 @@
 package com.mehmetkerem.dto.response;
 
-import com.mehmetkerem.model.User;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,7 +8,7 @@ import java.time.LocalDateTime;
 public class ReviewResponse {
     private String id;
     private ProductResponse product;
-    private User user;
+    private UserResponse user;
     private String comment;
     private int rating;
     private LocalDateTime createdAt;
