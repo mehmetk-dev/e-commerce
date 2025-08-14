@@ -6,6 +6,7 @@ import com.mehmetkerem.exception.ExceptionMessages;
 import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.mapper.AddressMapper;
 import com.mehmetkerem.model.Address;
+import com.mehmetkerem.model.User;
 import com.mehmetkerem.repository.AddressRepository;
 import com.mehmetkerem.service.IAddressService;
 import com.mehmetkerem.util.Messages;
@@ -58,5 +59,13 @@ public class AddressServiceImpl implements IAddressService {
     public String deleteAddress(String id) {
         addressRepository.delete(getAddressById(id));
         return String.format(Messages.DELETE_VALUE, id, "adres");
+    }
+
+    public List<Address> getAddressesByUser(User user){
+        return  user.getAddressIds().stream().map(this::getAddressById).toList();
+    }
+
+    public List<AddressResponse> addressToResponse(List<Address> addresses){
+        return addresses.stream().map(addressMapper::toResponse).toList();
     }
 }

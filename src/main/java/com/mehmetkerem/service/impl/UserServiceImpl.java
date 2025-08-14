@@ -5,15 +5,18 @@ import com.mehmetkerem.dto.response.AddressResponse;
 import com.mehmetkerem.dto.response.UserResponse;
 import com.mehmetkerem.exception.BadRequestException;
 import com.mehmetkerem.exception.ExceptionMessages;
+import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.mapper.AddressMapper;
 import com.mehmetkerem.mapper.UserMapper;
 import com.mehmetkerem.model.Address;
 import com.mehmetkerem.model.User;
 import com.mehmetkerem.repository.UserRepository;
 import com.mehmetkerem.service.IUserService;
+import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +28,10 @@ public class UserServiceImpl implements IUserService {
     private final AddressServiceImpl addressService;
     private final AddressMapper addressMapper;
 
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository, AddressServiceImpl addressService, AddressMapper addressMapper) {
+    public UserServiceImpl(UserMapper userMapper,
+                           UserRepository userRepository,
+                           AddressServiceImpl addressService,
+                           AddressMapper addressMapper) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.addressService = addressService;
@@ -40,8 +46,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserResponse saveUser(UserRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail())){
-            throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS,request.getEmail()));
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS, request.getEmail()));
         }
 
         List<AddressResponse> addresses = request.getAddressIds().stream()
@@ -53,5 +59,45 @@ public class UserServiceImpl implements IUserService {
         savedUser.setCreatedAt(LocalDateTime.now());
 
         return userMapper.toResponseWithAddresses(savedUser, addresses);
+    }
+
+    @Override
+    public String deleteUser(String id) {
+        userRepository.delete(getUserById(id));
+        return String.format(Messages.DELETE_VALUE, id, "kullanıcı");
+    }
+
+    @Override
+    public UserResponse updateUser(String id, UserRequest request) {
+        User currentUser = getUserById(id);
+        if (userRepository.existsByEmail(request.getEmail()) && !request.getEmail().equalsIgnoreCase(currentUser.getEmail())){
+            throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS,request.getEmail()));
+        }
+        return null;
+    }
+
+    @Override
+    public User getUserById(String id) {
+        return userRepository.findById(id).orElseThrow(
+                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "kullanıcı")));
+    }
+
+    @Override
+    public UserResponse getUserResponseById(String id) {
+        return userMapper.toResponse(getUserById(id));
+    }
+
+    @Override
+    public List<UserResponse> findAllUsers() {
+        List<User> allUsers = userRepository.findAll();
+
+        List<UserResponse> userResponses = new ArrayList<>();
+        for (User user : allUsers) {
+            List<AddressResponse> addressResponses = addressService.addressToResponse(addressService.getAddressesByUser(user));
+            UserResponse response = userMapper.toResponse(user);
+            response.setAddresses(addressResponses);
+            userResponses.add(response);
+        }
+        return userResponses;
     }
 }
