@@ -33,6 +33,11 @@ public class AddressServiceImpl implements IAddressService {
     }
 
     @Override
+    public AddressResponse getAddressResponseById(String id) {
+        return addressMapper.toResponse(getAddressById(id));
+    }
+
+    @Override
     public AddressResponse saveAddress(AddressRequest request) {
         return addressMapper.toResponse(addressRepository.save(addressMapper.toEntity(request)));
     }

@@ -70,5 +70,5 @@ public class ProductServiceImpl implements IProductService {
                     return productMapper.toResponseWithCategory(product, categoryResponse);
                 })
                 .toList();
-}
+    }
 }

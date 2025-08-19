@@ -44,4 +44,10 @@ public class RestAddressControllerImpl implements IRestAddressController {
     public ResponseEntity<String> deleteAddress(@PathVariable("id") String id) {
         return ResponseEntity.status(HttpStatus.OK).body(addressService.deleteAddress(id));
     }
+
+    @GetMapping("/{id}")
+    @Override
+    public ResponseEntity<AddressResponse> getAddressById(@PathVariable("id") String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.getAddressResponseById(id));
+    }
 }

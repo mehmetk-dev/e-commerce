@@ -12,5 +12,5 @@ public interface IRestAddressController {
     ResponseEntity<List<AddressResponse>> findAllAddress();
     ResponseEntity<AddressResponse> updateAddress(String id,AddressRequest request);
     ResponseEntity<String> deleteAddress(String id);
-
+    ResponseEntity<AddressResponse> getAddressById(String id);
 }
