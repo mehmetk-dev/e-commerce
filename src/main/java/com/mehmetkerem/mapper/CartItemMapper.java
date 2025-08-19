@@ -7,6 +7,8 @@ import com.mehmetkerem.model.CartItem;
 import com.mehmetkerem.model.Product;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CartItemMapper {
 
@@ -27,4 +29,12 @@ public interface CartItemMapper {
         response.setProduct(product);
         return response;
     }
+
+    default List<CartItem> toEntityCartItem(List<CartItemRequest> cartItemRequests) {
+
+        return cartItemRequests.stream()
+                .map(this::toEntity)
+                .toList();
+    }
+
 }

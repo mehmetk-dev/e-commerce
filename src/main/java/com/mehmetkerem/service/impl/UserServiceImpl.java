@@ -14,6 +14,7 @@ import com.mehmetkerem.repository.UserRepository;
 import com.mehmetkerem.service.IUserService;
 import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ public class UserServiceImpl implements IUserService {
         return String.format(Messages.DELETE_VALUE, id, "kullanıcı");
     }
 
+    @Transactional
     @Override
     public UserResponse updateUser(String id, UserRequest request) {
         User currentUser = getUserById(id);

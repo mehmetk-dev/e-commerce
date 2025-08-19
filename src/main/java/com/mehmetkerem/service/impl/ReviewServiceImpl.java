@@ -43,6 +43,7 @@ public class ReviewServiceImpl implements IReviewService {
          return String.format(Messages.DELETE_VALUE,id,"yorum");
     }
 
+    @Transactional
     @Override
     public ReviewResponse updateReview(String id, ReviewRequest request) {
         Review currentReview = getReviewById(id);
