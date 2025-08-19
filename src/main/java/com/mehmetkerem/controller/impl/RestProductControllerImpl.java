@@ -31,7 +31,6 @@ public class RestProductControllerImpl implements IRestProductController {
     @Override
     public ResponseEntity<List<ProductResponse>> findAllProducts() {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.findAllProducts());
-
     }
 
     @PutMapping("/{id}")

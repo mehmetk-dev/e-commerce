@@ -2,7 +2,8 @@ package com.mehmetkerem.exception;
 
 public class ExceptionMessages {
 
-    public static String ADDRESS_NOT_FOUND = "%s ID'li adres bulunamadı!";
-    public static String EMAIL_ALL_READY_EXISTS = "%s adlı mail zaten kayıtlı!";
-    public static String NOT_FOUND = "%s ID'li %s bulunamadı!";
+    public static final String CATEGORY_ALL_READY_EXISTS = "%s isimli kategori zaten ekli!";
+    public static final String ADDRESS_NOT_FOUND = "%s ID'li adres bulunamadı!";
+    public static final String EMAIL_ALL_READY_EXISTS = "%s adlı mail zaten kayıtlı!";
+    public static final String NOT_FOUND = "%s ID'li %s bulunamadı!";
 }

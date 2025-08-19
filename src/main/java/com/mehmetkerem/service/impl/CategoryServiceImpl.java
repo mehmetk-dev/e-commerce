@@ -2,6 +2,8 @@ package com.mehmetkerem.service.impl;
 
 import com.mehmetkerem.dto.request.CategoryRequest;
 import com.mehmetkerem.dto.response.CategoryResponse;
+import com.mehmetkerem.exception.BadRequestException;
+import com.mehmetkerem.exception.BaseException;
 import com.mehmetkerem.exception.ExceptionMessages;
 import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.mapper.CategoryMapper;
@@ -24,13 +26,14 @@ public class CategoryServiceImpl implements ICategoryService {
         this.categoryMapper = categoryMapper;
     }
 
-    private Category createCategory(CategoryRequest request) {
-        return categoryMapper.toEntity(request);
-    }
-
     @Override
     public CategoryResponse saveCategory(CategoryRequest request) {
-        Category savedCategory = categoryRepository.save(createCategory(request));
+
+        if (categoryRepository.existsByName(request.getName())){
+            throw new BadRequestException(String.format(ExceptionMessages.CATEGORY_ALL_READY_EXISTS,request.getName()));
+        }
+
+        Category savedCategory = categoryRepository.save(categoryMapper.toEntity(request));
         return categoryMapper.toResponse(savedCategory);
     }
 
