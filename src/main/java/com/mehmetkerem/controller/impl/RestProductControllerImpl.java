@@ -35,7 +35,7 @@ public class RestProductControllerImpl implements IRestProductController {
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable("id")String id,@RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable("id") String id, @RequestBody ProductRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.updateProduct(id, request));
     }
 

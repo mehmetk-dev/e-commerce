@@ -12,6 +12,7 @@ import com.mehmetkerem.repository.ReviewRepository;
 import com.mehmetkerem.service.IReviewService;
 import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,10 +31,10 @@ public class ReviewServiceImpl implements IReviewService {
         this.productService = productService;
     }
 
+    @Transactional
     @Override
     public ReviewResponse saveReview(ReviewRequest request) {
-        Review savedReview = reviewRepository.save(reviewMapper.toEntity(request));
-        return getDetails(savedReview);
+        return getDetails(reviewRepository.save(reviewMapper.toEntity(request)));
     }
 
     @Override

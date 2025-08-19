@@ -22,7 +22,7 @@ public class ProductRequest {
 
     @NotNull(message = "Stok adedi boş olamaz.")
     @PositiveOrZero(message = "Stok adedi eksi olamaz.")
-    private Integer quantity;
+    private Integer stock;
 
     @NotBlank(message = "Kategori ID boş olamaz.")
     private String categoryId;

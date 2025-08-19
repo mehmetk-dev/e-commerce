@@ -6,12 +6,14 @@ import com.mehmetkerem.dto.response.ProductResponse;
 import com.mehmetkerem.exception.ExceptionMessages;
 import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.mapper.ProductMapper;
+import com.mehmetkerem.model.Category;
 import com.mehmetkerem.model.Product;
 import com.mehmetkerem.repository.ProductRepository;
 import com.mehmetkerem.service.ICategoryService;
 import com.mehmetkerem.service.IProductService;
 import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,25 +31,22 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional
     public ProductResponse saveProduct(ProductRequest request) {
-
-
-
-        return productMapper.toResponseWithCategory(
-                productRepository.save(productMapper.toEntity(request)),
+        return productMapper.toResponseWithCategory(productRepository.save(productMapper.toEntity(request)),
                 categoryService.getCategoryResponseById(request.getCategoryId()));
     }
 
     @Override
     public String deleteProduct(String id) {
         productRepository.delete(getProductById(id));
-        return String.format(Messages.DELETE_VALUE,id,"ürün");
+        return String.format(Messages.DELETE_VALUE, id, "ürün");
     }
 
     @Override
     public ProductResponse updateProduct(String id, ProductRequest request) {
         Product product = getProductById(id);
-        productMapper.update(product,request);
+        productMapper.update(product, request);
         return productMapper.toResponseWithCategory(productRepository.save(product),
                 categoryService.getCategoryResponseById(product.getCategoryId()));
     }
@@ -56,13 +55,13 @@ public class ProductServiceImpl implements IProductService {
     public ProductResponse getProductResponseById(String id) {
         Product product = getProductById(id);
         return productMapper.toResponseWithCategory(
-                product,categoryService.getCategoryResponseById(product.getCategoryId()));
+                product, categoryService.getCategoryResponseById(product.getCategoryId()));
     }
 
     @Override
     public Product getProductById(String id) {
         return productRepository.findById(id).orElseThrow(
-                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND,id,"ürün")));
+                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "ürün")));
     }
 
     @Override

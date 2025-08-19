@@ -9,8 +9,12 @@ import java.util.List;
 public interface IRestProductController {
 
     ResponseEntity<ProductResponse> saveProduct(ProductRequest request);
+
     ResponseEntity<List<ProductResponse>> findAllProducts();
-    ResponseEntity<ProductResponse> updateProduct(String id,ProductRequest request);
+
+    ResponseEntity<ProductResponse> updateProduct(String id, ProductRequest request);
+
     ResponseEntity<String> deleteProduct(String id);
+
     ResponseEntity<ProductResponse> getProductById(String id);
 }

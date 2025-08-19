@@ -9,8 +9,12 @@ import java.util.List;
 public interface IRestReviewController {
 
     ResponseEntity<ReviewResponse> saveReview(ReviewRequest request);
+
     ResponseEntity<List<ReviewResponse>> findAllReviews();
-    ResponseEntity<ReviewResponse> updateReview(String id,ReviewRequest request);
+
+    ResponseEntity<ReviewResponse> updateReview(String id, ReviewRequest request);
+
     ResponseEntity<String> deleteReview(String id);
+
     ResponseEntity<ReviewResponse> getReviewById(String id);
 }

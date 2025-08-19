@@ -40,7 +40,7 @@ public class RestCategoryControllerImpl implements IRestCategoryController {
 
     @PutMapping("{id}")
     @Override
-    public ResponseEntity<CategoryResponse> updateCategory(@PathVariable("id") String id,@RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> updateCategory(@PathVariable("id") String id, @RequestBody CategoryRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(id, request));
     }
 

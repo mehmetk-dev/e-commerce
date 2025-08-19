@@ -4,12 +4,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-public class MongoConfig {
+@EnableTransactionManagement
+public class MongoTxConfig {
 
     @Bean
-    MongoTransactionManager transactionManager(MongoDatabaseFactory databaseFactory){
+    MongoTransactionManager mongoTransactionManager(MongoDatabaseFactory databaseFactory){
         return new MongoTransactionManager(databaseFactory);
     }
 }

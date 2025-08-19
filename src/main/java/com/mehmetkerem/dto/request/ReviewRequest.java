@@ -18,7 +18,7 @@ public class ReviewRequest {
     private String comment;
 
     @NotNull(message = "Puan boş olamaz.")
-    @Min(value = 1, message = "Puan en az 1 olmalı.")
-    @Max(value = 5, message = "Puan en fazla 5 olabilir.")
-    private Integer rating;
+    @DecimalMin(value = "1.0", inclusive = true, message = "Puan en az 1 olabilir.")
+    @DecimalMax(value = "5.0", inclusive = true, message = "Puan en fazla 5 olabilir.")
+    private Double rating;
 }
