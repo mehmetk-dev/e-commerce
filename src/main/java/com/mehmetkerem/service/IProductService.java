@@ -19,4 +19,6 @@ public interface IProductService {
     Product getProductById(String id);
 
     List<ProductResponse> findAllProducts();
+
+    List<ProductResponse> getProductsByIds(List<String> productIds );
 }

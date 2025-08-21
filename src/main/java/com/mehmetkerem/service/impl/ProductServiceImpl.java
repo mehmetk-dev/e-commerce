@@ -73,4 +73,9 @@ public class ProductServiceImpl implements IProductService {
                 })
                 .toList();
     }
+
+    @Override
+    public List<ProductResponse> getProductsByIds(List<String> productIds) {
+        return productRepository.findByIdIn(productIds).stream().map(productMapper::toResponse).toList();
+    }
 }
