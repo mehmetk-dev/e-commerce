@@ -14,7 +14,6 @@ import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -76,7 +75,32 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public List<ProductResponse> getProductsByIds(List<String> productIds) {
-        return productRepository.findByIdIn(productIds).stream().map(productMapper::toResponse).toList();
+
+        List<Product> products = productRepository.findByIdIn(productIds);
+        return products.stream().map(this::mapProductWithCategory).toList();
     }
 
+    @Override
+    public List<ProductResponse> getProductsByTitle(String title) {
+        List<Product> products = productRepository.findByTitleContainingIgnoreCase(title);
+
+        return products.stream().map(this::mapProductWithCategory).toList();
+    }
+
+    @Override
+    public List<ProductResponse> getProductsByCategory(String categoryId) {
+        List<Product> products = productRepository.findByCategoryId(categoryId);
+
+        return products.stream()
+                .map(this::mapProductWithCategory)
+                .toList();
+    }
+
+    private ProductResponse mapProductWithCategory(Product product) {
+        CategoryResponse categoryResponse = null;
+        if (product.getCategoryId() != null) {
+            categoryResponse = categoryService.getCategoryResponseById(product.getCategoryId());
+        }
+        return productMapper.toResponseWithCategory(product, categoryResponse);
+    }
 }

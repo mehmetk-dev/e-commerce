@@ -4,6 +4,7 @@ import com.mehmetkerem.dto.request.ProductRequest;
 import com.mehmetkerem.dto.response.ProductResponse;
 import org.springframework.http.ResponseEntity;
 
+
 import java.util.List;
 
 public interface IRestProductController {
@@ -17,4 +18,8 @@ public interface IRestProductController {
     ResponseEntity<String> deleteProduct(String id);
 
     ResponseEntity<ProductResponse> getProductById(String id);
+
+    ResponseEntity<List<ProductResponse>> searchProductsByTitle(String title);
+
+    ResponseEntity<List<ProductResponse>> searchProductsByCategoryId(String categoryId);
 }

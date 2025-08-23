@@ -59,12 +59,43 @@ public class CartServiceImpl implements ICartService {
 
         List<CartItem> entityCartItem = cartItemMapper.toEntityCartItem(cartItemRequests);
 
-        cart.setItems(entityCartItem);
+        List<String> productIds = entityCartItem.stream()
+                .map(CartItem::getProductId)
+                .toList();
+
+        List<ProductResponse> products = productService.getProductsByIds(productIds);
+
+        Map<String, ProductResponse> productMap = products.stream()
+                .collect(Collectors.toMap(ProductResponse::getId, p -> p));
+
+        for (CartItem item : entityCartItem) {
+            ProductResponse product = productMap.get(item.getProductId());
+            if (product == null) {
+                throw new NotFoundException("Product not found: " + item.getProductId());
+            }
+            item.setPrice(product.getPrice());
+        }
+
+        Map<String, CartItem> mergedItems = new LinkedHashMap<>();
+        for (CartItem item : entityCartItem) {
+            if (mergedItems.containsKey(item.getProductId())) {
+                CartItem existing = mergedItems.get(item.getProductId());
+                existing.setQuantity(existing.getQuantity() + item.getQuantity());
+            } else {
+                mergedItems.put(item.getProductId(), item);
+            }
+        }
+
+        List<CartItem> finalCartItems = new ArrayList<>(mergedItems.values());
+
+
+        cart.setItems(finalCartItems);
         cart.setUpdatedAt(LocalDateTime.now());
 
         Cart savedCart = cartRepository.save(cart);
 
         CartResponse response = cartMapper.toResponse(savedCart);
+        response.setId(userId);
         response.setItems(toResponseCartItem(savedCart.getItems()));
 
         return response;
@@ -91,12 +122,17 @@ public class CartServiceImpl implements ICartService {
         CartItem item = cartItemMapper.toEntity(request);
         item.setPrice(product.getPrice());
         cart.getItems().add(item);
+        cart.setUpdatedAt(LocalDateTime.now());
 
         return toResponse(cartRepository.save(cart));
     }
 
+    @Transactional
     @Override
     public CartResponse updateItemQuantity(String userId, String productId, int quantity) {
+
+        validateStock(quantity,productService.getProductById(productId));
+
         Cart cart = getCartByUserId(userId);
 
         CartItem cartItem = cart.getItems().stream()
@@ -105,6 +141,7 @@ public class CartServiceImpl implements ICartService {
                 .orElseThrow(() -> new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND_IN_CART));
 
         cartItem.setQuantity(quantity);
+        cart.setUpdatedAt(LocalDateTime.now());
         cartRepository.save(cart);
 
         return CartResponse.builder().items(toResponseCartItem(cart.getItems())).id(userId).build();
@@ -115,6 +152,7 @@ public class CartServiceImpl implements ICartService {
 
         Cart cart = getCartByUserId(userId);
         boolean isRemoved = cart.getItems().removeIf(item -> Objects.equals(item.getProductId(), productId));
+        cart.setUpdatedAt(LocalDateTime.now());
 
         if (!isRemoved){
             throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
@@ -141,7 +179,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     private void validateStock(Integer quantity, Product product){
-        if (quantity == null ||  quantity <= 0){
+        if (quantity == null ||  quantity <= 0 || product.getStock() < quantity){
             throw new BadRequestException(ExceptionMessages.UNKNOW_STOCK);
         }
     }

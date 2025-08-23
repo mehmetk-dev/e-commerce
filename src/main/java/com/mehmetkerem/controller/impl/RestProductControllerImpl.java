@@ -30,24 +30,36 @@ public class RestProductControllerImpl implements IRestProductController {
     @GetMapping("/find-all")
     @Override
     public ResponseEntity<List<ProductResponse>> findAllProducts() {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.findAllProducts());
+        return ResponseEntity.ok(productService.findAllProducts());
     }
 
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<ProductResponse> updateProduct(@PathVariable("id") String id, @RequestBody ProductRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.updateProduct(id, request));
+        return ResponseEntity.ok(productService.updateProduct(id, request));
+    }
+
+    @GetMapping("/search/title")
+    @Override
+    public ResponseEntity<List<ProductResponse>> searchProductsByTitle(@RequestParam String title) {
+        return ResponseEntity.ok(productService.getProductsByTitle(title));
+    }
+
+    @GetMapping("/search/category")
+    @Override
+    public ResponseEntity<List<ProductResponse>> searchProductsByCategoryId(@RequestParam String categoryId) {
+        return ResponseEntity.ok(productService.getProductsByCategory(categoryId));
     }
 
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<String> deleteProduct(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.deleteProduct(id));
+        return ResponseEntity.ok(productService.deleteProduct(id));
     }
 
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.getProductResponseById(id));
+        return ResponseEntity.ok(productService.getProductResponseById(id));
     }
 }
