@@ -9,4 +9,7 @@ public class ExceptionMessages {
     public static final String PRODUCT_NOT_FOUND = "Ürün bulunamadı!";
     public static final String SOME_PRODUCTS_NOT_FOUND = "Bazı ürün(ler) bulunamadı!: %s";
     public static final String INSUFFICIENT_STOCK = "%s ürün için yeterli stok yok.";
+    public static final String UNKNOW_STOCK = "Girilen stok geçersizdir";
+    public static final String PRODUCT_NOT_FOUND_IN_CART = "Girdiğiniz ürün sepetinizde bulunamadı!";
+
 }

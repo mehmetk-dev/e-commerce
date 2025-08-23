@@ -8,7 +8,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = { CartItemMapper.class }, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CartMapper {
 
-    @Mapping(target = "id", ignore = true)
     Cart toEntity(CartRequest request);
 
     CartResponse toResponse(Cart cart);

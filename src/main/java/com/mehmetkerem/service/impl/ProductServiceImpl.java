@@ -6,7 +6,6 @@ import com.mehmetkerem.dto.response.ProductResponse;
 import com.mehmetkerem.exception.ExceptionMessages;
 import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.mapper.ProductMapper;
-import com.mehmetkerem.model.Category;
 import com.mehmetkerem.model.Product;
 import com.mehmetkerem.repository.ProductRepository;
 import com.mehmetkerem.service.ICategoryService;
@@ -15,6 +14,7 @@ import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -78,4 +78,5 @@ public class ProductServiceImpl implements IProductService {
     public List<ProductResponse> getProductsByIds(List<String> productIds) {
         return productRepository.findByIdIn(productIds).stream().map(productMapper::toResponse).toList();
     }
+
 }

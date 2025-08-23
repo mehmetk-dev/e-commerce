@@ -11,13 +11,16 @@ import com.mehmetkerem.mapper.CartItemMapper;
 import com.mehmetkerem.mapper.CartMapper;
 import com.mehmetkerem.model.Cart;
 import com.mehmetkerem.model.CartItem;
+import com.mehmetkerem.model.Product;
 import com.mehmetkerem.repository.CartRepository;
 import com.mehmetkerem.service.ICartService;
 import com.mehmetkerem.service.IProductService;
 import com.mehmetkerem.service.IUserService;
+import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -68,42 +71,99 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public CartResponse getCartByUserId(String userId) {
-        return null;
+    public Cart getCartByUserId(String userId) {
+        return cartRepository.findById(userId).orElseThrow(
+                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND,userId,"sepet")));
     }
 
     @Override
+    public CartResponse getCartResponseByUserId(String userId) {
+        return toResponse(getCartByUserId(userId));
+    }
+
+    @Transactional
+    @Override
     public CartResponse addItem(String userId, CartItemRequest request) {
-        return null;
+        Cart cart = getCartByUserId(userId);
+
+        Product product = productService.getProductById(request.getProductId());
+        validateStock(request.getQuantity(),product);
+        CartItem item = cartItemMapper.toEntity(request);
+        item.setPrice(product.getPrice());
+        cart.getItems().add(item);
+
+        return toResponse(cartRepository.save(cart));
     }
 
     @Override
     public CartResponse updateItemQuantity(String userId, String productId, int quantity) {
-        return null;
+        Cart cart = getCartByUserId(userId);
+
+        CartItem cartItem = cart.getItems().stream()
+                .filter(item -> Objects.equals(item.getProductId(),productId))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND_IN_CART));
+
+        cartItem.setQuantity(quantity);
+        cartRepository.save(cart);
+
+        return CartResponse.builder().items(toResponseCartItem(cart.getItems())).id(userId).build();
     }
 
     @Override
     public CartResponse removeItem(String userId, String productId) {
-        return null;
+
+        Cart cart = getCartByUserId(userId);
+        boolean isRemoved = cart.getItems().removeIf(item -> Objects.equals(item.getProductId(), productId));
+
+        if (!isRemoved){
+            throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
+        }
+        return CartResponse.builder()
+                .items(toResponseCartItem(cart.getItems())).id(userId).build();
     }
 
     @Override
     public String clearCart(String userId) {
-        return "";
+        Cart cart = getCartByUserId(userId);
+        cart.setItems(new ArrayList<>());
+        cart.setUpdatedAt(LocalDateTime.now());
+        cartRepository.save(cart);
+        return String.format(Messages.CLEAR_VALUE,userId,"sepet");
     }
 
     @Override
-    public Double calculateTotal(String userId) {
-        return 0.0;
+    public BigDecimal calculateTotal(String userId) {
+        return getCartByUserId(userId).getItems().stream()
+                .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
+                .reduce(BigDecimal.ZERO,BigDecimal::add);
+
     }
+
+    private void validateStock(Integer quantity, Product product){
+        if (quantity == null ||  quantity <= 0){
+            throw new BadRequestException(ExceptionMessages.UNKNOW_STOCK);
+        }
+    }
+
+    private CartResponse toResponse(Cart cart) {
+        return CartResponse.builder()
+                .id(cart.getUserId())
+                .items(toResponseCartItem(cart.getItems()))
+                .build();
+    }
+
+    private List<String> getProductIdsByCartItems(List<CartItem> cartItems){
+        return cartItems.stream()
+                .map(CartItem::getProductId)
+                .toList();
+    }
+
+
 
     private List<CartItemResponse> toResponseCartItem(List<CartItem> cartItems) {
 
-        List<String> productIds = cartItems.stream()
-                .map(CartItem::getProductId)
-                .toList();
-
-        List<ProductResponse> products = productService.getProductsByIds(productIds);
+        List<ProductResponse> products = productService.getProductsByIds(getProductIdsByCartItems(cartItems));
 
         Map<String, ProductResponse> productMap = products.stream()
                 .collect(Collectors.toMap(ProductResponse::getId, p -> p));

@@ -15,13 +15,17 @@ public interface CartItemMapper {
     // Request → Entity
     @Mapping(target = "productId", source = "productId")
     @Mapping(target = "quantity", source = "quantity")
+    @Mapping(target = "price", ignore = true)
     CartItem toEntity(CartItemRequest request);
 
 
     @Mapping(target = "product", ignore = true)
     @Mapping(target = "quantity", source = "quantity")
+    @Mapping(target = "price", source = "price")
+    @Mapping(target = "total", expression = "java(entity.getPrice().multiply(java.math.BigDecimal.valueOf(entity.getQuantity())))")
     CartItemResponse toResponse(CartItem entity);
 
+    @Mapping(target = "price", ignore = true)
     void update(@MappingTarget CartItem entity, CartItemRequest request);
 
     default CartItemResponse toResponseWithProduct(CartItem entity, ProductResponse product) {
@@ -36,5 +40,6 @@ public interface CartItemMapper {
                 .map(this::toEntity)
                 .toList();
     }
+
 
 }
