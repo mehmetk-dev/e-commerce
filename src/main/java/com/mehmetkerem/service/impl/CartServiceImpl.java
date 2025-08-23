@@ -67,6 +67,36 @@ public class CartServiceImpl implements ICartService {
         return response;
     }
 
+    @Override
+    public CartResponse getCartByUserId(String userId) {
+        return null;
+    }
+
+    @Override
+    public CartResponse addItem(String userId, CartItemRequest request) {
+        return null;
+    }
+
+    @Override
+    public CartResponse updateItemQuantity(String userId, String productId, int quantity) {
+        return null;
+    }
+
+    @Override
+    public CartResponse removeItem(String userId, String productId) {
+        return null;
+    }
+
+    @Override
+    public String clearCart(String userId) {
+        return "";
+    }
+
+    @Override
+    public Double calculateTotal(String userId) {
+        return 0.0;
+    }
+
     private List<CartItemResponse> toResponseCartItem(List<CartItem> cartItems) {
 
         List<String> productIds = cartItems.stream()
