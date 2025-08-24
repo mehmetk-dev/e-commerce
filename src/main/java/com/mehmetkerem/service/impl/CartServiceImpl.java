@@ -218,7 +218,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     private void validateStock(List<CartItemRequest> requests) {
-        if (requests == null || requests.isEmpty()) return;
+        if (requests == null || requests.isEmpty()) throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
 
         Map<String, Integer> wanted = new LinkedHashMap<>();
         for (CartItemRequest req : requests) {
