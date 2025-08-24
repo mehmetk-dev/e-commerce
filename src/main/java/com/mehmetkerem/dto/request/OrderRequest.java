@@ -15,22 +15,11 @@ import java.util.List;
 @Data
 public class OrderRequest {
 
-    @NotNull(message = "Sipariş tarihi boş olamaz.")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime orderDate;
-
-    @NotNull(message = "Sipariş durumu boş olamaz.")
-    private OrderStatus orderStatus;
-
-    @NotEmpty(message = "Sipariş kalemleri boş olamaz.")
-    private List<OrderItemRequest> orderItems;
-
     @NotEmpty(message = "Adres ID boş olamaz.")
     private String addressId;
 
-    @NotNull(message = "Toplam tutar boş olamaz.")
-    private BigDecimal totalAmount;
-
     @NotNull(message = "Ödeme durumu boş olamaz.")
     private PaymentStatus paymentStatus;
+
+    private String note;
 }
