@@ -74,10 +74,16 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public List<ProductResponse> getProductsByIds(List<String> productIds) {
+    public List<ProductResponse> getProductResponsesByIds(List<String> productIds) {
+        return getProductsByIds(productIds).stream().map(this::mapProductWithCategory).toList();
+    }
 
-        List<Product> products = productRepository.findByIdIn(productIds);
-        return products.stream().map(this::mapProductWithCategory).toList();
+    public List<Product> getProductsByIds(List<String> productIds){
+        return productRepository.findByIdIn(productIds);
+    }
+
+    public List<Product> saveAllProducts(List<Product> products){
+        return productRepository.saveAll(products);
     }
 
     @Override
