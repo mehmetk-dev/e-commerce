@@ -27,7 +27,7 @@ public class RestOrderControllerImpl implements IRestOrderController {
     @PostMapping("/save")
     public ResponseEntity<OrderResponse> saveOrder(
             @RequestParam String userId, @RequestBody @Valid OrderRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.saveOrder(userId,request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.saveOrder(userId, request));
     }
 
     @Override

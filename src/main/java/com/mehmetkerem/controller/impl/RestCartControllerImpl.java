@@ -24,32 +24,32 @@ public class RestCartControllerImpl implements IRestCartController {
 
 
     @PostMapping("/{userId}/save")
-    public ResponseEntity<CartResponse> saveCart(@PathVariable("userId") String userId,@RequestBody List<CartItemRequest> request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(cartService.saveCart(userId,request));
+    public ResponseEntity<CartResponse> saveCart(@PathVariable("userId") String userId, @RequestBody List<CartItemRequest> request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartService.saveCart(userId, request));
     }
 
     @GetMapping("/{userId}")
     @Override
-    public ResponseEntity<CartResponse> getCartByUserId(@PathVariable("userId")String userId) {
+    public ResponseEntity<CartResponse> getCartByUserId(@PathVariable("userId") String userId) {
         return ResponseEntity.status(HttpStatus.OK).body(cartService.getCartResponseByUserId(userId));
     }
 
     @PostMapping("/{userId}/items")
     @Override
-    public ResponseEntity<CartResponse> addItem(@PathVariable("userId")String userId, @RequestBody CartItemRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.addItem(userId,request));
+    public ResponseEntity<CartResponse> addItem(@PathVariable("userId") String userId, @RequestBody CartItemRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(cartService.addItem(userId, request));
     }
 
     @PutMapping("/{userId}/items/{productId}")
     @Override
-    public ResponseEntity<CartResponse> updateItemQuantity(@PathVariable("userId") String userId,@PathVariable("productId") String productId,@RequestParam int quantity) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.updateItemQuantity(userId,productId,quantity));
+    public ResponseEntity<CartResponse> updateItemQuantity(@PathVariable("userId") String userId, @PathVariable("productId") String productId, @RequestParam int quantity) {
+        return ResponseEntity.status(HttpStatus.OK).body(cartService.updateItemQuantity(userId, productId, quantity));
     }
 
     @DeleteMapping("/{userId}/items/{productId}")
     @Override
-    public ResponseEntity<CartResponse> removeItem(@PathVariable("userId") String userId,@PathVariable("productId") String productId) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.removeItem(userId,productId));
+    public ResponseEntity<CartResponse> removeItem(@PathVariable("userId") String userId, @PathVariable("productId") String productId) {
+        return ResponseEntity.status(HttpStatus.OK).body(cartService.removeItem(userId, productId));
     }
 
     @DeleteMapping("/{userId}/clear")

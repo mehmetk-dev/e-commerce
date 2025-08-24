@@ -30,14 +30,14 @@ public class RestUserControllerImpl implements IRestUserController {
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<UserResponse> getUserById(@PathVariable("id")String id) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable("id") String id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserResponseById(id));
     }
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<UserResponse> updateUser(@PathVariable("id")String id,@RequestBody UserRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id,request));
+    public ResponseEntity<UserResponse> updateUser(@PathVariable("id") String id, @RequestBody UserRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, request));
     }
 
     @DeleteMapping("/{id}")
