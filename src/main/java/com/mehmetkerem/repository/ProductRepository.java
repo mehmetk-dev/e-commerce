@@ -8,9 +8,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends MongoRepository<Product,String> {
+public interface ProductRepository extends MongoRepository<Product, String> {
 
     List<Product> findByIdIn(List<String> ids);
+
     List<Product> findByTitleContainingIgnoreCase(String title);
+
     List<Product> findByCategoryId(String categoryId);
 }

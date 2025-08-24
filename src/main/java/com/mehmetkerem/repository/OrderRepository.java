@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface OrderRepository extends MongoRepository<Order,String> {
+public interface OrderRepository extends MongoRepository<Order, String> {
     List<Order> findByUserId(String userId);
 }
