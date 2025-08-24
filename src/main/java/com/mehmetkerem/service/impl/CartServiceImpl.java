@@ -63,7 +63,7 @@ public class CartServiceImpl implements ICartService {
                 .map(CartItem::getProductId)
                 .toList();
 
-        List<ProductResponse> products = productService.getProductsByIds(productIds);
+        List<ProductResponse> products = productService.getProductResponsesByIds(productIds);
 
         Map<String, ProductResponse> productMap = products.stream()
                 .collect(Collectors.toMap(ProductResponse::getId, p -> p));
@@ -188,6 +188,7 @@ public class CartServiceImpl implements ICartService {
         return CartResponse.builder()
                 .id(cart.getUserId())
                 .items(toResponseCartItem(cart.getItems()))
+                .updatedAt(cart.getUpdatedAt())
                 .build();
     }
 
@@ -201,7 +202,7 @@ public class CartServiceImpl implements ICartService {
 
     private List<CartItemResponse> toResponseCartItem(List<CartItem> cartItems) {
 
-        List<ProductResponse> products = productService.getProductsByIds(getProductIdsByCartItems(cartItems));
+        List<ProductResponse> products = productService.getProductResponsesByIds(getProductIdsByCartItems(cartItems));
 
         Map<String, ProductResponse> productMap = products.stream()
                 .collect(Collectors.toMap(ProductResponse::getId, p -> p));
@@ -235,7 +236,7 @@ public class CartServiceImpl implements ICartService {
         }
 
         List<String> ids = new ArrayList<>(wanted.keySet());
-        List<ProductResponse> products = productService.getProductsByIds(ids);
+        List<ProductResponse> products = productService.getProductResponsesByIds(ids);
 
         Set<String> foundIds = products.stream()
                 .map(ProductResponse::getId)
