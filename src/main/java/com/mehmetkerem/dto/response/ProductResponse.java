@@ -19,7 +19,7 @@ public class ProductResponse {
     private List<String> imageUrls;
     private Map<String, Object> attributes;
 
-    public ProductResponse(String id, String title, BigDecimal price){
+    public ProductResponse(String id, String title, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.price = price;
