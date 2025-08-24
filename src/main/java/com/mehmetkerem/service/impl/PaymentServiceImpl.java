@@ -33,7 +33,7 @@ public class PaymentServiceImpl implements IPaymentService {
 
     @Transactional
     @Override
-    public PaymentResponse processPayment(String userId, String orderId, BigDecimal amount, PaymentMethod paymentMethod,PaymentStatus paymentStatus) {
+    public PaymentResponse processPayment(String userId, String orderId, BigDecimal amount, PaymentMethod paymentMethod, PaymentStatus paymentStatus) {
 
         userService.getUserById(userId);
         orderService.getOrderById(orderId);
@@ -55,9 +55,9 @@ public class PaymentServiceImpl implements IPaymentService {
         return convertPaymentToResponse(getPaymentById(id));
     }
 
-    public Payment getPaymentById(String id){
+    public Payment getPaymentById(String id) {
         return paymentRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND,id,"ödeme")));
+                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "ödeme")));
     }
 
     @Override
@@ -81,10 +81,10 @@ public class PaymentServiceImpl implements IPaymentService {
     @Override
     public String deletePayment(String id) {
         paymentRepository.delete(getPaymentById(id));
-        return String.format(Messages.DELETE_VALUE,id,"ödeme");
+        return String.format(Messages.DELETE_VALUE, id, "ödeme");
     }
 
-    private PaymentResponse convertPaymentToResponse(Payment payment){
+    private PaymentResponse convertPaymentToResponse(Payment payment) {
 
         UserResponse userResponse = userService.getUserResponseById(payment.getUserId());
         OrderResponse orderResponse = orderService.getOrderResponseById(payment.getOrderId());

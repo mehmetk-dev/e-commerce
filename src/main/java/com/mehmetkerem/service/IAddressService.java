@@ -9,10 +9,15 @@ import java.util.List;
 public interface IAddressService {
 
     AddressResponse saveAddress(AddressRequest request);
+
     List<AddressResponse> findAllAddress();
+
     AddressResponse updateAddress(String id, AddressRequest request);
+
     String deleteAddress(String id);
+
     Address getAddressById(String id);
+
     AddressResponse getAddressResponseById(String id);
 
 }

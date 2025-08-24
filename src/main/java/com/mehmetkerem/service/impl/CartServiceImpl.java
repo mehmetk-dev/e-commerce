@@ -104,7 +104,7 @@ public class CartServiceImpl implements ICartService {
     @Override
     public Cart getCartByUserId(String userId) {
         return cartRepository.findById(userId).orElseThrow(
-                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND,userId,"sepet")));
+                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, userId, "sepet")));
     }
 
     @Override
@@ -118,7 +118,7 @@ public class CartServiceImpl implements ICartService {
         Cart cart = getCartByUserId(userId);
 
         Product product = productService.getProductById(request.getProductId());
-        validateStock(request.getQuantity(),product);
+        validateStock(request.getQuantity(), product);
         CartItem item = cartItemMapper.toEntity(request);
         item.setPrice(product.getPrice());
         cart.getItems().add(item);
@@ -131,12 +131,12 @@ public class CartServiceImpl implements ICartService {
     @Override
     public CartResponse updateItemQuantity(String userId, String productId, int quantity) {
 
-        validateStock(quantity,productService.getProductById(productId));
+        validateStock(quantity, productService.getProductById(productId));
 
         Cart cart = getCartByUserId(userId);
 
         CartItem cartItem = cart.getItems().stream()
-                .filter(item -> Objects.equals(item.getProductId(),productId))
+                .filter(item -> Objects.equals(item.getProductId(), productId))
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND_IN_CART));
 
@@ -154,7 +154,7 @@ public class CartServiceImpl implements ICartService {
         boolean isRemoved = cart.getItems().removeIf(item -> Objects.equals(item.getProductId(), productId));
         cart.setUpdatedAt(LocalDateTime.now());
 
-        if (!isRemoved){
+        if (!isRemoved) {
             throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
         }
         return CartResponse.builder()
@@ -167,19 +167,19 @@ public class CartServiceImpl implements ICartService {
         cart.setItems(new ArrayList<>());
         cart.setUpdatedAt(LocalDateTime.now());
         cartRepository.save(cart);
-        return String.format(Messages.CLEAR_VALUE,userId,"sepet");
+        return String.format(Messages.CLEAR_VALUE, userId, "sepet");
     }
 
     @Override
     public BigDecimal calculateTotal(String userId) {
         return getCartByUserId(userId).getItems().stream()
                 .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
-                .reduce(BigDecimal.ZERO,BigDecimal::add);
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     }
 
-    private void validateStock(Integer quantity, Product product){
-        if (quantity == null ||  quantity <= 0 || product.getStock() < quantity){
+    private void validateStock(Integer quantity, Product product) {
+        if (quantity == null || quantity <= 0 || product.getStock() < quantity) {
             throw new BadRequestException(ExceptionMessages.UNKNOW_STOCK);
         }
     }
@@ -192,12 +192,11 @@ public class CartServiceImpl implements ICartService {
                 .build();
     }
 
-    private List<String> getProductIdsByCartItems(List<CartItem> cartItems){
+    private List<String> getProductIdsByCartItems(List<CartItem> cartItems) {
         return cartItems.stream()
                 .map(CartItem::getProductId)
                 .toList();
     }
-
 
 
     private List<CartItemResponse> toResponseCartItem(List<CartItem> cartItems) {

@@ -29,8 +29,8 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public CategoryResponse saveCategory(CategoryRequest request) {
 
-        if (categoryRepository.existsByName(request.getName())){
-            throw new BadRequestException(String.format(ExceptionMessages.CATEGORY_ALL_READY_EXISTS,request.getName()));
+        if (categoryRepository.existsByName(request.getName())) {
+            throw new BadRequestException(String.format(ExceptionMessages.CATEGORY_ALL_READY_EXISTS, request.getName()));
         }
 
         Category savedCategory = categoryRepository.save(categoryMapper.toEntity(request));

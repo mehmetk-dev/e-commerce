@@ -63,8 +63,8 @@ public class AddressServiceImpl implements IAddressService {
         return String.format(Messages.DELETE_VALUE, id, "adres");
     }
 
-    public List<AddressResponse> getAddressesByUser(User user){
-        return  user.getAddressIds().stream()
+    public List<AddressResponse> getAddressesByUser(User user) {
+        return user.getAddressIds().stream()
                 .map(this::getAddressById)
                 .map(addressMapper::toResponse)
                 .toList();

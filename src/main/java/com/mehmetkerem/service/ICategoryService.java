@@ -8,9 +8,14 @@ import java.util.List;
 
 public interface ICategoryService {
     CategoryResponse saveCategory(CategoryRequest request);
+
     String deleteCategory(String id);
-    CategoryResponse updateCategory(String id,CategoryRequest request);
+
+    CategoryResponse updateCategory(String id, CategoryRequest request);
+
     CategoryResponse getCategoryResponseById(String id);
+
     Category getCategoryById(String id);
+
     List<CategoryResponse> findAllCategories();
 }

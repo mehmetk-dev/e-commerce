@@ -72,12 +72,12 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserResponse updateUser(String id, UserRequest request) {
         User currentUser = getUserById(id);
-        if (userRepository.existsByEmail(request.getEmail()) && !request.getEmail().equalsIgnoreCase(currentUser.getEmail())){
-            throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS,request.getEmail()));
+        if (userRepository.existsByEmail(request.getEmail()) && !request.getEmail().equalsIgnoreCase(currentUser.getEmail())) {
+            throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS, request.getEmail()));
         }
-        userMapper.update(currentUser,request);
+        userMapper.update(currentUser, request);
 
-        return userMapper.toResponseWithAddresses(userRepository.save(currentUser),addressService.getAddressesByUser(currentUser));
+        return userMapper.toResponseWithAddresses(userRepository.save(currentUser), addressService.getAddressesByUser(currentUser));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserResponse getUserResponseById(String id) {
         User user = getUserById(id);
-        return userMapper.toResponseWithAddresses(user,addressService.getAddressesByUser(user));
+        return userMapper.toResponseWithAddresses(user, addressService.getAddressesByUser(user));
     }
 
     @Override

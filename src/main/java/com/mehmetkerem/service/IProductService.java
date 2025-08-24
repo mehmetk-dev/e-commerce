@@ -20,7 +20,7 @@ public interface IProductService {
 
     List<ProductResponse> findAllProducts();
 
-    List<ProductResponse> getProductResponsesByIds(List<String> productIds );
+    List<ProductResponse> getProductResponsesByIds(List<String> productIds);
 
     List<ProductResponse> getProductsByTitle(String title);
 

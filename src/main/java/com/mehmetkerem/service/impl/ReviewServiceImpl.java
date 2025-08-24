@@ -39,15 +39,15 @@ public class ReviewServiceImpl implements IReviewService {
 
     @Override
     public String deleteReview(String id) {
-         reviewRepository.delete(getReviewById(id));
-         return String.format(Messages.DELETE_VALUE,id,"yorum");
+        reviewRepository.delete(getReviewById(id));
+        return String.format(Messages.DELETE_VALUE, id, "yorum");
     }
 
     @Transactional
     @Override
     public ReviewResponse updateReview(String id, ReviewRequest request) {
         Review currentReview = getReviewById(id);
-        reviewMapper.update(currentReview,request);
+        reviewMapper.update(currentReview, request);
         return getDetails(reviewRepository.save(currentReview));
     }
 
@@ -59,7 +59,7 @@ public class ReviewServiceImpl implements IReviewService {
     @Override
     public Review getReviewById(String id) {
         return reviewRepository.findById(id).orElseThrow(() ->
-                new NotFoundException(String.format(ExceptionMessages.NOT_FOUND,id,"yorum" )));
+                new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "yorum")));
     }
 
     @Override
@@ -72,6 +72,6 @@ public class ReviewServiceImpl implements IReviewService {
     private ReviewResponse getDetails(Review review) {
         UserResponse userResponse = userService.getUserResponseById(review.getUserId());
         ProductResponse productResponse = productService.getProductResponseById(review.getProductId());
-        return reviewMapper.toResponseWithDetails(review,productResponse,userResponse);
+        return reviewMapper.toResponseWithDetails(review, productResponse, userResponse);
     }
 }

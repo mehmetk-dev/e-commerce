@@ -43,12 +43,12 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Transactional
-    public OrderResponse saveOrder(String userId, OrderRequest request){
+    public OrderResponse saveOrder(String userId, OrderRequest request) {
 
         Cart cart = cartService.getCartByUserId(userId);
 
-        if (cart.getItems().isEmpty()){
-            throw new BadRequestException(String.format(ExceptionMessages.CART_NOT_FOUND,userId));
+        if (cart.getItems().isEmpty()) {
+            throw new BadRequestException(String.format(ExceptionMessages.CART_NOT_FOUND, userId));
         }
 
         List<OrderItem> orderItems = convertCartItemsToOrderItems(cart.getItems());
@@ -73,7 +73,7 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Order getOrderById(String orderId) {
         return orderRepository.findById(orderId).orElseThrow(
-                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND,orderId,"sipariş")));
+                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, orderId, "sipariş")));
     }
 
     @Override
@@ -111,10 +111,10 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public String deleteOrder(String orderId) {
         orderRepository.delete(getOrderById(orderId));
-        return String.format(Messages.DELETE_VALUE,orderId,"sipariş");
+        return String.format(Messages.DELETE_VALUE, orderId, "sipariş");
     }
 
-    private List<OrderItem> convertCartItemsToOrderItems(List<CartItem> cartItems){
+    private List<OrderItem> convertCartItemsToOrderItems(List<CartItem> cartItems) {
 
         List<ProductResponse> productList = productService.getProductResponsesByIds(
                 cartItems.stream().map(CartItem::getProductId).toList());
@@ -122,7 +122,7 @@ public class OrderServiceImpl implements IOrderService {
         Map<String, ProductResponse> productMap = productList.stream()
                 .collect(Collectors.toMap(ProductResponse::getId, p -> p));
 
-       return  cartItems.stream()
+        return cartItems.stream()
                 .map(ci -> {
                     ProductResponse product = productMap.get(ci.getProductId());
                     return OrderItem.builder()
@@ -136,7 +136,7 @@ public class OrderServiceImpl implements IOrderService {
 
     }
 
-    private OrderResponse  convertOrderToOrderResponse(Order order){
+    private OrderResponse convertOrderToOrderResponse(Order order) {
 
         return OrderResponse.builder()
                 .id(order.getId())
@@ -150,7 +150,7 @@ public class OrderServiceImpl implements IOrderService {
                 .build();
     }
 
-    private List<OrderItemResponse> convertToResponseOrderItems(List<OrderItem> orderItems){
+    private List<OrderItemResponse> convertToResponseOrderItems(List<OrderItem> orderItems) {
         return orderItems.stream()
                 .map(orderItem -> OrderItemResponse.builder()
                         .product(new ProductResponse(orderItem.getProductId(), orderItem.getTitle(), orderItem.getPrice()))
@@ -177,7 +177,7 @@ public class OrderServiceImpl implements IOrderService {
 
             if (product.getStock() < item.getQuantity()) {
                 throw new BadRequestException(
-                        String.format(ExceptionMessages.INSUFFICIENT_STOCK,product.getTitle()));
+                        String.format(ExceptionMessages.INSUFFICIENT_STOCK, product.getTitle()));
             }
 
             product.setStock(product.getStock() - item.getQuantity());
