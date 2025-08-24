@@ -10,6 +10,7 @@ import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.model.Payment;
 import com.mehmetkerem.repository.PaymentRepository;
 import com.mehmetkerem.service.IPaymentService;
+import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,10 +51,13 @@ public class PaymentServiceImpl implements IPaymentService {
     }
 
     @Override
-    public PaymentResponse getPaymentById(String id) {
-        Payment payment = paymentRepository.findById(id)
+    public PaymentResponse getPaymentResponseById(String id) {
+        return convertPaymentToResponse(getPaymentById(id));
+    }
+
+    public Payment getPaymentById(String id){
+        return paymentRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND,id,"ödeme")));
-        return convertPaymentToResponse(payment);
     }
 
     @Override
@@ -72,6 +76,12 @@ public class PaymentServiceImpl implements IPaymentService {
         payment.setPaymentStatus(newStatus);
         return convertPaymentToResponse(paymentRepository.save(payment));
 
+    }
+
+    @Override
+    public String deletePayment(String id) {
+        paymentRepository.delete(getPaymentById(id));
+        return String.format(Messages.DELETE_VALUE,id,"ödeme");
     }
 
     private PaymentResponse convertPaymentToResponse(Payment payment){
