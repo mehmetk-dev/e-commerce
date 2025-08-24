@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -25,6 +26,12 @@ public class Payment {
     @Field("order_id")
     private String orderId;
 
+    @Field("user_id")
+    private String userId;
+
+    @Field("amount")
+    private BigDecimal amount;
+
     @Field("payment_method")
     private PaymentMethod paymentMethod;
 
@@ -34,6 +41,6 @@ public class Payment {
     @Field("transaction_id")
     private String transactionId;
 
-    @Field("paid_at")
-    private LocalDateTime paidAt;
+    @Field("created_at")
+    private LocalDateTime createdAt;
 }
