@@ -11,5 +11,6 @@ public class ExceptionMessages {
     public static final String INSUFFICIENT_STOCK = "%s ürün için yeterli stok yok.";
     public static final String UNKNOW_STOCK = "Girilen stok geçersizdir";
     public static final String PRODUCT_NOT_FOUND_IN_CART = "Girdiğiniz ürün sepetinizde bulunamadı!";
+    public static final String CART_NOT_FOUND = "%s ID'li kullanıcının sepeti boş!";
 
 }
