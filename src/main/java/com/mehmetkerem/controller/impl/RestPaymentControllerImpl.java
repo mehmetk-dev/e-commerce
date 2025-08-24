@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
+@RequestMapping("/v1/payment")
 public class RestPaymentControllerImpl implements IRestPaymentController {
 
     private final IPaymentService paymentService;
@@ -35,26 +36,26 @@ public class RestPaymentControllerImpl implements IRestPaymentController {
 
     @Override
     @GetMapping("/{paymentId}")
-    public ResponseEntity<PaymentResponse> getPaymentById(@PathVariable String paymentId) {
+    public ResponseEntity<PaymentResponse> getPaymentById(@PathVariable("paymentId") String paymentId) {
         return ResponseEntity.ok(paymentService.getPaymentResponseById(paymentId));
     }
 
     @Override
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<PaymentResponse>> getPaymentsByUser(@PathVariable String userId) {
+    public ResponseEntity<List<PaymentResponse>> getPaymentsByUser(@PathVariable("userId") String userId) {
         return ResponseEntity.ok(paymentService.getPaymentsByUser(userId));
     }
 
     @Override
     @PutMapping("/{paymentId}/status")
-    public ResponseEntity<PaymentResponse> updatePaymentStatus(@PathVariable String paymentId,
+    public ResponseEntity<PaymentResponse> updatePaymentStatus(@PathVariable("paymentId") String paymentId,
                                                                @RequestParam PaymentStatus newStatus) {
         return ResponseEntity.ok(paymentService.updatePaymentStatus(paymentId, newStatus));
     }
 
     @Override
     @DeleteMapping("/{paymentId}")
-    public ResponseEntity<String> deletePayment(@PathVariable String paymentId) {
+    public ResponseEntity<String> deletePayment(@PathVariable("paymentId") String paymentId) {
         return ResponseEntity.ok(paymentService.deletePayment(paymentId));
     }
 }

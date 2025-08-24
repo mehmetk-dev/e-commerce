@@ -22,7 +22,6 @@ import java.util.List;
 public class Order {
 
     @Id
-    @Field("order_id")
     private String id;
 
     @Field("user_id")

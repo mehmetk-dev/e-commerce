@@ -32,13 +32,13 @@ public class RestOrderControllerImpl implements IRestOrderController {
 
     @Override
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderResponse> getOrderResponseById(@PathVariable String orderId) {
+    public ResponseEntity<OrderResponse> getOrderResponseById(@PathVariable("orderId") String orderId) {
         return ResponseEntity.ok(orderService.getOrderResponseById(orderId));
     }
 
     @Override
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<OrderResponse>> getOrdersByUser(@PathVariable String userId) {
+    public ResponseEntity<List<OrderResponse>> getOrdersByUser(@PathVariable("userId") String userId) {
         return ResponseEntity.ok(orderService.getOrdersByUser(userId));
     }
 
@@ -50,14 +50,14 @@ public class RestOrderControllerImpl implements IRestOrderController {
 
     @PutMapping("/{orderId}/status")
     public ResponseEntity<OrderResponse> updateOrderStatus(
-            @PathVariable String orderId,
+            @PathVariable("orderId") String orderId,
             @RequestParam OrderStatus newStatus
     ) {
         return ResponseEntity.ok(orderService.updateOrderStatus(orderId, newStatus));
     }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<String> deleteOrder(@PathVariable String orderId) {
+    public ResponseEntity<String> deleteOrder(@PathVariable("orderId") String orderId) {
         return ResponseEntity.ok(orderService.deleteOrder(orderId));
     }
 }

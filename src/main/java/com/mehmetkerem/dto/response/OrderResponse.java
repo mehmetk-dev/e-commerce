@@ -1,5 +1,6 @@
 package com.mehmetkerem.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mehmetkerem.enums.OrderStatus;
 import com.mehmetkerem.enums.PaymentStatus;
 import com.mehmetkerem.model.Address;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Builder
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderResponse {
 
     private String id;
