@@ -25,9 +25,9 @@ public interface ProductMapper {
 
     void update(@MappingTarget Product entity, ProductRequest request);
 
-    default ProductResponse toResponseWithCategory(Product product, CategoryResponse categoryResponse){
+    default ProductResponse toResponseWithCategory(Product product, CategoryResponse categoryResponse) {
         ProductResponse productResponse = toResponse(product);
-        if (product!=null){
+        if (product != null) {
             productResponse.setCategory(categoryResponse);
         }
         return productResponse;

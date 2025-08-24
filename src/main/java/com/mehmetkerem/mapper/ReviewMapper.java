@@ -25,7 +25,7 @@ public interface ReviewMapper {
 
     void update(@MappingTarget Review entity, ReviewRequest request);
 
-    default ReviewResponse toResponseWithDetails(Review entity, ProductResponse product, UserResponse  user) {
+    default ReviewResponse toResponseWithDetails(Review entity, ProductResponse product, UserResponse user) {
         ReviewResponse response = toResponse(entity);
         response.setProduct(product);
         response.setUser(user);
