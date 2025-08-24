@@ -1,4 +1,4 @@
-package com.mehmetkerem.ecommerce.service;
+package com.mehmetkerem.SpringMVCBackEnd.service;
 
 import com.mehmetkerem.dto.request.ProductRequest;
 import com.mehmetkerem.dto.response.CategoryResponse;
@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ProductServiceImplTest {
+class ProductServiceTest {
 
     @Mock
     private ProductRepository productRepository;
@@ -37,9 +37,10 @@ class ProductServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.openMocks(this); // mock’ları init et
     }
 
+    // saveProduct: ürün kaydedilir ve response dönülür
     @Test
     void testSaveProduct_success() {
         ProductRequest request = new ProductRequest();
@@ -54,9 +55,11 @@ class ProductServiceImplTest {
         when(productMapper.toResponseWithCategory(product, categoryResponse)).thenReturn(response);
 
         ProductResponse result = productService.saveProduct(request);
-        assertNotNull(result);
+
+        assertNotNull(result); // response boş olmamalı
     }
 
+    // getProductById: ürün bulunduğunda aynı id ile dönmeli
     @Test
     void testGetProductById_success() {
         Product product = new Product();
@@ -64,15 +67,19 @@ class ProductServiceImplTest {
         when(productRepository.findById("1")).thenReturn(Optional.of(product));
 
         Product result = productService.getProductById("1");
-        assertEquals("1", result.getId());
+
+        assertEquals("1", result.getId()); // id eşleşmeli
     }
 
+    // getProductById: ürün yoksa NotFoundException atmalı
     @Test
     void testGetProductById_notFound() {
         when(productRepository.findById("2")).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> productService.getProductById("2"));
+
+        assertThrows(NotFoundException.class, () -> productService.getProductById("2")); // bulunamayan id
     }
 
+    // getProductResponseById: ürün + kategori ile response dönmeli
     @Test
     void testGetProductResponseById_success() {
         Product product = new Product();
@@ -86,9 +93,11 @@ class ProductServiceImplTest {
         when(productMapper.toResponseWithCategory(product, categoryResponse)).thenReturn(response);
 
         ProductResponse result = productService.getProductResponseById("1");
-        assertNotNull(result);
+
+        assertNotNull(result); // response dönmeli
     }
 
+    // updateProduct: mevcut ürün güncellenir ve response döner
     @Test
     void testUpdateProduct_success() {
         ProductRequest request = new ProductRequest();
@@ -104,9 +113,11 @@ class ProductServiceImplTest {
         when(productMapper.toResponseWithCategory(product, categoryResponse)).thenReturn(response);
 
         ProductResponse result = productService.updateProduct("1", request);
-        assertNotNull(result);
+
+        assertNotNull(result); // güncelleme sonrası response boş olmamalı
     }
 
+    // deleteProduct: ürün varsa silinir ve mesaj dönülür
     @Test
     void testDeleteProduct_success() {
         Product product = new Product();
@@ -114,15 +125,19 @@ class ProductServiceImplTest {
         doNothing().when(productRepository).delete(product);
 
         String result = productService.deleteProduct("1");
-        assertTrue(result.contains("1"));
+
+        assertTrue(result.contains("1")); // mesaj içinde id yer almalı
     }
 
+    // deleteProduct: ürün yoksa NotFoundException atmalı
     @Test
     void testDeleteProduct_notFound() {
         when(productRepository.findById("2")).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> productService.deleteProduct("2"));
+
+        assertThrows(NotFoundException.class, () -> productService.deleteProduct("2")); // bulunamayan id
     }
 
+    // findAllProducts: tüm ürünler kategoriyle maplenerek dönmeli
     @Test
     void testFindAllProducts_success() {
         Product product1 = new Product();
@@ -141,9 +156,11 @@ class ProductServiceImplTest {
         when(productMapper.toResponseWithCategory(product2, category2)).thenReturn(response2);
 
         List<ProductResponse> results = productService.findAllProducts();
-        assertEquals(2, results.size());
+
+        assertEquals(2, results.size()); // toplam ürün sayısı 2 olmalı
     }
 
+    // getProductsByTitle: verilen başlığa göre 1 ürün dönmeli
     @Test
     void testGetProductsByTitle_success() {
         Product product = new Product();
@@ -156,9 +173,11 @@ class ProductServiceImplTest {
         when(productMapper.toResponseWithCategory(product, categoryResponse)).thenReturn(response);
 
         List<ProductResponse> results = productService.getProductsByTitle("title");
-        assertEquals(1, results.size());
+
+        assertEquals(1, results.size()); // 1 ürün dönmeli
     }
 
+    // getProductsByCategory: kategoriye göre ürün döner
     @Test
     void testGetProductsByCategory_success() {
         Product product = new Product();
@@ -171,9 +190,11 @@ class ProductServiceImplTest {
         when(productMapper.toResponseWithCategory(product, categoryResponse)).thenReturn(response);
 
         List<ProductResponse> results = productService.getProductsByCategory("cat1");
-        assertEquals(1, results.size());
+
+        assertEquals(1, results.size()); // 1 ürün dönmeli
     }
 
+    // getProductResponsesByIds: verilen id listesine göre ürün döner
     @Test
     void testGetProductResponsesByIds_success() {
         Product product = new Product();
@@ -186,6 +207,7 @@ class ProductServiceImplTest {
         when(productMapper.toResponseWithCategory(product, categoryResponse)).thenReturn(response);
 
         List<ProductResponse> results = productService.getProductResponsesByIds(List.of("1"));
-        assertEquals(1, results.size());
+
+        assertEquals(1, results.size()); // 1 ürün dönmeli
     }
 }

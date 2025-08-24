@@ -1,4 +1,4 @@
-package com.mehmetkerem.ecommerce.service;
+package com.mehmetkerem.SpringMVCBackEnd.service;
 
 import com.mehmetkerem.dto.request.UserRequest;
 import com.mehmetkerem.dto.response.AddressResponse;
@@ -24,7 +24,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class UserServiceImplTest {
+class UserServiceTest {
 
     @Mock
     private UserMapper userMapper;
@@ -43,9 +43,10 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.openMocks(this); // her test öncesi mockları initialize et
     }
 
+    // saveUser: email uygun + adres mevcut → kullanıcı kaydedilir ve response döner
     @Test
     void testSaveUser_success() {
         UserRequest request = new UserRequest();
@@ -65,9 +66,11 @@ class UserServiceImplTest {
         when(userMapper.toResponseWithAddresses(userEntity, List.of(addressResponse))).thenReturn(response);
 
         UserResponse result = userService.saveUser(request);
-        assertNotNull(result);
+
+        assertNotNull(result); // response null olmamalı, kayıt başarıyla tamamlandı
     }
 
+    // saveUser: email zaten kayıtlı → BadRequestException atılmalı
     @Test
     void testSaveUser_emailExists() {
         UserRequest request = new UserRequest();
@@ -75,9 +78,10 @@ class UserServiceImplTest {
 
         when(userRepository.existsByEmail("existing@example.com")).thenReturn(true);
 
-        assertThrows(BadRequestException.class, () -> userService.saveUser(request));
+        assertThrows(BadRequestException.class, () -> userService.saveUser(request)); // email çakışması doğrulaması
     }
 
+    // getUserById: kullanıcı bulunur → aynı id ile dönmeli
     @Test
     void testGetUserById_success() {
         User user = new User();
@@ -85,28 +89,35 @@ class UserServiceImplTest {
         when(userRepository.findById("1")).thenReturn(Optional.of(user));
 
         User result = userService.getUserById("1");
-        assertEquals("1", result.getId());
+
+        assertEquals("1", result.getId()); // dönen kullanıcının id'si beklenenle aynı olmalı
     }
 
+    // getUserById: kullanıcı yok → NotFoundException atılmalı
     @Test
     void testGetUserById_notFound() {
         when(userRepository.findById("2")).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> userService.getUserById("2"));
+
+        assertThrows(NotFoundException.class, () -> userService.getUserById("2")); // bulunamama durumu doğrulanır
     }
 
+    // getUserResponseById: kullanıcı + adresleri maplenir → response null olmamalı
     @Test
     void testGetUserResponseById_success() {
         User user = new User();
         user.setId("1");
         UserResponse response = new UserResponse();
+
         when(userRepository.findById("1")).thenReturn(Optional.of(user));
         when(addressService.getAddressesByUser(user)).thenReturn(List.of());
         when(userMapper.toResponseWithAddresses(user, List.of())).thenReturn(response);
 
         UserResponse result = userService.getUserResponseById("1");
-        assertNotNull(result);
+
+        assertNotNull(result); // mapping sonucu döndüğünü doğrular
     }
 
+    // updateUser: email yeni ve uygun → user güncellenir ve response döner
     @Test
     void testUpdateUser_success() {
         UserRequest request = new UserRequest();
@@ -123,9 +134,11 @@ class UserServiceImplTest {
         when(userMapper.toResponseWithAddresses(currentUser, List.of())).thenReturn(response);
 
         UserResponse result = userService.updateUser("1", request);
-        assertNotNull(result);
+
+        assertNotNull(result); // güncelleme sonrası response dönmeli
     }
 
+    // updateUser: email başka kullanıcıda kayıtlı → BadRequestException atılmalı
     @Test
     void testUpdateUser_emailConflict() {
         UserRequest request = new UserRequest();
@@ -136,9 +149,10 @@ class UserServiceImplTest {
         when(userRepository.findById("1")).thenReturn(Optional.of(currentUser));
         when(userRepository.existsByEmail("conflict@example.com")).thenReturn(true);
 
-        assertThrows(BadRequestException.class, () -> userService.updateUser("1", request));
+        assertThrows(BadRequestException.class, () -> userService.updateUser("1", request)); // email çakışması yakalanmalı
     }
 
+    // deleteUser: kullanıcı bulunur ve silinir → dönen mesajda id yer almalı
     @Test
     void testDeleteUser_success() {
         User user = new User();
@@ -146,15 +160,19 @@ class UserServiceImplTest {
         doNothing().when(userRepository).delete(user);
 
         String result = userService.deleteUser("1");
-        assertTrue(result.contains("1"));
+
+        assertTrue(result.contains("1")); // mesaj içinde silinen id’nin bulunmasını bekleriz
     }
 
+    // deleteUser: kullanıcı yok → NotFoundException atılmalı
     @Test
     void testDeleteUser_notFound() {
         when(userRepository.findById("2")).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> userService.deleteUser("2"));
+
+        assertThrows(NotFoundException.class, () -> userService.deleteUser("2")); // bulunamayan id için exception beklenir
     }
 
+    // findAllUsers: 2 kullanıcı döner → mapper ile 2 response dönmeli
     @Test
     void testFindAllUsers_success() {
         User user1 = new User();
@@ -169,6 +187,7 @@ class UserServiceImplTest {
         when(userMapper.toResponseWithAddresses(user2, List.of())).thenReturn(response2);
 
         List<UserResponse> results = userService.findAllUsers();
-        assertEquals(2, results.size());
+
+        assertEquals(2, results.size()); // toplam dönen kullanıcı sayısı 2 olmalı
     }
 }
