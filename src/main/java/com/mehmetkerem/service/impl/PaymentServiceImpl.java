@@ -71,8 +71,7 @@ public class PaymentServiceImpl implements IPaymentService {
     @Transactional
     @Override
     public PaymentResponse updatePaymentStatus(String paymentId, PaymentStatus newStatus) {
-        Payment payment = paymentRepository.findById(paymentId)
-                .orElseThrow(() -> new RuntimeException("Payment not found"));
+        Payment payment = getPaymentById(paymentId);
         payment.setPaymentStatus(newStatus);
         return convertPaymentToResponse(paymentRepository.save(payment));
 
