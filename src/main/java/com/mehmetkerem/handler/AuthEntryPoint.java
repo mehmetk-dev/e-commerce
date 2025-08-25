@@ -34,5 +34,6 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
         body.put("timestamp", LocalDateTime.now());
 
         new ObjectMapper().writeValue(response.getOutputStream(), body);
+
     }
 }
