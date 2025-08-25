@@ -28,7 +28,6 @@ public class RestAuthController {
     private final PasswordEncoder encoder;
     private final JwtService jwtService;
 
-    @Secured("ROLE_ADMIN")
     @PostMapping("/register")
     public ResponseEntity<Map<String,String>> register(@RequestBody RegisterRequest req) {
         return ResponseEntity.ok(authService.register(req));

@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,24 +29,28 @@ public class RestUserControllerImpl implements IRestUserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(request));
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<UserResponse> getUserById(@PathVariable("id") String id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserResponseById(id));
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<UserResponse> updateUser(@PathVariable("id") String id, @RequestBody UserRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, request));
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(id));
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/find-all")
     @Override
     public ResponseEntity<List<UserResponse>> findAllUser() {

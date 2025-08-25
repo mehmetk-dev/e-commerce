@@ -9,6 +9,7 @@ import com.mehmetkerem.service.IOrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,12 +43,13 @@ public class RestOrderControllerImpl implements IRestOrderController {
         return ResponseEntity.ok(orderService.getOrdersByUser(userId));
     }
 
+
+    @Secured("ROLE_ADMIN")
     @Override
     @GetMapping
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
-
     @PutMapping("/{orderId}/status")
     public ResponseEntity<OrderResponse> updateOrderStatus(
             @PathVariable("orderId") String orderId,
@@ -56,6 +58,7 @@ public class RestOrderControllerImpl implements IRestOrderController {
         return ResponseEntity.ok(orderService.updateOrderStatus(orderId, newStatus));
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{orderId}")
     public ResponseEntity<String> deleteOrder(@PathVariable("orderId") String orderId) {
         return ResponseEntity.ok(orderService.deleteOrder(orderId));
