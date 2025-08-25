@@ -138,7 +138,6 @@ java -jar target/e-commerce-*.jar
 |--------|------------------------|--------------------------------|------------|
 | POST   | `/api/auth/register`   | Yeni kullanıcı kaydı           | PUBLIC     |
 | POST   | `/api/auth/login`      | Giriş yap (JWT döner)          | PUBLIC     |
-| GET    | `/api/users/me`        | Oturum açan kullanıcının bilgisi | USER/ADMIN |
 | GET    | `/api/users`           | Kullanıcı listesi (sayfalı)    | ADMIN      |
 | GET    | `/api/users/{id}`      | Kullanıcı detayı               | ADMIN      |
 | PUT    | `/api/users/{id}`      | Kullanıcı güncelle             | ADMIN      |
