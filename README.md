@@ -1,27 +1,31 @@
-# E-Commerce (Spring Boot)
+# E-Commerce Backend
 
-Bu proje; ürün, sepet, sipariş ve kullanıcı yönetimi barındıran, **Spring Boot** tabanlı bir e-ticaret backend’idir. Katmanlı mimari, DTO/Mapper kullanımı ve doğrulama ile temiz bir yapı hedeflenmiştir.  
+Bu proje, modern bir **e-ticaret altyapısı** oluşturmak için geliştirilmiş **Spring Boot tabanlı bir backend uygulamasıdır**.  
+Amaç; kullanıcıların kayıt/giriş işlemleri yapabilmesi, ürünleri görüntüleyip sepetlerine ekleyebilmesi ve sipariş oluşturabilmesini sağlamaktır.  
+Ayrıca yönetici rolleri sayesinde ürün ve kategori yönetimi de yapılabilmektedir.  
 
-## İçerik
-- [Teknolojiler](#teknolojiler)
-- [Mimari ve Klasör Yapısı](#mimari-ve-klasör-yapısı)
-- [Özellikler](#özellikler)
-- [Kurulum](#kurulum)
-- [Yapılandırma](#yapılandırma)
-- [Çalıştırma](#çalıştırma)
-- [Örnek İstekler (cURL)](#örnek-istekler-curl)
-- [Geliştirme Notları](#geliştirme-notları)
-- [Yol Haritası](#yol-haritası)
-- [Lisans](#lisans)
+Proje, **katmanlı mimari**, **DTO-Entity dönüşümleri**, **JWT tabanlı kimlik doğrulama**, **MongoDB/Redis entegrasyonu** ve **global exception handling** gibi modern yazılım geliştirme prensiplerini barındırır.  
 
-## Teknolojiler
+---
+
+## Kullanılan Teknolojiler
+
 - **Java 17+**
-- **Spring Boot** (Web, Validation, Security)
-- **Spring Data** (MongoDB ya da JPA)
-- **JWT** tabanlı kimlik doğrulama
-- **MapStruct** (DTO ↔ Entity dönüşümleri)
-- **Lombok**
-- **Maven**
+- **Spring Boot** (Web, Security, Validation, Data)
+- **MongoDB** → Ana veritabanı
+- **Redis** → Cache yönetimi (oturum/token veya sorgu hızlandırma için)
+- **JWT (JSON Web Token)** → Kimlik doğrulama ve güvenlik
+- **Spring Security** → Yetkilendirme ve erişim kontrolü
+- **MapStruct** → DTO ↔ Entity dönüşümleri
+- **Lombok** → Boilerplate kod azaltma
+- **Maven** → Proje yönetimi ve bağımlılık
+- **Docker (opsiyonel)** → Container tabanlı çalıştırma
+- **JUnit / Mockito** → Birim testler için
+
+---
+
+## Mimari Yapı
+
 
 ## Mimari ve Klasör Yapısı
 ```
@@ -44,13 +48,38 @@ src/
         └─ ...
 ```
 
-## Özellikler
-- Kullanıcı kayıt/giriş (JWT ile)
-- Ürün CRUD (listeleme, filtreleme, sıralama)
-- Sepet yönetimi (ekleme/çıkarma/güncelleme)
-- Sipariş oluşturma ve sipariş durum takibi
-- DTO & MapStruct ile katman izolasyonu
-- Doğrulama ve global hata yönetimi
+
+---
+
+## Temel Özellikler
+
+- 🔐 **Kullanıcı Yönetimi**  
+  - Kayıt / Giriş  
+  - JWT tabanlı kimlik doğrulama  
+  - Roller (USER / ADMIN)
+
+- 📦 **Ürün Yönetimi**  
+  - Ürün CRUD işlemleri  
+  - Kategori yönetimi  
+  - Sayfalama & sıralama  
+
+- 🛒 **Sepet Yönetimi**  
+  - Sepete ürün ekleme/çıkarma/güncelleme  
+  - Kullanıcıya özel sepet saklama  
+
+- 📑 **Sipariş Yönetimi**  
+  - Sipariş oluşturma  
+  - Sipariş durumu takibi  
+
+- ⚡ **Cache & Performans**  
+  - Redis ile cacheleme  
+  - Token saklama  
+
+---
+
+## Kurulum
+
+```bash
 
 ## Kurulum
 ```bash
@@ -100,27 +129,75 @@ veya
 java -jar target/e-commerce-*.jar
 ```
 
-## Örnek İstekler (cURL)
+---
 
-**Kayıt**
-```bash
-curl -X POST http://localhost:8080/api/auth/register   -H "Content-Type: application/json"   -d '{"name":"Mehmet","email":"mehmet@example.com","password":"Sifre123!"}'
-```
+## API Endpointleri
 
-**Giriş**
-```bash
-curl -X POST http://localhost:8080/api/auth/login   -H "Content-Type: application/json"   -d '{"email":"mehmet@example.com","password":"Sifre123!"}'
-```
+### 🔐 Authentication & User
+| Method | Endpoint               | Açıklama                       | Rol        |
+|--------|------------------------|--------------------------------|------------|
+| POST   | `/api/auth/register`   | Yeni kullanıcı kaydı           | PUBLIC     |
+| POST   | `/api/auth/login`      | Giriş yap (JWT döner)          | PUBLIC     |
+| GET    | `/api/users/me`        | Oturum açan kullanıcının bilgisi | USER/ADMIN |
+| GET    | `/api/users`           | Kullanıcı listesi (sayfalı)    | ADMIN      |
+| GET    | `/api/users/{id}`      | Kullanıcı detayı               | ADMIN      |
+| PUT    | `/api/users/{id}`      | Kullanıcı güncelle             | ADMIN      |
+| DELETE | `/api/users/{id}`      | Kullanıcı sil                  | ADMIN      |
 
-**Ürün ekleme**
-```bash
-curl -X POST http://localhost:8080/api/products   -H "Authorization: Bearer <JWT>"   -H "Content-Type: application/json"   -d '{"name":"Koltuk","price":1999.90,"categoryId":"<id>"}'
-```
+---
 
-**Sepete ekleme**
-```bash
-curl -X POST http://localhost:8080/api/cart/items   -H "Authorization: Bearer <JWT>"   -H "Content-Type: application/json"   -d '{"productId":"<urun-id>","quantity":2}'
-```
+### 📦 Products & Categories
+| Method | Endpoint                       | Açıklama                        | Rol        |
+|--------|--------------------------------|---------------------------------|------------|
+| GET    | `/api/products`                | Tüm ürünleri listele (sayfalı, sıralama destekli) | PUBLIC |
+| GET    | `/api/products/{id}`           | Ürün detayını getir             | PUBLIC     |
+| POST   | `/api/products`                | Yeni ürün ekle                  | ADMIN      |
+| PUT    | `/api/products/{id}`           | Ürün güncelle                   | ADMIN      |
+| DELETE | `/api/products/{id}`           | Ürün sil                        | ADMIN      |
+| GET    | `/api/categories`              | Kategori listesi                 | PUBLIC     |
+| POST   | `/api/categories`              | Yeni kategori ekle               | ADMIN      |
+
+---
+
+### 🛒 Cart
+| Method | Endpoint                       | Açıklama                      | Rol   |
+|--------|--------------------------------|-------------------------------|-------|
+| GET    | `/api/cart`                    | Kullanıcının sepetini getir   | USER  |
+| POST   | `/api/cart/items`              | Sepete ürün ekle              | USER  |
+| PUT    | `/api/cart/items/{itemId}`     | Sepet ürününü güncelle        | USER  |
+| DELETE | `/api/cart/items/{itemId}`     | Sepetten ürün çıkar           | USER  |
+| DELETE | `/api/cart/clear`              | Sepeti tamamen temizle        | USER  |
+
+---
+
+### 📑 Orders
+| Method | Endpoint               | Açıklama                       | Rol   |
+|--------|------------------------|--------------------------------|-------|
+| POST   | `/api/orders`          | Yeni sipariş oluştur           | USER  |
+| GET    | `/api/orders`          | Kullanıcının siparişlerini getir | USER |
+| GET    | `/api/orders/{id}`     | Sipariş detayını getir         | USER  |
+| PUT    | `/api/orders/{id}/status` | Sipariş durumunu güncelle    | ADMIN |
+
+---
+
+### 📍 Address
+| Method | Endpoint                 | Açıklama                | Rol   |
+|--------|--------------------------|-------------------------|-------|
+| GET    | `/api/addresses`         | Kullanıcının adreslerini getir | USER |
+| POST   | `/api/addresses`         | Yeni adres ekle         | USER  |
+| PUT    | `/api/addresses/{id}`    | Adres güncelle          | USER  |
+| DELETE | `/api/addresses/{id}`    | Adres sil               | USER  |
+
+---
+
+### ⚡ Health & System
+| Method | Endpoint             | Açıklama                | Rol   |
+|--------|----------------------|-------------------------|-------|
+| GET    | `/actuator/health`   | Servis durumu           | PUBLIC|
+| GET    | `/actuator/info`     | Build ve proje bilgisi  | ADMIN |
+
+---
+
 
 ## Geliştirme Notları
 - MapStruct için IDE’de annotation processing aktif olmalı.
