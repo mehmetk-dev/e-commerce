@@ -3,6 +3,7 @@ package com.mehmetkerem.service;
 import com.mehmetkerem.dto.request.ProductRequest;
 import com.mehmetkerem.dto.response.ProductResponse;
 import com.mehmetkerem.model.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface IProductService {
     List<ProductResponse> getProductsByTitle(String title);
 
     List<ProductResponse> getProductsByCategory(String categoryId);
+
+    Page<ProductResponse> getAllProducts(int page, int size, String sortBy, String direction);
 }

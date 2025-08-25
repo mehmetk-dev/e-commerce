@@ -2,9 +2,13 @@ package com.mehmetkerem.controller.impl;
 
 import com.mehmetkerem.controller.IRestProductController;
 import com.mehmetkerem.dto.request.ProductRequest;
+import com.mehmetkerem.dto.response.CursorResponse;
 import com.mehmetkerem.dto.response.ProductResponse;
 import com.mehmetkerem.service.IProductService;
+import com.mehmetkerem.util.ResultData;
+import com.mehmetkerem.util.ResultHelper;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +65,17 @@ public class RestProductControllerImpl implements IRestProductController {
     @Override
     public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") String id) {
         return ResponseEntity.ok(productService.getProductResponseById(id));
+    }
+
+    @GetMapping
+    public ResultData<CursorResponse<ProductResponse>> listProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction
+    ) {
+        Page<ProductResponse> productPage = productService.getAllProducts(page, size, sortBy, direction);
+
+        return ResultHelper.cursor(productPage);
     }
 }
