@@ -56,25 +56,25 @@ src/
 
 ## Temel Özellikler
 
-- 🔐 **Kullanıcı Yönetimi**  
+-  **Kullanıcı Yönetimi**  
   - Kayıt / Giriş  
   - JWT tabanlı kimlik doğrulama  
   - Roller (USER / ADMIN)
 
-- 📦 **Ürün Yönetimi**  
+-  **Ürün Yönetimi**  
   - Ürün CRUD işlemleri  
   - Kategori yönetimi  
   - Sayfalama & sıralama  
 
-- 🛒 **Sepet Yönetimi**  
+-  **Sepet Yönetimi**  
   - Sepete ürün ekleme/çıkarma/güncelleme  
   - Kullanıcıya özel sepet saklama  
 
-- 📑 **Sipariş Yönetimi**  
+-  **Sipariş Yönetimi**  
   - Sipariş oluşturma  
-  - Sipariş durumu takibi  
-
-- ⚡ **Cache & Performans**  
+  - Sipariş durumu takibi
+    
+-  **Cache & Performans**  
   - Redis ile cacheleme  
   - Token saklama  
 
@@ -130,7 +130,7 @@ java -jar target/e-commerce-*.jar
 
 ## API Endpointleri
 
-### 🔐 Authentication & User
+###  Authentication & User
 | Method | Endpoint              | Açıklama                       | Rol        |
 |--------|-----------------------|--------------------------------|------------|
 | POST   | `/v1/auth/register`   | Yeni kullanıcı kaydı           | PUBLIC     |
@@ -143,7 +143,7 @@ java -jar target/e-commerce-*.jar
 
 ---
 
-### 📦 Products & Categories
+###  Products & Categories
 | Method | Endpoint                      | Açıklama                        | Rol        |
 |--------|-------------------------------|---------------------------------|------------|
 | GET    | `/v1/products`                | Tüm ürünleri listele (sayfalı, sıralama destekli)| PUBLIC |
@@ -158,7 +158,7 @@ java -jar target/e-commerce-*.jar
 
 ---
 
-### 🛒 Cart
+###  Cart
 | Method | Endpoint                      | Açıklama                      | Rol   |
 |--------|-------------------------------|-------------------------------|-------|
 | GET    | `/v1/cart/{userId}`                    | Kullanıcının sepetini getir   | USER  |
@@ -171,7 +171,7 @@ java -jar target/e-commerce-*.jar
 
 ---
 
-### 📑 Orders
+###  Orders
 | Method | Endpoint                | Açıklama                       | Rol   |
 |--------|-------------------------|--------------------------------|-------|
 | POST   | `/v1/order/save`            | Yeni sipariş oluştur           | USER  |
@@ -182,7 +182,7 @@ java -jar target/e-commerce-*.jar
 
 ---
 
-### 📍 Address
+###  Address
 | Method | Endpoint                 | Açıklama                | Rol   |
 |--------|--------------------------|-------------------------|-------|
 | GET    | `/v1/address/{id}`         | ID'ye göre adres getir | USER |
@@ -193,7 +193,7 @@ java -jar target/e-commerce-*.jar
 
 ---
 
-### 📍 Review
+###  Review
 | Method | Endpoint                 | Açıklama                | Rol   |
 |--------|--------------------------|-------------------------|-------|
 | GET    | `/v1/review/{id}`         | ID'ye göre yorum getir | USER |
@@ -204,7 +204,7 @@ java -jar target/e-commerce-*.jar
 
 ---
 
-### 📍 Payment
+###  Payment
 | Method | Endpoint                 | Açıklama                | Rol   |
 |--------|--------------------------|-------------------------|-------|
 | GET    | `/v1/payment/{paymentId}`         | ID'ye göre ödeme getir | USER |
