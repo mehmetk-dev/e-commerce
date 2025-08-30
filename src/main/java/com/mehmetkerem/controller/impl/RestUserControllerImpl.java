@@ -23,6 +23,7 @@ public class RestUserControllerImpl implements IRestUserController {
         this.userService = userService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/save")
     @Override
     public ResponseEntity<UserResponse> saveUser(@Valid @RequestBody UserRequest request) {

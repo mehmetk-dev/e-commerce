@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,48 +26,56 @@ public class RestProductControllerImpl implements IRestProductController {
         this.productService = productService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/save")
     @Override
     public ResponseEntity<ProductResponse> saveProduct(@Valid @RequestBody ProductRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveProduct(request));
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/find-all")
     @Override
     public ResponseEntity<List<ProductResponse>> findAllProducts() {
         return ResponseEntity.ok(productService.findAllProducts());
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<ProductResponse> updateProduct(@PathVariable("id") String id, @RequestBody ProductRequest request) {
         return ResponseEntity.ok(productService.updateProduct(id, request));
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/search/title")
     @Override
     public ResponseEntity<List<ProductResponse>> searchProductsByTitle(@RequestParam String title) {
         return ResponseEntity.ok(productService.getProductsByTitle(title));
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/search/category")
     @Override
     public ResponseEntity<List<ProductResponse>> searchProductsByCategoryId(@RequestParam String categoryId) {
         return ResponseEntity.ok(productService.getProductsByCategory(categoryId));
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<String> deleteProduct(@PathVariable("id") String id) {
         return ResponseEntity.ok(productService.deleteProduct(id));
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") String id) {
         return ResponseEntity.ok(productService.getProductResponseById(id));
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping
     public ResultData<CursorResponse<ProductResponse>> listProducts(
             @RequestParam(defaultValue = "0") int page,
