@@ -92,7 +92,7 @@ cd e-commerce
 ```
 
 ## Yapılandırma
-`src/main/resources/application.yml` içerisinde gerekli ayarları yap.
+`src/main/resources/application.properties` içerisinde gerekli ayarları yap.
 
 **MongoDB örneği**
 ```yaml
@@ -136,64 +136,56 @@ java -jar target/e-commerce-*.jar
 ### 🔐 Authentication & User
 | Method | Endpoint               | Açıklama                       | Rol        |
 |--------|------------------------|--------------------------------|------------|
-| POST   | `/api/auth/register`   | Yeni kullanıcı kaydı           | PUBLIC     |
-| POST   | `/api/auth/login`      | Giriş yap (JWT döner)          | PUBLIC     |
-| GET    | `/api/users`           | Kullanıcı listesi (sayfalı)    | ADMIN      |
-| GET    | `/api/users/{id}`      | Kullanıcı detayı               | ADMIN      |
-| PUT    | `/api/users/{id}`      | Kullanıcı güncelle             | ADMIN      |
-| DELETE | `/api/users/{id}`      | Kullanıcı sil                  | ADMIN      |
+| POST   | `/v1/auth/register`   | Yeni kullanıcı kaydı           | PUBLIC     |
+| POST   | `/v1/auth/login`      | Giriş yap (JWT döner)          | PUBLIC     |
+| GET    | `/v1/users`           | Kullanıcı listesi (sayfalı)    | ADMIN      |
+| GET    | `/v1/users/{id}`      | Kullanıcı detayı               | ADMIN      |
+| PUT    | `/v1/users/{id}`      | Kullanıcı güncelle             | ADMIN      |
+| DELETE | `/v1/users/{id}`      | Kullanıcı sil                  | ADMIN      |
 
 ---
 
 ### 📦 Products & Categories
-| Method | Endpoint                       | Açıklama                        | Rol        |
-|--------|--------------------------------|---------------------------------|------------|
-| GET    | `/api/products`                | Tüm ürünleri listele (sayfalı, sıralama destekli) | PUBLIC |
-| GET    | `/api/products/{id}`           | Ürün detayını getir             | PUBLIC     |
-| POST   | `/api/products`                | Yeni ürün ekle                  | ADMIN      |
-| PUT    | `/api/products/{id}`           | Ürün güncelle                   | ADMIN      |
-| DELETE | `/api/products/{id}`           | Ürün sil                        | ADMIN      |
-| GET    | `/api/categories`              | Kategori listesi                 | PUBLIC     |
-| POST   | `/api/categories`              | Yeni kategori ekle               | ADMIN      |
+| Method | Endpoint                      | Açıklama                        | Rol        |
+|--------|-------------------------------|---------------------------------|------------|
+| GET    | `/v1/products`                | Tüm ürünleri listele (sayfalı, sıralama destekli) | PUBLIC |
+| GET    | `/v1/products/{id}`           | Ürün detayını getir             | PUBLIC     |
+| POST   | `/v1/products`                | Yeni ürün ekle                  | ADMIN      |
+| PUT    | `/v1/products/{id}`           | Ürün güncelle                   | ADMIN      |
+| DELETE | `/v1/products/{id}`           | Ürün sil                        | ADMIN      |
+| GET    | `/v1/categories`              | Kategori listesi                 | PUBLIC     |
+| POST   | `/v1/categories`              | Yeni kategori ekle               | ADMIN      |
 
 ---
 
 ### 🛒 Cart
-| Method | Endpoint                       | Açıklama                      | Rol   |
-|--------|--------------------------------|-------------------------------|-------|
-| GET    | `/api/cart`                    | Kullanıcının sepetini getir   | USER  |
-| POST   | `/api/cart/items`              | Sepete ürün ekle              | USER  |
-| PUT    | `/api/cart/items/{itemId}`     | Sepet ürününü güncelle        | USER  |
-| DELETE | `/api/cart/items/{itemId}`     | Sepetten ürün çıkar           | USER  |
-| DELETE | `/api/cart/clear`              | Sepeti tamamen temizle        | USER  |
+| Method | Endpoint                      | Açıklama                      | Rol   |
+|--------|-------------------------------|-------------------------------|-------|
+| GET    | `/v1/cart`                    | Kullanıcının sepetini getir   | USER  |
+| POST   | `/v1/cart/items`              | Sepete ürün ekle              | USER  |
+| PUT    | `/v1/cart/items/{itemId}`     | Sepet ürününü güncelle        | USER  |
+| DELETE | `/v1/cart/items/{itemId}`     | Sepetten ürün çıkar           | USER  |
+| DELETE | `/v1/cart/clear`              | Sepeti tamamen temizle        | USER  |
 
 ---
 
 ### 📑 Orders
-| Method | Endpoint               | Açıklama                       | Rol   |
-|--------|------------------------|--------------------------------|-------|
-| POST   | `/api/orders`          | Yeni sipariş oluştur           | USER  |
-| GET    | `/api/orders`          | Kullanıcının siparişlerini getir | USER |
-| GET    | `/api/orders/{id}`     | Sipariş detayını getir         | USER  |
-| PUT    | `/api/orders/{id}/status` | Sipariş durumunu güncelle    | ADMIN |
+| Method | Endpoint                | Açıklama                       | Rol   |
+|--------|-------------------------|--------------------------------|-------|
+| POST   | `/v1/orders`            | Yeni sipariş oluştur           | USER  |
+| GET    | `/v1/orders`            | Kullanıcının siparişlerini getir | USER |
+| GET    | `/v1/orders/{id}`       | Sipariş detayını getir         | USER  |
+| PUT    | `/v1/orders/{id}/status`| Sipariş durumunu güncelle    | ADMIN |
 
 ---
 
 ### 📍 Address
 | Method | Endpoint                 | Açıklama                | Rol   |
 |--------|--------------------------|-------------------------|-------|
-| GET    | `/api/addresses`         | Kullanıcının adreslerini getir | USER |
-| POST   | `/api/addresses`         | Yeni adres ekle         | USER  |
-| PUT    | `/api/addresses/{id}`    | Adres güncelle          | USER  |
-| DELETE | `/api/addresses/{id}`    | Adres sil               | USER  |
-
----
-
-### ⚡ Health & System
-| Method | Endpoint             | Açıklama                | Rol   |
-|--------|----------------------|-------------------------|-------|
-| GET    | `/actuator/health`   | Servis durumu           | PUBLIC|
-| GET    | `/actuator/info`     | Build ve proje bilgisi  | ADMIN |
+| GET    | `/v1/addresses`         | Kullanıcının adreslerini getir | USER |
+| POST   | `/v1/addresses`         | Yeni adres ekle         | USER  |
+| PUT    | `/v1/addresses/{id}`    | Adres güncelle          | USER  |
+| DELETE | `/v1/addresses/{id}`    | Adres sil               | USER  |
 
 ---
 
