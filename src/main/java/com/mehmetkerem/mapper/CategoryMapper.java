@@ -5,8 +5,7 @@ import com.mehmetkerem.dto.response.CategoryResponse;
 import com.mehmetkerem.model.Category;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CategoryMapper {
 
     @Mapping(target = "id", ignore = true)

@@ -1,6 +1,5 @@
 package com.mehmetkerem.dto.request;
 
-import com.mehmetkerem.model.CartItem;
 import lombok.Data;
 
 import java.time.LocalDateTime;

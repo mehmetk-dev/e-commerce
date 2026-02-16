@@ -1,23 +1,19 @@
 package com.mehmetkerem.controller;
 
-import com.mehmetkerem.dto.request.OrderRequest;
+import com.mehmetkerem.dto.response.CursorResponse;
+import com.mehmetkerem.dto.response.OrderInvoiceResponse;
 import com.mehmetkerem.dto.response.OrderResponse;
-import com.mehmetkerem.enums.OrderStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.util.List;
+import com.mehmetkerem.util.ResultData;
 
 public interface IRestOrderController {
+    ResultData<OrderResponse> updateTrackingInfo(Long orderId, String trackingNumber, String carrierName);
 
-    ResponseEntity<OrderResponse> saveOrder(String userId, OrderRequest request);
+    ResultData<CursorResponse<OrderResponse>> getAllOrders(int page, int size, String sortBy, String direction);
 
-    ResponseEntity<OrderResponse> getOrderResponseById(String orderId);
+    ResultData<CursorResponse<OrderResponse>> getMyOrders(int page, int size, String sortBy, String direction);
 
-    ResponseEntity<List<OrderResponse>> getOrdersByUser(String userId);
+    ResultData<OrderResponse> saveOrder(com.mehmetkerem.dto.request.OrderRequest request);
 
-    ResponseEntity<List<OrderResponse>> getAllOrders();
-
-    ResponseEntity<OrderResponse> updateOrderStatus(String orderId, OrderStatus newStatus);
-
-    ResponseEntity<String> deleteOrder(String orderId);
+    /** Kendi siparişi veya admin için sipariş fişi. */
+    ResultData<OrderInvoiceResponse> getOrderInvoice(Long orderId);
 }

@@ -9,19 +9,23 @@ import java.util.List;
 
 public interface ICartService {
 
-    CartResponse saveCart(String userId, List<CartItemRequest> cartItemRequests);
+    CartResponse saveCart(Long userId, List<CartItemRequest> cartItemRequests);
 
-    Cart getCartByUserId(String userId);
+    Cart getCartByUserId(Long userId);
 
-    CartResponse getCartResponseByUserId(String userId);
+    CartResponse getCartResponseByUserId(Long userId);
 
-    CartResponse addItem(String userId, CartItemRequest request);
+    CartResponse addItem(Long userId, CartItemRequest request);
 
-    CartResponse updateItemQuantity(String userId, String productId, int quantity);
+    CartResponse updateItemQuantity(Long userId, Long productId, int quantity);
 
-    CartResponse removeItem(String userId, String productId);
+    CartResponse removeItem(Long userId, Long productId);
 
-    String clearCart(String userId);
+    String clearCart(Long userId);
 
-    BigDecimal calculateTotal(String userId);
+    BigDecimal calculateTotal(Long userId);
+
+    CartResponse applyCoupon(Long userId, String couponCode);
+
+    CartResponse removeCoupon(Long userId);
 }

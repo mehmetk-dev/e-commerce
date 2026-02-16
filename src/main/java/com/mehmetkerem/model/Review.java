@@ -1,35 +1,41 @@
 package com.mehmetkerem.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
 @Data
-@Document(collection = "reviews")
+@Entity
+@Table(name = "reviews")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Review {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Field("product_id")
-    private String productId;
+    @Column(name = "product_id")
+    private Long productId;
 
-    @Field("user_id")
-    private String userId;
+    @Column(name = "user_id")
+    private Long userId;
 
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
     private int rating;
 
-    @Field("created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

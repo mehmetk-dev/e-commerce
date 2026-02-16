@@ -1,22 +1,22 @@
 package com.mehmetkerem.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
-@Document(collection = "address")
+@Entity
+@Table(name = "addresses")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Address {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
 
@@ -26,9 +26,12 @@ public class Address {
 
     private String district;
 
-    @Field("address_line")
+    @Column(name = "address_line")
     private String addressLine;
 
-    @Field("postal_code")
+    @Column(name = "postal_code")
     private String postalCode;
+
+    @Column(name = "user_id")
+    private Long userId;
 }

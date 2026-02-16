@@ -3,7 +3,6 @@ package com.mehmetkerem.service.impl;
 import com.mehmetkerem.dto.request.CategoryRequest;
 import com.mehmetkerem.dto.response.CategoryResponse;
 import com.mehmetkerem.exception.BadRequestException;
-import com.mehmetkerem.exception.BaseException;
 import com.mehmetkerem.exception.ExceptionMessages;
 import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.mapper.CategoryMapper;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@SuppressWarnings("null")
 public class CategoryServiceImpl implements ICategoryService {
 
     private final CategoryRepository categoryRepository;
@@ -30,7 +30,8 @@ public class CategoryServiceImpl implements ICategoryService {
     public CategoryResponse saveCategory(CategoryRequest request) {
 
         if (categoryRepository.existsByName(request.getName())) {
-            throw new BadRequestException(String.format(ExceptionMessages.CATEGORY_ALL_READY_EXISTS, request.getName()));
+            throw new BadRequestException(
+                    String.format(ExceptionMessages.CATEGORY_ALL_READY_EXISTS, request.getName()));
         }
 
         Category savedCategory = categoryRepository.save(categoryMapper.toEntity(request));
@@ -38,25 +39,25 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public String deleteCategory(String id) {
+    public String deleteCategory(Long id) {
         categoryRepository.delete(getCategoryById(id));
         return String.format(Messages.DELETE_VALUE, id, "kategori");
     }
 
     @Override
-    public CategoryResponse updateCategory(String id, CategoryRequest request) {
+    public CategoryResponse updateCategory(Long id, CategoryRequest request) {
         Category category = getCategoryById(id);
         categoryMapper.update(category, request);
         return categoryMapper.toResponse(categoryRepository.save(category));
     }
 
     @Override
-    public CategoryResponse getCategoryResponseById(String id) {
+    public CategoryResponse getCategoryResponseById(Long id) {
         return categoryMapper.toResponse(getCategoryById(id));
     }
 
     @Override
-    public Category getCategoryById(String id) {
+    public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "kategori")));
     }

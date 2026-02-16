@@ -2,45 +2,52 @@ package com.mehmetkerem.model;
 
 import com.mehmetkerem.enums.PaymentMethod;
 import com.mehmetkerem.enums.PaymentStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@Document(collection = "payments")
+@Entity
+@Table(name = "payments")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Payment {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Field("order_id")
-    private String orderId;
+    @Column(name = "order_id")
+    private Long orderId;
 
-    @Field("user_id")
-    private String userId;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Field("amount")
+    @Column(precision = 12, scale = 2)
     private BigDecimal amount;
 
-    @Field("payment_method")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
-    @Field("payment_status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_status")
     private PaymentStatus paymentStatus;
 
-    @Field("transaction_id")
+    @Column(name = "transaction_id")
     private String transactionId;
 
-    @Field("created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

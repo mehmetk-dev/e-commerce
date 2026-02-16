@@ -4,50 +4,66 @@ import com.mehmetkerem.controller.IRestAddressController;
 import com.mehmetkerem.dto.request.AddressRequest;
 import com.mehmetkerem.dto.response.AddressResponse;
 import com.mehmetkerem.service.IAddressService;
+import com.mehmetkerem.util.ResultData;
+import com.mehmetkerem.util.ResultHelper;
+import com.mehmetkerem.util.SecurityUtils;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/address")
+@RequiredArgsConstructor
 public class RestAddressControllerImpl implements IRestAddressController {
 
     private final IAddressService addressService;
 
-    public RestAddressControllerImpl(IAddressService addressService) {
-        this.addressService = addressService;
+    private static long requireCurrentUserId() {
+        Long id = SecurityUtils.getCurrentUserId();
+        if (id == null) {
+            throw new org.springframework.security.authentication.InsufficientAuthenticationException("Oturum gerekli");
+        }
+        return id;
     }
 
+    @Override
     @PostMapping("/save")
-    @Override
-    public ResponseEntity<AddressResponse> saveAddress(@Valid @RequestBody AddressRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.saveAddress(request));
+    public ResultData<AddressResponse> saveAddress(@Valid @RequestBody AddressRequest request) {
+        return ResultHelper.success(addressService.saveAddress(requireCurrentUserId(), request));
     }
 
+    @Override
     @GetMapping("/find-all")
-    @Override
-    public ResponseEntity<List<AddressResponse>> findAllAddress() {
-        return ResponseEntity.status(HttpStatus.OK).body(addressService.findAllAddress());
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResultData<List<AddressResponse>> findAllAddress() {
+        return ResultHelper.success(addressService.findAllAddress());
     }
 
+    @Override
     @PutMapping("/{id}")
-    @Override
-    public ResponseEntity<AddressResponse> updateAddress(@PathVariable("id") String id, @RequestBody AddressRequest request) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(addressService.updateAddress(id, request));
+    public ResultData<AddressResponse> updateAddress(@PathVariable("id") Long id,
+            @RequestBody AddressRequest request) {
+        return ResultHelper.success(addressService.updateAddressForUser(id, requireCurrentUserId(), request));
     }
 
+    @Override
     @DeleteMapping("/{id}")
-    @Override
-    public ResponseEntity<String> deleteAddress(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(addressService.deleteAddress(id));
+    public ResultData<String> deleteAddress(@PathVariable("id") Long id) {
+        return ResultHelper.success(addressService.deleteAddressForUser(id, requireCurrentUserId()));
     }
 
-    @GetMapping("/{id}")
     @Override
-    public ResponseEntity<AddressResponse> getAddressById(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(addressService.getAddressResponseById(id));
+    @GetMapping("/{id}")
+    public ResultData<AddressResponse> getAddressById(@PathVariable("id") Long id) {
+        return ResultHelper.success(addressService.getAddressResponseByIdAndUserId(id, requireCurrentUserId()));
+    }
+
+    @Override
+    @GetMapping("/my-addresses")
+    public ResultData<List<AddressResponse>> getMyAddresses() {
+        return ResultHelper.success(addressService.getAddressesByUserId(requireCurrentUserId()));
     }
 }

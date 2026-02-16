@@ -7,6 +7,6 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CategoryResponse {
 
-    private String id;
+    private Long id;
     private String name;
 }

@@ -24,8 +24,8 @@ public class ProductRequest {
     @PositiveOrZero(message = "Stok adedi eksi olamaz.")
     private Integer stock;
 
-    @NotBlank(message = "Kategori ID boş olamaz.")
-    private String categoryId;
+    @NotNull(message = "Kategori ID boş olamaz.")
+    private Long categoryId;
 
     @NotEmpty(message = "En az bir görsel URL'i gereklidir.")
     private List<@NotBlank(message = "Görsel URL'i boş olamaz.") String> imageUrls;

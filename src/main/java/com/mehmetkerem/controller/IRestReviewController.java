@@ -2,19 +2,19 @@ package com.mehmetkerem.controller;
 
 import com.mehmetkerem.dto.request.ReviewRequest;
 import com.mehmetkerem.dto.response.ReviewResponse;
-import org.springframework.http.ResponseEntity;
+import com.mehmetkerem.util.ResultData;
 
 import java.util.List;
 
 public interface IRestReviewController {
 
-    ResponseEntity<ReviewResponse> saveReview(ReviewRequest request);
+    ResultData<ReviewResponse> saveReview(ReviewRequest request);
 
-    ResponseEntity<List<ReviewResponse>> findAllReviews();
+    ResultData<List<ReviewResponse>> findAllReviews();
 
-    ResponseEntity<ReviewResponse> updateReview(String id, ReviewRequest request);
+    ResultData<ReviewResponse> updateReview(Long id, ReviewRequest request);
 
-    ResponseEntity<String> deleteReview(String id);
+    ResultData<String> deleteReview(Long id);
 
-    ResponseEntity<ReviewResponse> getReviewById(String id);
+    ResultData<ReviewResponse> getReviewById(Long id);
 }

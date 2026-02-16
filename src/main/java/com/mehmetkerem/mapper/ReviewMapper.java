@@ -5,16 +5,13 @@ import com.mehmetkerem.dto.response.ProductResponse;
 import com.mehmetkerem.dto.response.ReviewResponse;
 import com.mehmetkerem.dto.response.UserResponse;
 import com.mehmetkerem.model.Review;
-import com.mehmetkerem.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(
-        componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
-)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ReviewMapper {
 
     @Mapping(target = "id", ignore = true)

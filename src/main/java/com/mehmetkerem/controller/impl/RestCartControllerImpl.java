@@ -1,68 +1,78 @@
 package com.mehmetkerem.controller.impl;
 
-import com.mehmetkerem.controller.IRestCartController;
 import com.mehmetkerem.dto.request.CartItemRequest;
+import jakarta.validation.Valid;
 import com.mehmetkerem.dto.response.CartResponse;
 import com.mehmetkerem.service.ICartService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import com.mehmetkerem.util.ResultData;
+import com.mehmetkerem.util.ResultHelper;
+import com.mehmetkerem.util.SecurityUtils;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/v1/cart")
-public class RestCartControllerImpl implements IRestCartController {
+@RequiredArgsConstructor
+public class RestCartControllerImpl {
 
     private final ICartService cartService;
 
-    public RestCartControllerImpl(ICartService cartService) {
-        this.cartService = cartService;
+    private static long requireCurrentUserId() {
+        Long id = SecurityUtils.getCurrentUserId();
+        if (id == null) {
+            throw new InsufficientAuthenticationException("Oturum gerekli");
+        }
+        return id;
     }
 
-
-    @PostMapping("/{userId}/save")
-    public ResponseEntity<CartResponse> saveCart(@PathVariable("userId") String userId, @RequestBody List<CartItemRequest> request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(cartService.saveCart(userId, request));
+    @GetMapping
+    public ResultData<CartResponse> getCart() {
+        return ResultHelper.success(cartService.getCartResponseByUserId(requireCurrentUserId()));
     }
 
-    @GetMapping("/{userId}")
-    @Override
-    public ResponseEntity<CartResponse> getCartByUserId(@PathVariable("userId") String userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.getCartResponseByUserId(userId));
+    @PostMapping("/items")
+    public ResultData<CartResponse> addItem(@Valid @RequestBody CartItemRequest request) {
+        return ResultHelper.success(cartService.addItem(requireCurrentUserId(), request));
     }
 
-    @PostMapping("/{userId}/items")
-    @Override
-    public ResponseEntity<CartResponse> addItem(@PathVariable("userId") String userId, @RequestBody CartItemRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.addItem(userId, request));
+    @PostMapping("/sync")
+    public ResultData<CartResponse> syncCart(@Valid @RequestBody List<CartItemRequest> requests) {
+        return ResultHelper.success(cartService.saveCart(requireCurrentUserId(), requests));
     }
 
-    @PutMapping("/{userId}/items/{productId}")
-    @Override
-    public ResponseEntity<CartResponse> updateItemQuantity(@PathVariable("userId") String userId, @PathVariable("productId") String productId, @RequestParam int quantity) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.updateItemQuantity(userId, productId, quantity));
+    @PutMapping("/items/{productId}")
+    public ResultData<CartResponse> updateQuantity(
+            @PathVariable Long productId,
+            @RequestParam int quantity) {
+        return ResultHelper.success(cartService.updateItemQuantity(requireCurrentUserId(), productId, quantity));
     }
 
-    @DeleteMapping("/{userId}/items/{productId}")
-    @Override
-    public ResponseEntity<CartResponse> removeItem(@PathVariable("userId") String userId, @PathVariable("productId") String productId) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.removeItem(userId, productId));
+    @DeleteMapping("/items/{productId}")
+    public ResultData<CartResponse> removeItem(@PathVariable Long productId) {
+        return ResultHelper.success(cartService.removeItem(requireCurrentUserId(), productId));
     }
 
-    @DeleteMapping("/{userId}/clear")
-    @Override
-    public ResponseEntity<String> clearCart(@PathVariable("userId") String userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.clearCart(userId));
+    @DeleteMapping
+    public ResultData<String> clearCart() {
+        return ResultHelper.success(cartService.clearCart(requireCurrentUserId()));
     }
 
-    @GetMapping("/{userId}/total")
-    @Override
-    public ResponseEntity<BigDecimal> calculateTotal(@PathVariable("userId") String userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(cartService.calculateTotal(userId));
+    @GetMapping("/total")
+    public ResultData<BigDecimal> getTotal() {
+        return ResultHelper.success(cartService.calculateTotal(requireCurrentUserId()));
     }
 
+    @PostMapping("/coupon/{code}")
+    public ResultData<CartResponse> applyCoupon(@PathVariable String code) {
+        return ResultHelper.success(cartService.applyCoupon(requireCurrentUserId(), code));
+    }
 
+    @DeleteMapping("/coupon")
+    public ResultData<CartResponse> removeCoupon() {
+        return ResultHelper.success(cartService.removeCoupon(requireCurrentUserId()));
+    }
 }

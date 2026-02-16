@@ -8,16 +8,32 @@ import java.util.List;
 
 public interface IAddressService {
 
-    AddressResponse saveAddress(AddressRequest request);
+    AddressResponse saveAddress(Long userId, AddressRequest request);
+
+    List<AddressResponse> getAddressesByUserId(Long userId);
 
     List<AddressResponse> findAllAddress();
 
-    AddressResponse updateAddress(String id, AddressRequest request);
+    AddressResponse updateAddress(Long id, AddressRequest request);
 
-    String deleteAddress(String id);
+    String deleteAddress(Long id);
 
-    Address getAddressById(String id);
+    Address getAddressById(Long id);
 
-    AddressResponse getAddressResponseById(String id);
+    /**
+     * Adresi getirir; sadece ilgili kullanıcıya aitse döner.
+     * Başka kullanıcının adresi ise exception fırlatır.
+     */
+    Address getAddressByIdAndUserId(Long id, Long userId);
 
+    AddressResponse getAddressResponseById(Long id);
+
+    /** Kullanıcı sadece kendi adresini görebilir. */
+    AddressResponse getAddressResponseByIdAndUserId(Long id, Long userId);
+
+    /** Sadece adres sahibi güncelleyebilir. */
+    AddressResponse updateAddressForUser(Long id, Long userId, AddressRequest request);
+
+    /** Sadece adres sahibi silebilir. */
+    String deleteAddressForUser(Long id, Long userId);
 }

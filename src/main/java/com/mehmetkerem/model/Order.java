@@ -2,46 +2,66 @@ package com.mehmetkerem.model;
 
 import com.mehmetkerem.enums.OrderStatus;
 import com.mehmetkerem.enums.PaymentStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Document(collection = "orders")
+@Entity
+@Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Order {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Field("user_id")
-    private String userId;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Field("order_date")
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
 
-    @Field("order_status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
 
-    @Field("order_items")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
     private List<OrderItem> orderItems;
 
-    @Field("shipping_address")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shipping_address_id")
     private Address shippingAddress;
 
-    @Field("total_amount")
+    @Column(name = "total_amount", precision = 12, scale = 2)
     private BigDecimal totalAmount;
 
-    @Field("payment_status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_status")
     private PaymentStatus paymentStatus;
+
+    @Column(name = "tracking_number")
+    private String trackingNumber;
+
+    @Column(name = "carrier_name")
+    private String carrierName;
+
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
+
+    @PrePersist
+    protected void onCreate() {
+        if (orderDate == null) {
+            orderDate = LocalDateTime.now();
+        }
+    }
 }

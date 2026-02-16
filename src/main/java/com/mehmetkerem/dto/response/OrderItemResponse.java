@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderItemResponse {
 
+    private Long id;
+
     private ProductResponse product;
 
     private String title;

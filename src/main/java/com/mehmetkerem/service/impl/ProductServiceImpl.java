@@ -14,23 +14,29 @@ import com.mehmetkerem.util.Messages;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import com.mehmetkerem.repository.specification.ProductSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
 @Service
+@SuppressWarnings("null")
 public class ProductServiceImpl implements IProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ICategoryService categoryService;
 
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper, ICategoryService categoryService) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper,
+            ICategoryService categoryService) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
         this.categoryService = categoryService;
@@ -38,22 +44,22 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     @Transactional
-    @CacheEvict(cacheNames = {"products:list", "products:byId"}, allEntries = true)
+    @CacheEvict(cacheNames = { "products:list", "products:byId" }, allEntries = true)
     public ProductResponse saveProduct(ProductRequest request) {
         return productMapper.toResponseWithCategory(productRepository.save(productMapper.toEntity(request)),
                 categoryService.getCategoryResponseById(request.getCategoryId()));
     }
 
-    @CacheEvict(cacheNames = {"products:list", "products:byId"}, allEntries = true)
+    @CacheEvict(cacheNames = { "products:list", "products:byId" }, allEntries = true)
     @Override
-    public String deleteProduct(String id) {
+    public String deleteProduct(Long id) {
         productRepository.delete(getProductById(id));
         return String.format(Messages.DELETE_VALUE, id, "ürün");
     }
 
     @Override
-    @CacheEvict(cacheNames = {"products:list", "products:byId"}, allEntries = true)
-    public ProductResponse updateProduct(String id, ProductRequest request) {
+    @CacheEvict(cacheNames = { "products:list", "products:byId" }, allEntries = true)
+    public ProductResponse updateProduct(Long id, ProductRequest request) {
         Product product = getProductById(id);
         productMapper.update(product, request);
         return productMapper.toResponseWithCategory(productRepository.save(product),
@@ -62,14 +68,14 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     @Cacheable(cacheNames = "products:byId", key = "#id")
-    public ProductResponse getProductResponseById(String id) {
+    public ProductResponse getProductResponseById(Long id) {
         Product product = getProductById(id);
         return productMapper.toResponseWithCategory(
                 product, categoryService.getCategoryResponseById(product.getCategoryId()));
     }
 
     @Override
-    public Product getProductById(String id) {
+    public Product getProductById(Long id) {
         return productRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "ürün")));
     }
@@ -78,18 +84,19 @@ public class ProductServiceImpl implements IProductService {
     public List<ProductResponse> findAllProducts() {
         return productRepository.findAll().stream()
                 .map(product -> {
-                    CategoryResponse categoryResponse = categoryService.getCategoryResponseById(product.getCategoryId());
+                    CategoryResponse categoryResponse = categoryService
+                            .getCategoryResponseById(product.getCategoryId());
                     return productMapper.toResponseWithCategory(product, categoryResponse);
                 })
                 .toList();
     }
 
     @Override
-    public List<ProductResponse> getProductResponsesByIds(List<String> productIds) {
+    public List<ProductResponse> getProductResponsesByIds(List<Long> productIds) {
         return getProductsByIds(productIds).stream().map(this::mapProductWithCategory).toList();
     }
 
-    public List<Product> getProductsByIds(List<String> productIds) {
+    public List<Product> getProductsByIds(List<Long> productIds) {
         return productRepository.findByIdIn(productIds);
     }
 
@@ -105,7 +112,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public List<ProductResponse> getProductsByCategory(String categoryId) {
+    public List<ProductResponse> getProductsByCategory(Long categoryId) {
         List<Product> products = productRepository.findByCategoryId(categoryId);
 
         return products.stream()
@@ -113,10 +120,20 @@ public class ProductServiceImpl implements IProductService {
                 .toList();
     }
 
-    @Cacheable(
-            cacheNames = "products:list",
-            key = "'p='+#page+';s='+#size+';sort='+#sortBy+';dir='+#direction"
-    )
+    @Override
+    public Page<ProductResponse> searchProducts(String title, Long categoryId, BigDecimal minPrice, BigDecimal maxPrice,
+            Double minRating, Pageable pageable) {
+
+        Specification<Product> spec = Specification.where(ProductSpecification.hasTitle(title))
+                .and(ProductSpecification.hasCategory(categoryId))
+                .and(ProductSpecification.priceBetween(minPrice, maxPrice))
+                .and(ProductSpecification.greaterThanRating(minRating));
+
+        Page<Product> productPage = productRepository.findAll(spec, pageable);
+        return productPage.map(this::mapProductWithCategory);
+    }
+
+    @Cacheable(cacheNames = "products:list", key = "'p='+#page+';s='+#size+';sort='+#sortBy+';dir='+#direction")
     public Page<ProductResponse> getAllProducts(int page, int size, String sortBy, String direction) {
         Sort sort = direction.equalsIgnoreCase("desc")
                 ? Sort.by(sortBy).descending()

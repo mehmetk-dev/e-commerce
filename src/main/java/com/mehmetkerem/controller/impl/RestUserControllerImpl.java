@@ -4,10 +4,9 @@ import com.mehmetkerem.controller.IRestUserController;
 import com.mehmetkerem.dto.request.UserRequest;
 import com.mehmetkerem.dto.response.UserResponse;
 import com.mehmetkerem.service.IUserService;
+import com.mehmetkerem.util.ResultData;
+import com.mehmetkerem.util.ResultHelper;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,35 +25,35 @@ public class RestUserControllerImpl implements IRestUserController {
     @Secured("ROLE_ADMIN")
     @PostMapping("/save")
     @Override
-    public ResponseEntity<UserResponse> saveUser(@Valid @RequestBody UserRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(request));
+    public ResultData<UserResponse> saveUser(@Valid @RequestBody UserRequest request) {
+        return ResultHelper.success(userService.saveUser(request));
     }
 
     @Secured("ROLE_ADMIN")
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<UserResponse> getUserById(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserResponseById(id));
+    public ResultData<UserResponse> getUserById(@PathVariable("id") Long id) {
+        return ResultHelper.success(userService.getUserResponseById(id));
     }
 
     @Secured("ROLE_ADMIN")
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<UserResponse> updateUser(@PathVariable("id") String id, @RequestBody UserRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, request));
+    public ResultData<UserResponse> updateUser(@PathVariable("id") Long id, @RequestBody UserRequest request) {
+        return ResultHelper.success(userService.updateUser(id, request));
     }
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(id));
+    public ResultData<String> deleteUser(@PathVariable("id") Long id) {
+        return ResultHelper.success(userService.deleteUser(id));
     }
 
     @Secured("ROLE_ADMIN")
     @GetMapping("/find-all")
     @Override
-    public ResponseEntity<List<UserResponse>> findAllUser() {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAllUsers());
+    public ResultData<List<UserResponse>> findAllUser() {
+        return ResultHelper.success(userService.findAllUsers());
     }
 }

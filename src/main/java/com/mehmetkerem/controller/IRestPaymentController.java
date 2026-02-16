@@ -3,26 +3,25 @@ package com.mehmetkerem.controller;
 import com.mehmetkerem.dto.response.PaymentResponse;
 import com.mehmetkerem.enums.PaymentMethod;
 import com.mehmetkerem.enums.PaymentStatus;
-import org.springframework.http.ResponseEntity;
+import com.mehmetkerem.util.ResultData;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface IRestPaymentController {
 
-    ResponseEntity<PaymentResponse> processPayment(
-            String userId,
-            String orderId,
+    /** Oturum açmış kullanıcı için ödeme işler; orderId siparişin bu kullanıcıya ait olduğu doğrulanır. */
+    ResultData<PaymentResponse> processPayment(
+            Long orderId,
             BigDecimal amount,
-            PaymentMethod paymentMethod,
-            PaymentStatus paymentStatus
-    );
+            PaymentMethod paymentMethod);
 
-    ResponseEntity<PaymentResponse> getPaymentById(String paymentId);
+    ResultData<PaymentResponse> getPaymentById(Long paymentId);
 
-    ResponseEntity<List<PaymentResponse>> getPaymentsByUser(String userId);
+    /** Oturum açmış kullanıcının ödemelerini döner. */
+    ResultData<List<PaymentResponse>> getMyPayments();
 
-    ResponseEntity<PaymentResponse> updatePaymentStatus(String paymentId, PaymentStatus newStatus);
+    ResultData<PaymentResponse> updatePaymentStatus(Long paymentId, PaymentStatus newStatus);
 
-    ResponseEntity<String> deletePayment(String paymentId);
+    ResultData<String> deletePayment(Long paymentId);
 }

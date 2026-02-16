@@ -33,7 +33,9 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
         body.put("path", request.getServletPath());
         body.put("timestamp", LocalDateTime.now());
 
-        new ObjectMapper().writeValue(response.getOutputStream(), body);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.writeValue(response.getOutputStream(), body);
 
     }
 }

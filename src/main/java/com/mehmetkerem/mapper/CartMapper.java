@@ -5,7 +5,8 @@ import com.mehmetkerem.dto.response.CartResponse;
 import com.mehmetkerem.model.Cart;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = {CartItemMapper.class}, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", uses = {
+        CartItemMapper.class }, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CartMapper {
 
     Cart toEntity(CartRequest request);
@@ -13,6 +14,5 @@ public interface CartMapper {
     CartResponse toResponse(Cart cart);
 
     void update(@MappingTarget Cart entity, CartRequest request);
-
 
 }

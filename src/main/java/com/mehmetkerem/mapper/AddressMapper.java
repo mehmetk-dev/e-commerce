@@ -5,7 +5,7 @@ import com.mehmetkerem.dto.response.AddressResponse;
 import com.mehmetkerem.model.Address;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AddressMapper {
 
     @Mapping(target = "id", ignore = true)

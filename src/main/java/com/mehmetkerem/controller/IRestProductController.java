@@ -1,25 +1,38 @@
 package com.mehmetkerem.controller;
 
 import com.mehmetkerem.dto.request.ProductRequest;
+import com.mehmetkerem.dto.response.CursorResponse;
 import com.mehmetkerem.dto.response.ProductResponse;
-import org.springframework.http.ResponseEntity;
+import com.mehmetkerem.util.ResultData;
 
-
+import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface IRestProductController {
 
-    ResponseEntity<ProductResponse> saveProduct(ProductRequest request);
+    ResultData<ProductResponse> saveProduct(ProductRequest request);
 
-    ResponseEntity<List<ProductResponse>> findAllProducts();
+    ResultData<List<ProductResponse>> findAllProducts();
 
-    ResponseEntity<ProductResponse> updateProduct(String id, ProductRequest request);
+    ResultData<ProductResponse> updateProduct(Long id, ProductRequest request);
 
-    ResponseEntity<String> deleteProduct(String id);
+    ResultData<String> deleteProduct(Long id);
 
-    ResponseEntity<ProductResponse> getProductById(String id);
+    ResultData<ProductResponse> getProductById(Long id);
 
-    ResponseEntity<List<ProductResponse>> searchProductsByTitle(String title);
+    ResultData<List<ProductResponse>> searchProductsByTitle(String title);
 
-    ResponseEntity<List<ProductResponse>> searchProductsByCategoryId(String categoryId);
+    ResultData<List<ProductResponse>> searchProductsByCategoryId(Long categoryId);
+
+    ResultData<CursorResponse<ProductResponse>> searchProducts(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(required = false) Double minRating,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction);
 }

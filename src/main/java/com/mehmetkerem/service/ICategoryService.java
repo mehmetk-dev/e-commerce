@@ -9,13 +9,13 @@ import java.util.List;
 public interface ICategoryService {
     CategoryResponse saveCategory(CategoryRequest request);
 
-    String deleteCategory(String id);
+    String deleteCategory(Long id);
 
-    CategoryResponse updateCategory(String id, CategoryRequest request);
+    CategoryResponse updateCategory(Long id, CategoryRequest request);
 
-    CategoryResponse getCategoryResponseById(String id);
+    CategoryResponse getCategoryResponseById(Long id);
 
-    Category getCategoryById(String id);
+    Category getCategoryById(Long id);
 
     List<CategoryResponse> findAllCategories();
 }

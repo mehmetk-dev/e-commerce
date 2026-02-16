@@ -2,19 +2,19 @@ package com.mehmetkerem.controller;
 
 import com.mehmetkerem.dto.request.UserRequest;
 import com.mehmetkerem.dto.response.UserResponse;
-import org.springframework.http.ResponseEntity;
+import com.mehmetkerem.util.ResultData;
 
 import java.util.List;
 
 public interface IRestUserController {
 
-    ResponseEntity<UserResponse> saveUser(UserRequest request);
+    ResultData<UserResponse> saveUser(UserRequest request);
 
-    ResponseEntity<UserResponse> getUserById(String id);
+    ResultData<UserResponse> getUserById(Long id);
 
-    ResponseEntity<UserResponse> updateUser(String id, UserRequest request);
+    ResultData<UserResponse> updateUser(Long id, UserRequest request);
 
-    ResponseEntity<String> deleteUser(String id);
+    ResultData<String> deleteUser(Long id);
 
-    ResponseEntity<List<UserResponse>> findAllUser();
+    ResultData<List<UserResponse>> findAllUser();
 }

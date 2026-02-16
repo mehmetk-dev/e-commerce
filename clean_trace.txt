@@ -1,0 +1,1440 @@
+
+  test_output.log:1:[INFO] Sc
+anning for projects...
+  test_output.log:2:[INFO] 
+> test_output.log:3:[INFO] --
+-------------------< com.mehm
+etkerem:ecommerce >----------
+------------
+  test_output.log:4:[INFO] Bu
+ilding E-Commerce 0.0.1-SNAPS
+HOT
+  test_output.log:5:[INFO]   
+from pom.xml
+  test_output.log:6:[INFO] --
+-----------------------------
+-[ jar ]---------------------
+------------
+  test_output.log:7:[INFO] 
+  test_output.log:8:[INFO] --
+- resources:3.3.1:resources (
+default-resources) @ ecommerc
+e ---
+  test_output.log:22:[INFO] U
+sing auto detected provider o
+rg.apache.maven.surefire.juni
+tplatform.JUnitPlatformProvid
+er
+  test_output.log:23:[INFO] 
+  test_output.log:24:[INFO] -
+-----------------------------
+-------------------------
+  test_output.log:25:[INFO]  
+T E S T S
+  test_output.log:26:[INFO] -
+-----------------------------
+-------------------------
+> test_output.log:27:[INFO] R
+unning com.mehmetkerem.integr
+ation.OrderIntegrationTest
+> test_output.log:28:20:46:25
+.776 [main] INFO org.springfr
+amework.test.context.support.
+AnnotationConfigContextLoader
+Utils -- Could not detect def
+ault configuration classes fo
+r test class [com.mehmetkerem
+.integration.OrderIntegration
+Test]: OrderIntegrationTest d
+oes not declare any static, n
+on-private, non-final, nested
+ classes annotated with @Conf
+iguration.
+> test_output.log:29:20:46:25
+.933 [main] INFO org.springfr
+amework.boot.test.context.Spr
+ingBootTestContextBootstrappe
+r -- Found @SpringBootConfigu
+ration com.mehmetkerem.EComme
+rceApplication for test class
+ com.mehmetkerem.integration.
+OrderIntegrationTest
+  test_output.log:30:
+  test_output.log:31:  .   __
+__          _            __ _
+ _
+  test_output.log:32: /\\ / _
+__'_ __ _ _(_)_ __  __ _ \ \ 
+\ \
+  test_output.log:33:( ( )\__
+_ | '_ | '_| | '_ \/ _` | \ \
+ \ \
+  test_output.log:34: \\/  __
+_)| |_)| | | | | || (_| |  ) 
+) ) )
+  test_output.log:312:       
+foreign key (user_id) 
+  test_output.log:313:       
+references users
+  test_output.log:314:2026-02
+-12T20:46:31.333+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] j.LocalContainerE
+ntityManagerFactoryBean : Ini
+tialized JPA EntityManagerFac
+tory for persistence unit 'de
+fault'
+  test_output.log:315:2026-02
+-12T20:46:31.933+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] o.s.d.j.r.query.Q
+ueryEnhancerFactory     : Hib
+ernate is in classpath; If ap
+plicable, HQL parser will be 
+used.
+  test_output.log:316:2026-02
+-12T20:46:33.189+03:00  WARN 
+16924 --- [E-Commerce] [     
+      main] JpaBaseConfigurat
+ion$JpaWebConfiguration : spr
+ing.jpa.open-in-view is enabl
+ed by default. Therefore, dat
+abase queries may be performe
+d during view rendering. Expl
+icitly configure spring.jpa.o
+pen-in-view to disable this w
+arning
+> test_output.log:317:2026-02
+-12T20:46:33.833+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] o.s.s.web.Default
+SecurityFilterChain     : Wil
+l secure any request with [or
+g.springframework.security.we
+b.session.DisableEncodeUrlFil
+ter@23591a2c, org.springframe
+work.security.web.context.req
+uest.async.WebAsyncManagerInt
+egrationFilter@431782fe, org.
+springframework.security.web.
+context.SecurityContextHolder
+Filter@4f991f00, org.springfr
+amework.security.web.header.H
+eaderWriterFilter@2108d503, o
+rg.springframework.web.filter
+.CorsFilter@6e16fcaf, org.spr
+ingframework.security.web.aut
+hentication.logout.LogoutFilt
+er@6d03404e, org.springframew
+ork.security.oauth2.client.we
+b.OAuth2AuthorizationRequestR
+edirectFilter@6a275836, org.s
+pringframework.security.oauth
+2.client.web.OAuth2LoginAuthe
+nticationFilter@513f8279, com
+.mehmetkerem.jwt.JwtAuthFilte
+r@145ce025, org.springframewo
+rk.security.web.authenticatio
+n.ui.DefaultLoginPageGenerati
+ngFilter@7fec198a, org.spring
+framework.security.web.authen
+tication.ui.DefaultLogoutPage
+GeneratingFilter@2680474c, or
+g.springframework.security.we
+b.savedrequest.RequestCacheAw
+areFilter@524a96f5, org.sprin
+gframework.security.web.servl
+etapi.SecurityContextHolderAw
+areRequestFilter@72fb922c, or
+g.springframework.security.we
+b.authentication.AnonymousAut
+henticationFilter@4de3a1ca, o
+rg.springframework.security.w
+eb.session.SessionManagementF
+ilter@20382851, org.springfra
+mework.security.web.access.Ex
+ceptionTranslationFilter@5b83
+545d, org.springframework.sec
+urity.web.access.intercept.Au
+thorizationFilter@20e1ce62]
+> test_output.log:318:2026-02
+-12T20:46:34.513+03:00 DEBUG 
+16924 --- [E-Commerce] [     
+      main] com.mehmetkerem.j
+wt.JwtAuthFilter        : Fil
+ter 'jwtAuthFilter' configure
+d for use
+  test_output.log:319:2026-02
+-12T20:46:34.514+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] o.s.b.t.m.w.Sprin
+gBootMockServletContext : Ini
+tializing Spring TestDispatch
+erServlet ''
+  test_output.log:320:2026-02
+-12T20:46:34.514+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] o.s.t.web.servlet
+.TestDispatcherServlet  : Ini
+tializing Servlet ''
+  test_output.log:321:2026-02
+-12T20:46:34.516+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] o.s.t.web.servlet
+.TestDispatcherServlet  : Com
+pleted initialization in 2 ms
+  test_output.log:322:2026-02
+-12T20:46:34.551+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] c.m.integration.O
+rderIntegrationTest     : Sta
+rted OrderIntegrationTest in 
+8.42 seconds (process running
+ for 9.661)
+  test_output.log:323:mvn : J
+ava HotSpot(TM) 64-Bit
+  test_output.log:865:2026-02
+-12T20:46:36.531+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] c.m.s.impl.MockEm
+ailNotificationService  : ? [
+MOCK EMAIL] To: user@test.com
+ | Subject: Sipari? Onay? | B
+ody: Sipari?iniz al?nd?! Kod:
+ ORD-1
+  test_output.log:866:2026-02
+-12T20:46:36.532+03:00  INFO 
+16924 --- [E-Commerce] [     
+      main] c.m.service.impl.
+OrderServiceImpl        : Sip
+ari? onay? g?nderildi: user@t
+est.com
+  test_output.log:867:2026-02
+-12T20:46:36.532+03:00 DEBUG 
+16924 --- [E-Commerce] [     
+      main] c.m.service.impl.
+OrderServiceImpl        : Res
+ponse d?n??t?r?l?yor...
+  test_output.log:868:2026-02
+-12T20:46:36.542+03:00 ERROR 
+16924 --- [E-Commerce] [     
+      main] c.m.service.impl.
+OrderServiceImpl        : Sip
+ari? kaydedilirken hata olu?t
+u: 
+  test_output.log:869:
+> test_output.log:870:org.spr
+ingframework.orm.jpa.JpaSyste
+mException: A collection with
+ cascade="all-delete-orphan" 
+was no longer referenced by t
+he owning entity instance: co
+m.mehmetkerem.model.Cart.item
+s
+  test_output.log:871:	at org
+.springframework.orm.jpa.vend
+or.HibernateJpaDialect.conver
+tHibernateAccessException(Hib
+ernateJpaDialect.java:341) ~[
+spring-orm-6.1.3.jar:6.1.3]
+  test_output.log:872:	at org
+.springframework.orm.jpa.vend
+or.HibernateJpaDialect.transl
+ateExceptionIfPossible(Hibern
+ateJpaDialect.java:241) ~[spr
+ing-orm-6.1.3.jar:6.1.3]
+  test_output.log:873:	at org
+.springframework.orm.jpa.Abst
+ractEntityManagerFactoryBean.
+translateExceptionIfPossible(
+AbstractEntityManagerFactoryB
+ean.java:550) ~[spring-orm-6.
+1.3.jar:6.1.3]
+  test_output.log:874:	at org
+.springframework.dao.support.
+ChainedPersistenceExceptionTr
+anslator.translateExceptionIf
+Possible(ChainedPersistenceEx
+ceptionTranslator.java:61) ~[
+spring-tx-6.1.3.jar:6.1.3]
+  test_output.log:875:	at org
+.springframework.dao.support.
+DataAccessUtils.translateIfNe
+cessary(DataAccessUtils.java:
+335) ~[spring-tx-6.1.3.jar:6.
+1.3]
+  test_output.log:879:	at org
+.springframework.aop.framewor
+k.ReflectiveMethodInvocation.
+proceed(ReflectiveMethodInvoc
+ation.java:184) ~[spring-aop-
+6.1.3.jar:6.1.3]
+  test_output.log:880:	at org
+.springframework.aop.intercep
+tor.ExposeInvocationIntercept
+or.invoke(ExposeInvocationInt
+erceptor.java:97) ~[spring-ao
+p-6.1.3.jar:6.1.3]
+  test_output.log:881:	at org
+.springframework.aop.framewor
+k.ReflectiveMethodInvocation.
+proceed(ReflectiveMethodInvoc
+ation.java:184) ~[spring-aop-
+6.1.3.jar:6.1.3]
+  test_output.log:882:	at org
+.springframework.aop.framewor
+k.JdkDynamicAopProxy.invoke(J
+dkDynamicAopProxy.java:220) ~
+[spring-aop-6.1.3.jar:6.1.3]
+  test_output.log:883:	at jdk
+.proxy2/jdk.proxy2.$Proxy158.
+findByUserId(Unknown Source) 
+~[na:na]
+> test_output.log:884:	at com
+.mehmetkerem.service.impl.Add
+ressServiceImpl.getAddressesB
+yUserId(AddressServiceImpl.ja
+va:67) ~[classes/:na]
+> test_output.log:885:	at com
+.mehmetkerem.service.impl.Use
+rServiceImpl.getUserResponseB
+yId(UserServiceImpl.java:95) 
+~[classes/:na]
+  test_output.log:886:	at jav
+a.base/jdk.internal.reflect.N
+ativeMethodAccessorImpl.invok
+e0(Native Method) ~[na:na]
+  test_output.log:887:	at jav
+a.base/jdk.internal.reflect.N
+ativeMethodAccessorImpl.invok
+e(NativeMethodAccessorImpl.ja
+va:77) ~[na:na]
+  test_output.log:888:	at jav
+a.base/jdk.internal.reflect.D
+elegatingMethodAccessorImpl.i
+nvoke(DelegatingMethodAccesso
+rImpl.java:43) ~[na:na]
+  test_output.log:889:	at jav
+a.base/java.lang.reflect.Meth
+od.invoke(Method.java:568) ~[
+na:na]
+  test_output.log:890:	at org
+.springframework.aop.support.
+AopUtils.invokeJoinpointUsing
+Reflection(AopUtils.java:351)
+ ~[spring-aop-6.1.3.jar:6.1.3
+]
+  test_output.log:891:	at org
+.springframework.aop.framewor
+k.CglibAopProxy$DynamicAdvise
+dInterceptor.intercept(CglibA
+opProxy.java:713) ~[spring-ao
+p-6.1.3.jar:6.1.3]
+> test_output.log:892:	at com
+.mehmetkerem.service.impl.Use
+rServiceImpl$$SpringCGLIB$$0.
+getUserResponseById(<generate
+d>) ~[classes/:na]
+> test_output.log:893:	at com
+.mehmetkerem.service.impl.Ord
+erServiceImpl.convertOrderToO
+rderResponse(OrderServiceImpl
+.java:240) ~[classes/:na]
+> test_output.log:894:	at com
+.mehmetkerem.service.impl.Ord
+erServiceImpl.saveOrder(Order
+ServiceImpl.java:109) ~[class
+es/:na]
+  test_output.log:895:	at jav
+a.base/jdk.internal.reflect.N
+ativeMethodAccessorImpl.invok
+e0(Native Method) ~[na:na]
+  test_output.log:896:	at jav
+a.base/jdk.internal.reflect.N
+ativeMethodAccessorImpl.invok
+e(NativeMethodAccessorImpl.ja
+va:77) ~[na:na]
+  test_output.log:897:	at jav
+a.base/jdk.internal.reflect.D
+elegatingMethodAccessorImpl.i
+nvoke(DelegatingMethodAccesso
+rImpl.java:43) ~[na:na]
+  test_output.log:898:	at jav
+a.base/java.lang.reflect.Meth
+od.invoke(Method.java:568) ~[
+na:na]
+  test_output.log:899:	at org
+.springframework.aop.support.
+AopUtils.invokeJoinpointUsing
+Reflection(AopUtils.java:351)
+ ~[spring-aop-6.1.3.jar:6.1.3
+]
+  test_output.log:904:	at org
+.springframework.transaction.
+interceptor.TransactionAspect
+Support.invokeWithinTransacti
+on(TransactionAspectSupport.j
+ava:385) ~[spring-tx-6.1.3.ja
+r:6.1.3]
+  test_output.log:905:	at org
+.springframework.transaction.
+interceptor.TransactionInterc
+eptor.invoke(TransactionInter
+ceptor.java:119) ~[spring-tx-
+6.1.3.jar:6.1.3]
+  test_output.log:906:	at org
+.springframework.aop.framewor
+k.ReflectiveMethodInvocation.
+proceed(ReflectiveMethodInvoc
+ation.java:184) ~[spring-aop-
+6.1.3.jar:6.1.3]
+  test_output.log:907:	at org
+.springframework.aop.framewor
+k.CglibAopProxy$CglibMethodIn
+vocation.proceed(CglibAopProx
+y.java:765) ~[spring-aop-6.1.
+3.jar:6.1.3]
+  test_output.log:908:	at org
+.springframework.aop.framewor
+k.CglibAopProxy$DynamicAdvise
+dInterceptor.intercept(CglibA
+opProxy.java:717) ~[spring-ao
+p-6.1.3.jar:6.1.3]
+> test_output.log:909:	at com
+.mehmetkerem.service.impl.Ord
+erServiceImpl$$SpringCGLIB$$0
+.saveOrder(<generated>) ~[cla
+sses/:na]
+> test_output.log:910:	at com
+.mehmetkerem.controller.impl.
+RestOrderControllerImpl.saveO
+rder(RestOrderControllerImpl.
+java:39) ~[classes/:na]
+  test_output.log:911:	at jav
+a.base/jdk.internal.reflect.N
+ativeMethodAccessorImpl.invok
+e0(Native Method) ~[na:na]
+  test_output.log:912:	at jav
+a.base/jdk.internal.reflect.N
+ativeMethodAccessorImpl.invok
+e(NativeMethodAccessorImpl.ja
+va:77) ~[na:na]
+  test_output.log:913:	at jav
+a.base/jdk.internal.reflect.D
+elegatingMethodAccessorImpl.i
+nvoke(DelegatingMethodAccesso
+rImpl.java:43) ~[na:na]
+  test_output.log:914:	at jav
+a.base/java.lang.reflect.Meth
+od.invoke(Method.java:568) ~[
+na:na]
+  test_output.log:915:	at org
+.springframework.web.method.s
+upport.InvocableHandlerMethod
+.doInvoke(InvocableHandlerMet
+hod.java:261) ~[spring-web-6.
+1.3.jar:6.1.3]
+  test_output.log:952:	at org
+.springframework.web.filter.O
+ncePerRequestFilter.doFilter(
+OncePerRequestFilter.java:116
+) ~[spring-web-6.1.3.jar:6.1.
+3]
+  test_output.log:953:	at org
+.springframework.security.web
+.FilterChainProxy$VirtualFilt
+erChain.doFilter(FilterChainP
+roxy.java:374) ~[spring-secur
+ity-web-6.2.1.jar:6.2.1]
+  test_output.log:954:	at org
+.springframework.security.web
+.authentication.ui.DefaultLog
+inPageGeneratingFilter.doFilt
+er(DefaultLoginPageGenerating
+Filter.java:189) ~[spring-sec
+urity-web-6.2.1.jar:6.2.1]
+  test_output.log:955:	at org
+.springframework.security.web
+.authentication.ui.DefaultLog
+inPageGeneratingFilter.doFilt
+er(DefaultLoginPageGenerating
+Filter.java:175) ~[spring-sec
+urity-web-6.2.1.jar:6.2.1]
+  test_output.log:956:	at org
+.springframework.security.web
+.FilterChainProxy$VirtualFilt
+erChain.doFilter(FilterChainP
+roxy.java:374) ~[spring-secur
+ity-web-6.2.1.jar:6.2.1]
+> test_output.log:957:	at com
+.mehmetkerem.jwt.JwtAuthFilte
+r.doFilterInternal(JwtAuthFil
+ter.java:51) ~[classes/:na]
+  test_output.log:958:	at org
+.springframework.web.filter.O
+ncePerRequestFilter.doFilter(
+OncePerRequestFilter.java:116
+) ~[spring-web-6.1.3.jar:6.1.
+3]
+  test_output.log:959:	at org
+.springframework.security.web
+.FilterChainProxy$VirtualFilt
+erChain.doFilter(FilterChainP
+roxy.java:374) ~[spring-secur
+ity-web-6.2.1.jar:6.2.1]
+  test_output.log:960:	at org
+.springframework.security.web
+.authentication.AbstractAuthe
+nticationProcessingFilter.doF
+ilter(AbstractAuthenticationP
+rocessingFilter.java:227) ~[s
+pring-security-web-6.2.1.jar:
+6.2.1]
+  test_output.log:961:	at org
+.springframework.security.web
+.authentication.AbstractAuthe
+nticationProcessingFilter.doF
+ilter(AbstractAuthenticationP
+rocessingFilter.java:221) ~[s
+pring-security-web-6.2.1.jar:
+6.2.1]
+  test_output.log:962:	at org
+.springframework.security.web
+.FilterChainProxy$VirtualFilt
+erChain.doFilter(FilterChainP
+roxy.java:374) ~[spring-secur
+ity-web-6.2.1.jar:6.2.1]
+  test_output.log:1004:	at or
+g.springframework.web.filter.
+CharacterEncodingFilter.doFil
+terInternal(CharacterEncoding
+Filter.java:201) ~[spring-web
+-6.1.3.jar:6.1.3]
+  test_output.log:1005:	at or
+g.springframework.web.filter.
+OncePerRequestFilter.doFilter
+(OncePerRequestFilter.java:11
+6) ~[spring-web-6.1.3.jar:6.1
+.3]
+  test_output.log:1006:	at or
+g.springframework.test.web.se
+rvlet.setup.MockMvcFilterDeco
+rator.doFilter(MockMvcFilterD
+ecorator.java:151) ~[spring-t
+est-6.1.3.jar:6.1.3]
+  test_output.log:1007:	at or
+g.springframework.mock.web.Mo
+ckFilterChain.doFilter(MockFi
+lterChain.java:132) ~[spring-
+test-6.1.3.jar:6.1.3]
+  test_output.log:1008:	at or
+g.springframework.test.web.se
+rvlet.MockMvc.perform(MockMvc
+.java:201) ~[spring-test-6.1.
+3.jar:6.1.3]
+> test_output.log:1009:	at co
+m.mehmetkerem.integration.Ord
+erIntegrationTest.shouldPlace
+AndVerifyOrder(OrderIntegrati
+onTest.java:178) ~[test-class
+es/:na]
+  test_output.log:1010:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke0(Native Method) ~[na:na]
+  test_output.log:1011:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke(NativeMethodAccessorImpl.j
+ava:77) ~[na:na]
+  test_output.log:1012:	at ja
+va.base/jdk.internal.reflect.
+DelegatingMethodAccessorImpl.
+invoke(DelegatingMethodAccess
+orImpl.java:43) ~[na:na]
+  test_output.log:1013:	at ja
+va.base/java.lang.reflect.Met
+hod.invoke(Method.java:568) ~
+[na:na]
+  test_output.log:1014:	at or
+g.junit.platform.commons.util
+.ReflectionUtils.invokeMethod
+(ReflectionUtils.java:728) ~[
+junit-platform-commons-1.10.1
+.jar:1.10.1]
+  test_output.log:1076:	at or
+g.apache.maven.surefire.junit
+platform.JUnitPlatformProvide
+r.invoke(JUnitPlatformProvide
+r.java:122) ~[surefire-junit-
+platform-3.1.2.jar:3.1.2]
+  test_output.log:1077:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.runSuitesInPro
+cess(ForkedBooter.java:385) ~
+[surefire-booter-3.1.2.jar:3.
+1.2]
+  test_output.log:1078:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.execute(Forked
+Booter.java:162) ~[surefire-b
+ooter-3.1.2.jar:3.1.2]
+  test_output.log:1079:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.run(ForkedBoot
+er.java:507) ~[surefire-boote
+r-3.1.2.jar:3.1.2]
+  test_output.log:1080:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.main(ForkedBoo
+ter.java:495) ~[surefire-boot
+er-3.1.2.jar:3.1.2]
+> test_output.log:1081:Caused
+ by: org.hibernate.HibernateE
+xception: A collection with c
+ascade="all-delete-orphan" wa
+s no longer referenced by the
+ owning entity instance: com.
+mehmetkerem.model.Cart.items
+  test_output.log:1082:	at or
+g.hibernate.engine.internal.C
+ollections.processDereference
+dCollection(Collections.java:
+98) ~[hibernate-core-6.4.1.Fi
+nal.jar:6.4.1.Final]
+  test_output.log:1083:	at or
+g.hibernate.engine.internal.C
+ollections.processUnreachable
+Collection(Collections.java:4
+9) ~[hibernate-core-6.4.1.Fin
+al.jar:6.4.1.Final]
+  test_output.log:1084:	at or
+g.hibernate.event.internal.Ab
+stractFlushingEventListener.l
+ambda$flushCollections$1(Abst
+ractFlushingEventListener.jav
+a:270) ~[hibernate-core-6.4.1
+.Final.jar:6.4.1.Final]
+  test_output.log:1085:	at or
+g.hibernate.engine.internal.S
+tatefulPersistenceContext.for
+EachCollectionEntry(StatefulP
+ersistenceContext.java:1321) 
+~[hibernate-core-6.4.1.Final.
+jar:6.4.1.Final]
+  test_output.log:1086:	at or
+g.hibernate.event.internal.Ab
+stractFlushingEventListener.f
+lushCollections(AbstractFlush
+ingEventListener.java:267) ~[
+hibernate-core-6.4.1.Final.ja
+r:6.4.1.Final]
+  test_output.log:1112:	at or
+g.springframework.dao.support
+.PersistenceExceptionTranslat
+ionInterceptor.invoke(Persist
+enceExceptionTranslationInter
+ceptor.java:137) ~[spring-tx-
+6.1.3.jar:6.1.3]
+  test_output.log:1113:	... 2
+04 common frames omitted
+  test_output.log:1114:
+  test_output.log:1115:2026-0
+2-12T20:46:36.560+03:00 ERROR
+ 16924 --- [E-Commerce] [    
+       main] c.m.handler.Glob
+alExceptionHandler       : Be
+klenmeyen hata olu?tu: 
+  test_output.log:1116:
+> test_output.log:1117:org.sp
+ringframework.orm.jpa.JpaSyst
+emException: A collection wit
+h cascade="all-delete-orphan"
+ was no longer referenced by 
+the owning entity instance: c
+om.mehmetkerem.model.Cart.ite
+ms
+  test_output.log:1118:	at or
+g.springframework.orm.jpa.ven
+dor.HibernateJpaDialect.conve
+rtHibernateAccessException(Hi
+bernateJpaDialect.java:341) ~
+[spring-orm-6.1.3.jar:6.1.3]
+  test_output.log:1119:	at or
+g.springframework.orm.jpa.ven
+dor.HibernateJpaDialect.trans
+lateExceptionIfPossible(Hiber
+nateJpaDialect.java:241) ~[sp
+ring-orm-6.1.3.jar:6.1.3]
+  test_output.log:1120:	at or
+g.springframework.orm.jpa.Abs
+tractEntityManagerFactoryBean
+.translateExceptionIfPossible
+(AbstractEntityManagerFactory
+Bean.java:550) ~[spring-orm-6
+.1.3.jar:6.1.3]
+  test_output.log:1121:	at or
+g.springframework.dao.support
+.ChainedPersistenceExceptionT
+ranslator.translateExceptionI
+fPossible(ChainedPersistenceE
+xceptionTranslator.java:61) ~
+[spring-tx-6.1.3.jar:6.1.3]
+  test_output.log:1122:	at or
+g.springframework.dao.support
+.DataAccessUtils.translateIfN
+ecessary(DataAccessUtils.java
+:335) ~[spring-tx-6.1.3.jar:6
+.1.3]
+  test_output.log:1126:	at or
+g.springframework.aop.framewo
+rk.ReflectiveMethodInvocation
+.proceed(ReflectiveMethodInvo
+cation.java:184) ~[spring-aop
+-6.1.3.jar:6.1.3]
+  test_output.log:1127:	at or
+g.springframework.aop.interce
+ptor.ExposeInvocationIntercep
+tor.invoke(ExposeInvocationIn
+terceptor.java:97) ~[spring-a
+op-6.1.3.jar:6.1.3]
+  test_output.log:1128:	at or
+g.springframework.aop.framewo
+rk.ReflectiveMethodInvocation
+.proceed(ReflectiveMethodInvo
+cation.java:184) ~[spring-aop
+-6.1.3.jar:6.1.3]
+  test_output.log:1129:	at or
+g.springframework.aop.framewo
+rk.JdkDynamicAopProxy.invoke(
+JdkDynamicAopProxy.java:220) 
+~[spring-aop-6.1.3.jar:6.1.3]
+  test_output.log:1130:	at jd
+k.proxy2/jdk.proxy2.$Proxy158
+.findByUserId(Unknown Source)
+ ~[na:na]
+> test_output.log:1131:	at co
+m.mehmetkerem.service.impl.Ad
+dressServiceImpl.getAddresses
+ByUserId(AddressServiceImpl.j
+ava:67) ~[classes/:na]
+> test_output.log:1132:	at co
+m.mehmetkerem.service.impl.Us
+erServiceImpl.getUserResponse
+ById(UserServiceImpl.java:95)
+ ~[classes/:na]
+  test_output.log:1133:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke0(Native Method) ~[na:na]
+  test_output.log:1134:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke(NativeMethodAccessorImpl.j
+ava:77) ~[na:na]
+  test_output.log:1135:	at ja
+va.base/jdk.internal.reflect.
+DelegatingMethodAccessorImpl.
+invoke(DelegatingMethodAccess
+orImpl.java:43) ~[na:na]
+  test_output.log:1136:	at ja
+va.base/java.lang.reflect.Met
+hod.invoke(Method.java:568) ~
+[na:na]
+  test_output.log:1137:	at or
+g.springframework.aop.support
+.AopUtils.invokeJoinpointUsin
+gReflection(AopUtils.java:351
+) ~[spring-aop-6.1.3.jar:6.1.
+3]
+  test_output.log:1138:	at or
+g.springframework.aop.framewo
+rk.CglibAopProxy$DynamicAdvis
+edInterceptor.intercept(Cglib
+AopProxy.java:713) ~[spring-a
+op-6.1.3.jar:6.1.3]
+> test_output.log:1139:	at co
+m.mehmetkerem.service.impl.Us
+erServiceImpl$$SpringCGLIB$$0
+.getUserResponseById(<generat
+ed>) ~[classes/:na]
+> test_output.log:1140:	at co
+m.mehmetkerem.service.impl.Or
+derServiceImpl.convertOrderTo
+OrderResponse(OrderServiceImp
+l.java:240) ~[classes/:na]
+> test_output.log:1141:	at co
+m.mehmetkerem.service.impl.Or
+derServiceImpl.saveOrder(Orde
+rServiceImpl.java:109) ~[clas
+ses/:na]
+  test_output.log:1142:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke0(Native Method) ~[na:na]
+  test_output.log:1143:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke(NativeMethodAccessorImpl.j
+ava:77) ~[na:na]
+  test_output.log:1144:	at ja
+va.base/jdk.internal.reflect.
+DelegatingMethodAccessorImpl.
+invoke(DelegatingMethodAccess
+orImpl.java:43) ~[na:na]
+  test_output.log:1145:	at ja
+va.base/java.lang.reflect.Met
+hod.invoke(Method.java:568) ~
+[na:na]
+  test_output.log:1146:	at or
+g.springframework.aop.support
+.AopUtils.invokeJoinpointUsin
+gReflection(AopUtils.java:351
+) ~[spring-aop-6.1.3.jar:6.1.
+3]
+  test_output.log:1151:	at or
+g.springframework.transaction
+.interceptor.TransactionAspec
+tSupport.invokeWithinTransact
+ion(TransactionAspectSupport.
+java:385) ~[spring-tx-6.1.3.j
+ar:6.1.3]
+  test_output.log:1152:	at or
+g.springframework.transaction
+.interceptor.TransactionInter
+ceptor.invoke(TransactionInte
+rceptor.java:119) ~[spring-tx
+-6.1.3.jar:6.1.3]
+  test_output.log:1153:	at or
+g.springframework.aop.framewo
+rk.ReflectiveMethodInvocation
+.proceed(ReflectiveMethodInvo
+cation.java:184) ~[spring-aop
+-6.1.3.jar:6.1.3]
+  test_output.log:1154:	at or
+g.springframework.aop.framewo
+rk.CglibAopProxy$CglibMethodI
+nvocation.proceed(CglibAopPro
+xy.java:765) ~[spring-aop-6.1
+.3.jar:6.1.3]
+  test_output.log:1155:	at or
+g.springframework.aop.framewo
+rk.CglibAopProxy$DynamicAdvis
+edInterceptor.intercept(Cglib
+AopProxy.java:717) ~[spring-a
+op-6.1.3.jar:6.1.3]
+> test_output.log:1156:	at co
+m.mehmetkerem.service.impl.Or
+derServiceImpl$$SpringCGLIB$$
+0.saveOrder(<generated>) ~[cl
+asses/:na]
+> test_output.log:1157:	at co
+m.mehmetkerem.controller.impl
+.RestOrderControllerImpl.save
+Order(RestOrderControllerImpl
+.java:39) ~[classes/:na]
+  test_output.log:1158:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke0(Native Method) ~[na:na]
+  test_output.log:1159:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke(NativeMethodAccessorImpl.j
+ava:77) ~[na:na]
+  test_output.log:1160:	at ja
+va.base/jdk.internal.reflect.
+DelegatingMethodAccessorImpl.
+invoke(DelegatingMethodAccess
+orImpl.java:43) ~[na:na]
+  test_output.log:1161:	at ja
+va.base/java.lang.reflect.Met
+hod.invoke(Method.java:568) ~
+[na:na]
+  test_output.log:1162:	at or
+g.springframework.web.method.
+support.InvocableHandlerMetho
+d.doInvoke(InvocableHandlerMe
+thod.java:261) ~[spring-web-6
+.1.3.jar:6.1.3]
+  test_output.log:1199:	at or
+g.springframework.web.filter.
+OncePerRequestFilter.doFilter
+(OncePerRequestFilter.java:11
+6) ~[spring-web-6.1.3.jar:6.1
+.3]
+  test_output.log:1200:	at or
+g.springframework.security.we
+b.FilterChainProxy$VirtualFil
+terChain.doFilter(FilterChain
+Proxy.java:374) ~[spring-secu
+rity-web-6.2.1.jar:6.2.1]
+  test_output.log:1201:	at or
+g.springframework.security.we
+b.authentication.ui.DefaultLo
+ginPageGeneratingFilter.doFil
+ter(DefaultLoginPageGeneratin
+gFilter.java:189) ~[spring-se
+curity-web-6.2.1.jar:6.2.1]
+  test_output.log:1202:	at or
+g.springframework.security.we
+b.authentication.ui.DefaultLo
+ginPageGeneratingFilter.doFil
+ter(DefaultLoginPageGeneratin
+gFilter.java:175) ~[spring-se
+curity-web-6.2.1.jar:6.2.1]
+  test_output.log:1203:	at or
+g.springframework.security.we
+b.FilterChainProxy$VirtualFil
+terChain.doFilter(FilterChain
+Proxy.java:374) ~[spring-secu
+rity-web-6.2.1.jar:6.2.1]
+> test_output.log:1204:	at co
+m.mehmetkerem.jwt.JwtAuthFilt
+er.doFilterInternal(JwtAuthFi
+lter.java:51) ~[classes/:na]
+  test_output.log:1205:	at or
+g.springframework.web.filter.
+OncePerRequestFilter.doFilter
+(OncePerRequestFilter.java:11
+6) ~[spring-web-6.1.3.jar:6.1
+.3]
+  test_output.log:1206:	at or
+g.springframework.security.we
+b.FilterChainProxy$VirtualFil
+terChain.doFilter(FilterChain
+Proxy.java:374) ~[spring-secu
+rity-web-6.2.1.jar:6.2.1]
+  test_output.log:1207:	at or
+g.springframework.security.we
+b.authentication.AbstractAuth
+enticationProcessingFilter.do
+Filter(AbstractAuthentication
+ProcessingFilter.java:227) ~[
+spring-security-web-6.2.1.jar
+:6.2.1]
+  test_output.log:1208:	at or
+g.springframework.security.we
+b.authentication.AbstractAuth
+enticationProcessingFilter.do
+Filter(AbstractAuthentication
+ProcessingFilter.java:221) ~[
+spring-security-web-6.2.1.jar
+:6.2.1]
+  test_output.log:1209:	at or
+g.springframework.security.we
+b.FilterChainProxy$VirtualFil
+terChain.doFilter(FilterChain
+Proxy.java:374) ~[spring-secu
+rity-web-6.2.1.jar:6.2.1]
+  test_output.log:1251:	at or
+g.springframework.web.filter.
+CharacterEncodingFilter.doFil
+terInternal(CharacterEncoding
+Filter.java:201) ~[spring-web
+-6.1.3.jar:6.1.3]
+  test_output.log:1252:	at or
+g.springframework.web.filter.
+OncePerRequestFilter.doFilter
+(OncePerRequestFilter.java:11
+6) ~[spring-web-6.1.3.jar:6.1
+.3]
+  test_output.log:1253:	at or
+g.springframework.test.web.se
+rvlet.setup.MockMvcFilterDeco
+rator.doFilter(MockMvcFilterD
+ecorator.java:151) ~[spring-t
+est-6.1.3.jar:6.1.3]
+  test_output.log:1254:	at or
+g.springframework.mock.web.Mo
+ckFilterChain.doFilter(MockFi
+lterChain.java:132) ~[spring-
+test-6.1.3.jar:6.1.3]
+  test_output.log:1255:	at or
+g.springframework.test.web.se
+rvlet.MockMvc.perform(MockMvc
+.java:201) ~[spring-test-6.1.
+3.jar:6.1.3]
+> test_output.log:1256:	at co
+m.mehmetkerem.integration.Ord
+erIntegrationTest.shouldPlace
+AndVerifyOrder(OrderIntegrati
+onTest.java:178) ~[test-class
+es/:na]
+  test_output.log:1257:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke0(Native Method) ~[na:na]
+  test_output.log:1258:	at ja
+va.base/jdk.internal.reflect.
+NativeMethodAccessorImpl.invo
+ke(NativeMethodAccessorImpl.j
+ava:77) ~[na:na]
+  test_output.log:1259:	at ja
+va.base/jdk.internal.reflect.
+DelegatingMethodAccessorImpl.
+invoke(DelegatingMethodAccess
+orImpl.java:43) ~[na:na]
+  test_output.log:1260:	at ja
+va.base/java.lang.reflect.Met
+hod.invoke(Method.java:568) ~
+[na:na]
+  test_output.log:1261:	at or
+g.junit.platform.commons.util
+.ReflectionUtils.invokeMethod
+(ReflectionUtils.java:728) ~[
+junit-platform-commons-1.10.1
+.jar:1.10.1]
+  test_output.log:1323:	at or
+g.apache.maven.surefire.junit
+platform.JUnitPlatformProvide
+r.invoke(JUnitPlatformProvide
+r.java:122) ~[surefire-junit-
+platform-3.1.2.jar:3.1.2]
+  test_output.log:1324:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.runSuitesInPro
+cess(ForkedBooter.java:385) ~
+[surefire-booter-3.1.2.jar:3.
+1.2]
+  test_output.log:1325:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.execute(Forked
+Booter.java:162) ~[surefire-b
+ooter-3.1.2.jar:3.1.2]
+  test_output.log:1326:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.run(ForkedBoot
+er.java:507) ~[surefire-boote
+r-3.1.2.jar:3.1.2]
+  test_output.log:1327:	at or
+g.apache.maven.surefire.boote
+r.ForkedBooter.main(ForkedBoo
+ter.java:495) ~[surefire-boot
+er-3.1.2.jar:3.1.2]
+> test_output.log:1328:Caused
+ by: org.hibernate.HibernateE
+xception: A collection with c
+ascade="all-delete-orphan" wa
+s no longer referenced by the
+ owning entity instance: com.
+mehmetkerem.model.Cart.items
+  test_output.log:1329:	at or
+g.hibernate.engine.internal.C
+ollections.processDereference
+dCollection(Collections.java:
+98) ~[hibernate-core-6.4.1.Fi
+nal.jar:6.4.1.Final]
+  test_output.log:1330:	at or
+g.hibernate.engine.internal.C
+ollections.processUnreachable
+Collection(Collections.java:4
+9) ~[hibernate-core-6.4.1.Fin
+al.jar:6.4.1.Final]
+  test_output.log:1331:	at or
+g.hibernate.event.internal.Ab
+stractFlushingEventListener.l
+ambda$flushCollections$1(Abst
+ractFlushingEventListener.jav
+a:270) ~[hibernate-core-6.4.1
+.Final.jar:6.4.1.Final]
+  test_output.log:1332:	at or
+g.hibernate.engine.internal.S
+tatefulPersistenceContext.for
+EachCollectionEntry(StatefulP
+ersistenceContext.java:1321) 
+~[hibernate-core-6.4.1.Final.
+jar:6.4.1.Final]
+  test_output.log:1333:	at or
+g.hibernate.event.internal.Ab
+stractFlushingEventListener.f
+lushCollections(AbstractFlush
+ingEventListener.java:267) ~[
+hibernate-core-6.4.1.Final.ja
+r:6.4.1.Final]
+  test_output.log:1367:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Content-Length:"75"]
+  test_output.log:1368:      
+       Body = {"name":"User",
+"email":"user@test.com","pass
+word":"password","role":"USER
+"}
+  test_output.log:1369:    Se
+ssion Attrs = {}
+  test_output.log:1370:
+  test_output.log:1371:Handle
+r:
+> test_output.log:1372:      
+       Type = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl
+> test_output.log:1373:      
+     Method = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl#register(RegisterR
+equest)
+  test_output.log:1374:
+  test_output.log:1375:Async:
+  test_output.log:1376:    As
+ync started = false
+  test_output.log:1377:     A
+sync result = null
+  test_output.log:1378:
+  test_output.log:1404:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Content-Length:"47"]
+  test_output.log:1405:      
+       Body = {"email":"user@
+test.com","password":"passwor
+d"}
+  test_output.log:1406:    Se
+ssion Attrs = {}
+  test_output.log:1407:
+  test_output.log:1408:Handle
+r:
+> test_output.log:1409:      
+       Type = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl
+> test_output.log:1410:      
+     Method = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl#login(LoginRequest
+)
+  test_output.log:1411:
+  test_output.log:1412:Async:
+  test_output.log:1413:    As
+ync started = false
+  test_output.log:1414:     A
+sync result = null
+  test_output.log:1415:
+  test_output.log:1441:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Content-Length:"78"]
+  test_output.log:1442:      
+       Body = {"name":"Admin"
+,"email":"admin@test.com","pa
+ssword":"admin123","role":"AD
+MIN"}
+  test_output.log:1443:    Se
+ssion Attrs = {}
+  test_output.log:1444:
+  test_output.log:1445:Handle
+r:
+> test_output.log:1446:      
+       Type = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl
+> test_output.log:1447:      
+     Method = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl#register(RegisterR
+equest)
+  test_output.log:1448:
+  test_output.log:1449:Async:
+  test_output.log:1450:    As
+ync started = false
+  test_output.log:1451:     A
+sync result = null
+  test_output.log:1452:
+  test_output.log:1478:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Content-Length:"48"]
+  test_output.log:1479:      
+       Body = {"email":"admin
+@test.com","password":"admin1
+23"}
+  test_output.log:1480:    Se
+ssion Attrs = {}
+  test_output.log:1481:
+  test_output.log:1482:Handle
+r:
+> test_output.log:1483:      
+       Type = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl
+> test_output.log:1484:      
+     Method = com.mehmetkerem
+.controller.impl.RestAuthCont
+rollerImpl#login(LoginRequest
+)
+  test_output.log:1485:
+  test_output.log:1486:Async:
+  test_output.log:1487:    As
+ync started = false
+  test_output.log:1488:     A
+sync result = null
+  test_output.log:1489:
+  test_output.log:1515:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Authorization:"Bearer eyJ
+hbGciOiJIUzI1NiJ9.eyJzdWIiOiJ
+hZG1pbkB0ZXN0LmNvbSIsInJvbGVz
+IjpbIlJPTEVfQURNSU4iXSwiaWF0I
+joxNzcwOTE4Mzk2LCJleHAiOjE3Nz
+A5MjE5OTZ9.U16zX1Q4wDAr-On2lf
+UtQl4s5R66Wih0qClM3juwe98", C
+ontent-Length:"17"]
+  test_output.log:1516:      
+       Body = {"name":"Antika
+"}
+  test_output.log:1517:    Se
+ssion Attrs = {}
+  test_output.log:1518:
+  test_output.log:1519:Handle
+r:
+> test_output.log:1520:      
+       Type = com.mehmetkerem
+.controller.impl.RestCategory
+ControllerImpl
+> test_output.log:1521:      
+     Method = com.mehmetkerem
+.controller.impl.RestCategory
+ControllerImpl#saveCategory(C
+ategoryRequest)
+  test_output.log:1522:
+  test_output.log:1523:Async:
+  test_output.log:1524:    As
+ync started = false
+  test_output.log:1525:     A
+sync result = null
+  test_output.log:1526:
+  test_output.log:1552:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Authorization:"Bearer eyJ
+hbGciOiJIUzI1NiJ9.eyJzdWIiOiJ
+hZG1pbkB0ZXN0LmNvbSIsInJvbGVz
+IjpbIlJPTEVfQURNSU4iXSwiaWF0I
+joxNzcwOTE4Mzk2LCJleHAiOjE3Nz
+A5MjE5OTZ9.U16zX1Q4wDAr-On2lf
+UtQl4s5R66Wih0qClM3juwe98", C
+ontent-Length:"145"]
+  test_output.log:1553:      
+       Body = {"title":"Antik
+a Gramofon","description":nul
+l,"price":5000,"stock":5,"cat
+egoryId":1,"imageUrls":["http
+://image.com/gramo.jpg"],"att
+ributes":null}
+  test_output.log:1554:    Se
+ssion Attrs = {}
+  test_output.log:1555:
+  test_output.log:1556:Handle
+r:
+> test_output.log:1557:      
+       Type = com.mehmetkerem
+.controller.impl.RestProductC
+ontrollerImpl
+> test_output.log:1558:      
+     Method = com.mehmetkerem
+.controller.impl.RestProductC
+ontrollerImpl#saveProduct(Pro
+ductRequest)
+  test_output.log:1559:
+  test_output.log:1560:Async:
+  test_output.log:1561:    As
+ync started = false
+  test_output.log:1562:     A
+sync result = null
+  test_output.log:1563:
+  test_output.log:1589:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Authorization:"Bearer eyJ
+hbGciOiJIUzI1NiJ9.eyJzdWIiOiJ
+1c2VyQHRlc3QuY29tIiwicm9sZXMi
+OlsiUk9MRV9VU0VSIl0sImlhdCI6M
+Tc3MDkxODM5NSwiZXhwIjoxNzcwOT
+IxOTk1fQ.0tb1__ty_qR8JNhWu9Ik
+-_ZFsU3uCMKM7B2Y4sKyhus", Con
+tent-Length:"28"]
+  test_output.log:1590:      
+       Body = {"productId":1,
+"quantity":1}
+  test_output.log:1591:    Se
+ssion Attrs = {}
+  test_output.log:1592:
+  test_output.log:1593:Handle
+r:
+> test_output.log:1594:      
+       Type = com.mehmetkerem
+.controller.impl.RestCartCont
+rollerImpl
+> test_output.log:1595:      
+     Method = com.mehmetkerem
+.controller.impl.RestCartCont
+rollerImpl#addItem(Long, Cart
+ItemRequest)
+  test_output.log:1596:
+  test_output.log:1597:Async:
+  test_output.log:1598:    As
+ync started = false
+  test_output.log:1599:     A
+sync result = null
+  test_output.log:1600:
+  test_output.log:1626:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Authorization:"Bearer eyJ
+hbGciOiJIUzI1NiJ9.eyJzdWIiOiJ
+1c2VyQHRlc3QuY29tIiwicm9sZXMi
+OlsiUk9MRV9VU0VSIl0sImlhdCI6M
+Tc3MDkxODM5NSwiZXhwIjoxNzcwOT
+IxOTk1fQ.0tb1__ty_qR8JNhWu9Ik
+-_ZFsU3uCMKM7B2Y4sKyhus", Con
+tent-Length:"125"]
+  test_output.log:1627:      
+       Body = {"title":"Ev","
+country":"Turkey","city":"Ist
+anbul","district":"Kadikoy","
+postalCode":"34710","addressL
+ine":"Test sokak no 5"}
+  test_output.log:1628:    Se
+ssion Attrs = {}
+  test_output.log:1629:
+  test_output.log:1630:Handle
+r:
+> test_output.log:1631:      
+       Type = com.mehmetkerem
+.controller.impl.RestAddressC
+ontrollerImpl
+> test_output.log:1632:      
+     Method = com.mehmetkerem
+.controller.impl.RestAddressC
+ontrollerImpl#saveAddress(Add
+ressRequest)
+  test_output.log:1633:
+  test_output.log:1634:Async:
+  test_output.log:1635:    As
+ync started = false
+  test_output.log:1636:     A
+sync result = null
+  test_output.log:1637:
+  test_output.log:1663:      
+    Headers = [Content-Type:"
+application/json;charset=UTF-
+8", Authorization:"Bearer eyJ
+hbGciOiJIUzI1NiJ9.eyJzdWIiOiJ
+1c2VyQHRlc3QuY29tIiwicm9sZXMi
+OlsiUk9MRV9VU0VSIl0sImlhdCI6M
+Tc3MDkxODM5NSwiZXhwIjoxNzcwOT
+IxOTk1fQ.0tb1__ty_qR8JNhWu9Ik
+-_ZFsU3uCMKM7B2Y4sKyhus", Con
+tent-Length:"60"]
+  test_output.log:1664:      
+       Body = {"addressId":1,
+"paymentStatus":"PAID","note"
+:"Hassas kargo"}
+  test_output.log:1665:    Se
+ssion Attrs = {}
+  test_output.log:1666:
+  test_output.log:1667:Handle
+r:
+> test_output.log:1668:      
+       Type = com.mehmetkerem
+.controller.impl.RestOrderCon
+trollerImpl
+> test_output.log:1669:      
+     Method = com.mehmetkerem
+.controller.impl.RestOrderCon
+trollerImpl#saveOrder(Long, O
+rderRequest)
+  test_output.log:1670:
+  test_output.log:1671:Async:
+  test_output.log:1672:    As
+ync started = false
+  test_output.log:1673:     A
+sync result = null
+  test_output.log:1674:
+  test_output.log:1686:MockHt
+tpServletResponse:
+  test_output.log:1687:      
+     Status = 500
+  test_output.log:1688:    Er
+ror message = null
+  test_output.log:1689:      
+    Headers = [Vary:"Origin",
+ "Access-Control-Request-Meth
+od", "Access-Control-Request-
+Headers", Content-Type:"appli
+cation/json", X-Content-Type-
+Options:"nosniff", X-XSS-Prot
+ection:"0", Cache-Control:"no
+-cache, no-store, max-age=0, 
+must-revalidate", Pragma:"no-
+cache", Expires:"0", X-Frame-
+Options:"DENY"]
+  test_output.log:1690:     C
+ontent type = application/jso
+n
+> test_output.log:1691:      
+       Body = {"status":false
+,"message":"A collection with
+ cascade=\"all-delete-orphan\
+" was no longer referenced by
+ the owning entity instance: 
+com.mehmetkerem.model.Cart.it
+ems","code":"500"}
+  test_output.log:1692:    Fo
+rwarded URL = null
+  test_output.log:1693:   Red
+irected URL = null
+  test_output.log:1694:      
+    Cookies = []
+> test_output.log:1695:[ERROR
+] Tests run: 1, Failures: 1, 
+Errors: 0, Skipped: 0, Time e
+lapsed: 11.08 s <<< FAILURE! 
+-- in com.mehmetkerem.integra
+tion.OrderIntegrationTest
+> test_output.log:1696:[ERROR
+] com.mehmetkerem.integration
+.OrderIntegrationTest.shouldP
+laceAndVerifyOrder -- Time el
+apsed: 2.028 s <<< FAILURE!
+  test_output.log:1697:java.l
+ang.AssertionError: Status ex
+pected:<200> but was:<500>
+  test_output.log:1698:	at or
+g.springframework.test.util.A
+ssertionErrors.fail(Assertion
+Errors.java:59)
+  test_output.log:1699:	at or
+g.springframework.test.util.A
+ssertionErrors.assertEquals(A
+ssertionErrors.java:122)
+  test_output.log:1700:	at or
+g.springframework.test.web.se
+rvlet.result.StatusResultMatc
+hers.lambda$matcher$9(StatusR
+esultMatchers.java:637)
+  test_output.log:1701:	at or
+g.springframework.test.web.se
+rvlet.MockMvc$1.andExpect(Moc
+kMvc.java:214)
+> test_output.log:1702:	at co
+m.mehmetkerem.integration.Ord
+erIntegrationTest.shouldPlace
+AndVerifyOrder(OrderIntegrati
+onTest.java:182)
+  test_output.log:1703:	at ja
+va.base/java.lang.reflect.Met
+hod.invoke(Method.java:568)
+  test_output.log:1704:	at ja
+va.base/java.util.ArrayList.f
+orEach(ArrayList.java:1511)
+  test_output.log:1705:	at ja
+va.base/java.util.ArrayList.f
+orEach(ArrayList.java:1511)
+  test_output.log:1706:
+  test_output.log:1707:[INFO]
+ 
+
+

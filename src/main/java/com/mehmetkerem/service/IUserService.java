@@ -10,13 +10,21 @@ public interface IUserService {
 
     UserResponse saveUser(UserRequest request);
 
-    String deleteUser(String id);
+    String deleteUser(Long id);
 
-    UserResponse updateUser(String id, UserRequest request);
+    UserResponse updateUser(Long id, UserRequest request);
 
-    User getUserById(String id);
+    User getUserById(Long id);
 
-    UserResponse getUserResponseById(String id);
+    UserResponse getUserResponseById(Long id);
 
     List<UserResponse> findAllUsers();
+
+    UserResponse getUserByEmail(String email);
+
+    void createPasswordResetTokenForUser(User user, String token);
+
+    String validatePasswordResetToken(String token);
+
+    void changeUserPassword(User user, String password);
 }

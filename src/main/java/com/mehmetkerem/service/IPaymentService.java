@@ -10,16 +10,19 @@ import java.util.List;
 
 public interface IPaymentService {
 
-    PaymentResponse processPayment(String userId, String orderId, BigDecimal amount, PaymentMethod paymentMethod, PaymentStatus paymentStatus);
+    PaymentResponse processPayment(Long userId, Long orderId, BigDecimal amount, PaymentMethod paymentMethod);
 
-    PaymentResponse getPaymentResponseById(String id);
+    PaymentResponse getPaymentResponseById(Long id);
 
-    Payment getPaymentById(String id);
+    /** Sadece ödeme sahibi veya ADMIN erişebilir. */
+    PaymentResponse getPaymentResponseByIdAndUserId(Long id, Long userId);
 
-    List<PaymentResponse> getPaymentsByUser(String userId);
+    Payment getPaymentById(Long id);
 
-    PaymentResponse updatePaymentStatus(String paymentId, PaymentStatus newStatus);
+    List<PaymentResponse> getPaymentsByUser(Long userId);
 
-    String deletePayment(String id);
+    PaymentResponse updatePaymentStatus(Long paymentId, PaymentStatus newStatus);
 
+    /** Sadece ADMIN ödeme siler. */
+    String deletePayment(Long id);
 }

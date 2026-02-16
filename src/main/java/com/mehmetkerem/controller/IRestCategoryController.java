@@ -2,19 +2,19 @@ package com.mehmetkerem.controller;
 
 import com.mehmetkerem.dto.request.CategoryRequest;
 import com.mehmetkerem.dto.response.CategoryResponse;
-import org.springframework.http.ResponseEntity;
+import com.mehmetkerem.util.ResultData;
 
 import java.util.List;
 
 public interface IRestCategoryController {
 
-    ResponseEntity<CategoryResponse> saveCategory(CategoryRequest request);
+    ResultData<CategoryResponse> saveCategory(CategoryRequest request);
 
-    ResponseEntity<String> deleteCategory(String id);
+    ResultData<String> deleteCategory(Long id);
 
-    ResponseEntity<CategoryResponse> getCategoryById(String id);
+    ResultData<CategoryResponse> getCategoryById(Long id);
 
-    ResponseEntity<CategoryResponse> updateCategory(String id, CategoryRequest request);
+    ResultData<CategoryResponse> updateCategory(Long id, CategoryRequest request);
 
-    ResponseEntity<List<CategoryResponse>> findAllCategories();
+    ResultData<List<CategoryResponse>> findAllCategories();
 }

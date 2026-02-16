@@ -6,11 +6,9 @@ import com.mehmetkerem.dto.response.ProductResponse;
 import com.mehmetkerem.model.OrderItem;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        uses = {ProductMapper.class})
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {
+        ProductMapper.class })
 public interface OrderItemMapper {
-
 
     OrderItem toEntity(OrderItemRequest request);
 

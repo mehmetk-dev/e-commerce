@@ -9,12 +9,15 @@ import com.mehmetkerem.util.ResultData;
 import com.mehmetkerem.util.ResultHelper;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/v1/product")
@@ -29,61 +32,77 @@ public class RestProductControllerImpl implements IRestProductController {
     @Secured("ROLE_ADMIN")
     @PostMapping("/save")
     @Override
-    public ResponseEntity<ProductResponse> saveProduct(@Valid @RequestBody ProductRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveProduct(request));
+    public ResultData<ProductResponse> saveProduct(@Valid @RequestBody ProductRequest request) {
+        return ResultHelper.success(productService.saveProduct(request));
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/find-all")
     @Override
-    public ResponseEntity<List<ProductResponse>> findAllProducts() {
-        return ResponseEntity.ok(productService.findAllProducts());
+    public ResultData<List<ProductResponse>> findAllProducts() {
+        return ResultHelper.success(productService.findAllProducts());
     }
 
     @Secured("ROLE_ADMIN")
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable("id") String id, @RequestBody ProductRequest request) {
-        return ResponseEntity.ok(productService.updateProduct(id, request));
+    public ResultData<ProductResponse> updateProduct(@PathVariable("id") Long id,
+            @RequestBody ProductRequest request) {
+        return ResultHelper.success(productService.updateProduct(id, request));
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/search/title")
     @Override
-    public ResponseEntity<List<ProductResponse>> searchProductsByTitle(@RequestParam String title) {
-        return ResponseEntity.ok(productService.getProductsByTitle(title));
+    public ResultData<List<ProductResponse>> searchProductsByTitle(@RequestParam String title) {
+        return ResultHelper.success(productService.getProductsByTitle(title));
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/search/category")
     @Override
-    public ResponseEntity<List<ProductResponse>> searchProductsByCategoryId(@RequestParam String categoryId) {
-        return ResponseEntity.ok(productService.getProductsByCategory(categoryId));
+    public ResultData<List<ProductResponse>> searchProductsByCategoryId(@RequestParam Long categoryId) {
+        return ResultHelper.success(productService.getProductsByCategory(categoryId));
+    }
+
+    @GetMapping("/search")
+    @Override
+    public ResultData<CursorResponse<ProductResponse>> searchProducts(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(required = false) Double minRating,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction) {
+
+        Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+        int cappedSize = Math.min(Math.max(size, 1), 100);
+        Pageable pageable = PageRequest.of(page, cappedSize, sort);
+        Page<ProductResponse> productPage = productService.searchProducts(title, categoryId, minPrice, maxPrice, minRating, pageable);
+        return ResultHelper.cursor(productPage);
     }
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteProduct(@PathVariable("id") String id) {
-        return ResponseEntity.ok(productService.deleteProduct(id));
+    public ResultData<String> deleteProduct(@PathVariable("id") Long id) {
+        return ResultHelper.success(productService.deleteProduct(id));
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(productService.getProductResponseById(id));
+    public ResultData<ProductResponse> getProductById(@PathVariable("id") Long id) {
+        return ResultHelper.success(productService.getProductResponseById(id));
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping
     public ResultData<CursorResponse<ProductResponse>> listProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size,
             @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "asc") String direction
-    ) {
-        Page<ProductResponse> productPage = productService.getAllProducts(page, size, sortBy, direction);
+            @RequestParam(defaultValue = "asc") String direction) {
+        int cappedSize = Math.min(Math.max(size, 1), 100);
+        Page<ProductResponse> productPage = productService.getAllProducts(page, cappedSize, sortBy, direction);
 
         return ResultHelper.cursor(productPage);
     }

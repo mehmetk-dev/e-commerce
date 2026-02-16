@@ -3,8 +3,6 @@ package com.mehmetkerem.dto.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mehmetkerem.enums.OrderStatus;
 import com.mehmetkerem.enums.PaymentStatus;
-import com.mehmetkerem.model.Address;
-import com.mehmetkerem.model.OrderItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +19,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderResponse {
 
-    private String id;
+    private Long id;
 
     private UserResponse user;
 
@@ -37,4 +35,7 @@ public class OrderResponse {
 
     private PaymentStatus paymentStatus;
 
+    private String trackingNumber;
+
+    private String carrierName;
 }

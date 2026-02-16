@@ -4,12 +4,11 @@ import com.mehmetkerem.dto.request.CartItemRequest;
 import com.mehmetkerem.dto.response.CartItemResponse;
 import com.mehmetkerem.dto.response.ProductResponse;
 import com.mehmetkerem.model.CartItem;
-import com.mehmetkerem.model.Product;
 import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CartItemMapper {
 
     // Request → Entity
@@ -17,7 +16,6 @@ public interface CartItemMapper {
     @Mapping(target = "quantity", source = "quantity")
     @Mapping(target = "price", ignore = true)
     CartItem toEntity(CartItemRequest request);
-
 
     @Mapping(target = "product", ignore = true)
     @Mapping(target = "quantity", source = "quantity")
@@ -40,6 +38,5 @@ public interface CartItemMapper {
                 .map(this::toEntity)
                 .toList();
     }
-
 
 }

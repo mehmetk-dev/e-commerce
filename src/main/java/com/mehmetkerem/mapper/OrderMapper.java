@@ -7,11 +7,8 @@ import com.mehmetkerem.dto.response.UserResponse;
 import com.mehmetkerem.model.Order;
 import org.mapstruct.*;
 
-@Mapper(
-        componentModel = "spring",
-        uses = {OrderItemMapper.class, AddressMapper.class},
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
-)
+@Mapper(componentModel = "spring", uses = { OrderItemMapper.class,
+        AddressMapper.class }, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderMapper {
 
     @Mapping(target = "id", ignore = true)

@@ -4,13 +4,12 @@ import com.mehmetkerem.controller.IRestReviewController;
 import com.mehmetkerem.dto.request.ReviewRequest;
 import com.mehmetkerem.dto.response.ReviewResponse;
 import com.mehmetkerem.service.IReviewService;
+import com.mehmetkerem.util.ResultData;
+import com.mehmetkerem.util.ResultHelper;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/v1/review")
@@ -24,31 +23,32 @@ public class RestReviewControllerImpl implements IRestReviewController {
 
     @PostMapping("/save")
     @Override
-    public ResponseEntity<ReviewResponse> saveReview(@Valid @RequestBody ReviewRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.saveReview(request));
+    public ResultData<ReviewResponse> saveReview(@Valid @RequestBody ReviewRequest request) {
+        return ResultHelper.success(reviewService.saveReview(request));
     }
 
     @GetMapping("/find-all")
     @Override
-    public ResponseEntity<List<ReviewResponse>> findAllReviews() {
-        return ResponseEntity.status(HttpStatus.OK).body(reviewService.findAllReviews());
+    public ResultData<List<ReviewResponse>> findAllReviews() {
+        return ResultHelper.success(reviewService.findAllReviews());
     }
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<ReviewResponse> updateReview(@PathVariable("id") String id, @RequestBody ReviewRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(reviewService.updateReview(id, request));
+    public ResultData<ReviewResponse> updateReview(@PathVariable("id") Long id,
+            @RequestBody ReviewRequest request) {
+        return ResultHelper.success(reviewService.updateReview(id, request));
     }
 
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteReview(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(reviewService.deleteReview(id));
+    public ResultData<String> deleteReview(@PathVariable("id") Long id) {
+        return ResultHelper.success(reviewService.deleteReview(id));
     }
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<ReviewResponse> getReviewById(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(reviewService.getReviewResponseById(id));
+    public ResultData<ReviewResponse> getReviewById(@PathVariable("id") Long id) {
+        return ResultHelper.success(reviewService.getReviewResponseById(id));
     }
 }

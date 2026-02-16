@@ -2,19 +2,19 @@ package com.mehmetkerem.controller;
 
 import com.mehmetkerem.dto.request.AddressRequest;
 import com.mehmetkerem.dto.response.AddressResponse;
-import org.springframework.http.ResponseEntity;
-
+import com.mehmetkerem.util.ResultData;
 import java.util.List;
 
 public interface IRestAddressController {
+    ResultData<AddressResponse> saveAddress(AddressRequest request);
 
-    ResponseEntity<AddressResponse> saveAddress(AddressRequest request);
+    ResultData<List<AddressResponse>> findAllAddress();
 
-    ResponseEntity<List<AddressResponse>> findAllAddress();
+    ResultData<AddressResponse> updateAddress(Long id, AddressRequest request);
 
-    ResponseEntity<AddressResponse> updateAddress(String id, AddressRequest request);
+    ResultData<String> deleteAddress(Long id);
 
-    ResponseEntity<String> deleteAddress(String id);
+    ResultData<AddressResponse> getAddressById(Long id);
 
-    ResponseEntity<AddressResponse> getAddressById(String id);
+    ResultData<List<AddressResponse>> getMyAddresses();
 }

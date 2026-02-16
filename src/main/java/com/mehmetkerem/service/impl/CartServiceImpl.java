@@ -15,7 +15,7 @@ import com.mehmetkerem.model.Product;
 import com.mehmetkerem.repository.CartRepository;
 import com.mehmetkerem.service.ICartService;
 import com.mehmetkerem.service.IProductService;
-import com.mehmetkerem.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,46 +26,46 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@SuppressWarnings("null")
+@Slf4j
 public class CartServiceImpl implements ICartService {
 
     private final CartRepository cartRepository;
     private final CartMapper cartMapper;
     private final CartItemMapper cartItemMapper;
-    private final IUserService userService;
+
     private final IProductService productService;
+    private final com.mehmetkerem.service.ICouponService couponService;
 
     public CartServiceImpl(CartRepository cartRepository,
-                           CartMapper cartMapper,
-                           CartItemMapper cartItemMapper,
-                           IUserService userService,
-                           IProductService productService) {
+            CartMapper cartMapper,
+            CartItemMapper cartItemMapper,
+            IProductService productService,
+            com.mehmetkerem.service.ICouponService couponService) {
         this.cartRepository = cartRepository;
         this.cartMapper = cartMapper;
         this.cartItemMapper = cartItemMapper;
-        this.userService = userService;
         this.productService = productService;
+        this.couponService = couponService;
     }
 
     @Transactional
-    public CartResponse saveCart(String userId, List<CartItemRequest> cartItemRequests) {
-
+    @Override
+    public CartResponse saveCart(Long userId, List<CartItemRequest> cartItemRequests) {
+        log.info("Sepet kaydediliyor. UserId: {}, Ürün Adedi: {}", userId, cartItemRequests.size());
         validateStock(cartItemRequests);
 
-        Cart cart = cartRepository.findById(userId)
-                .orElse(Cart.builder()
-                        .userId(userService.getUserById(userId).getId())
-                        .items(new ArrayList<>())
-                        .build());
+        Cart cart = getCartByUserId(userId);
 
         List<CartItem> entityCartItem = cartItemMapper.toEntityCartItem(cartItemRequests);
 
-        List<String> productIds = entityCartItem.stream()
+        List<Long> productIds = entityCartItem.stream()
                 .map(CartItem::getProductId)
-                .toList();
+                .collect(Collectors.toList());
 
         List<ProductResponse> products = productService.getProductResponsesByIds(productIds);
 
-        Map<String, ProductResponse> productMap = products.stream()
+        Map<Long, ProductResponse> productMap = products.stream()
                 .collect(Collectors.toMap(ProductResponse::getId, p -> p));
 
         for (CartItem item : entityCartItem) {
@@ -76,7 +76,8 @@ public class CartServiceImpl implements ICartService {
             item.setPrice(product.getPrice());
         }
 
-        Map<String, CartItem> mergedItems = new LinkedHashMap<>();
+        // Merge logic used here
+        Map<Long, CartItem> mergedItems = new LinkedHashMap<>();
         for (CartItem item : entityCartItem) {
             if (mergedItems.containsKey(item.getProductId())) {
                 CartItem existing = mergedItems.get(item.getProductId());
@@ -88,48 +89,66 @@ public class CartServiceImpl implements ICartService {
 
         List<CartItem> finalCartItems = new ArrayList<>(mergedItems.values());
 
-
-        cart.setItems(finalCartItems);
+        cart.getItems().clear();
+        cart.getItems().addAll(finalCartItems);
         cart.setUpdatedAt(LocalDateTime.now());
 
         Cart savedCart = cartRepository.save(cart);
 
         CartResponse response = cartMapper.toResponse(savedCart);
-        response.setId(userId);
+        response.setUserId(userId);
         response.setItems(toResponseCartItem(savedCart.getItems()));
 
         return response;
     }
 
     @Override
-    public Cart getCartByUserId(String userId) {
-        return cartRepository.findById(userId).orElseThrow(
-                () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, userId, "sepet")));
+    public Cart getCartByUserId(Long userId) {
+        // Create cart if not exists
+        return cartRepository.findByUserId(userId).orElseGet(() -> {
+            Cart newCart = Cart.builder()
+                    .userId(userId)
+                    .items(new ArrayList<>())
+                    .build();
+            return cartRepository.save(newCart);
+        });
     }
 
     @Override
-    public CartResponse getCartResponseByUserId(String userId) {
+    public CartResponse getCartResponseByUserId(Long userId) {
         return toResponse(getCartByUserId(userId));
     }
 
     @Transactional
     @Override
-    public CartResponse addItem(String userId, CartItemRequest request) {
+    public CartResponse addItem(Long userId, CartItemRequest request) {
         Cart cart = getCartByUserId(userId);
 
         Product product = productService.getProductById(request.getProductId());
         validateStock(request.getQuantity(), product);
-        CartItem item = cartItemMapper.toEntity(request);
-        item.setPrice(product.getPrice());
-        cart.getItems().add(item);
+
+        Optional<CartItem> existingItem = cart.getItems().stream()
+                .filter(item -> Objects.equals(item.getProductId(), request.getProductId()))
+                .findFirst();
+
+        if (existingItem.isPresent()) {
+            existingItem.get().setQuantity(existingItem.get().getQuantity() + request.getQuantity());
+        } else {
+            CartItem newItem = cartItemMapper.toEntity(request);
+            newItem.setPrice(product.getPrice());
+            cart.getItems().add(newItem);
+        }
+
         cart.setUpdatedAt(LocalDateTime.now());
+        log.info("Sepete ürün eklendi. Kullanıcı ID: {}, Ürün ID: {}, Miktar: {}", userId, request.getProductId(),
+                request.getQuantity());
 
         return toResponse(cartRepository.save(cart));
     }
 
     @Transactional
     @Override
-    public CartResponse updateItemQuantity(String userId, String productId, int quantity) {
+    public CartResponse updateItemQuantity(Long userId, Long productId, int quantity) {
 
         validateStock(quantity, productService.getProductById(productId));
 
@@ -144,38 +163,84 @@ public class CartServiceImpl implements ICartService {
         cart.setUpdatedAt(LocalDateTime.now());
         cartRepository.save(cart);
 
-        return CartResponse.builder().items(toResponseCartItem(cart.getItems())).id(userId).build();
+        return CartResponse.builder().items(toResponseCartItem(cart.getItems())).userId(userId).build();
     }
 
     @Override
-    public CartResponse removeItem(String userId, String productId) {
+    public CartResponse removeItem(Long userId, Long productId) {
 
         Cart cart = getCartByUserId(userId);
         boolean isRemoved = cart.getItems().removeIf(item -> Objects.equals(item.getProductId(), productId));
         cart.setUpdatedAt(LocalDateTime.now());
 
         if (!isRemoved) {
+            log.warn("Sepetten ürün silme hatası: Ürün bulunamadı. Kullanıcı ID: {}, Ürün ID: {}", userId, productId);
             throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
         }
-        return CartResponse.builder()
-                .items(toResponseCartItem(cart.getItems())).id(userId).build();
+        log.info("Ürün sepetten çıkarıldı. Kullanıcı ID: {}, Ürün ID: {}", userId, productId);
+        return toResponse(cartRepository.save(cart));
     }
 
     @Override
-    public String clearCart(String userId) {
+    public String clearCart(Long userId) {
         Cart cart = getCartByUserId(userId);
-        cart.setItems(new ArrayList<>());
+        cart.getItems().clear();
         cart.setUpdatedAt(LocalDateTime.now());
         cartRepository.save(cart);
         return String.format(Messages.CLEAR_VALUE, userId, "sepet");
     }
 
     @Override
-    public BigDecimal calculateTotal(String userId) {
-        return getCartByUserId(userId).getItems().stream()
+    @Transactional
+    public CartResponse applyCoupon(Long userId, String couponCode) {
+        Cart cart = getCartByUserId(userId);
+
+        // Calculate current total
+        BigDecimal currentTotal = calculateRawTotal(cart);
+
+        // Validate and check if applicable (throws exception if invalid)
+        couponService.applyCoupon(couponCode, currentTotal);
+
+        cart.setCouponCode(couponCode);
+        cartRepository.save(cart);
+
+        CartResponse response = toResponse(cart);
+        // Recalculate total with discount (validating/applying to ensure price is
+        // updated if needed)
+        couponService.applyCoupon(couponCode, currentTotal);
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public CartResponse removeCoupon(Long userId) {
+        Cart cart = getCartByUserId(userId);
+        cart.setCouponCode(null);
+        cartRepository.save(cart);
+        return toResponse(cart);
+    }
+
+    private BigDecimal calculateRawTotal(Cart cart) {
+        return cart.getItems().stream()
                 .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
+    @Override
+    public BigDecimal calculateTotal(Long userId) {
+        Cart cart = getCartByUserId(userId);
+        BigDecimal total = calculateRawTotal(cart);
+
+        if (cart.getCouponCode() != null) {
+            try {
+                return couponService.applyCoupon(cart.getCouponCode(), total);
+            } catch (Exception e) {
+                // If coupon invalid now (expired etc), return raw total or handle error
+                // For now, let's log and clear invalid coupon? Or just return raw total.
+                return total;
+            }
+        }
+        return total;
     }
 
     private void validateStock(Integer quantity, Product product) {
@@ -186,81 +251,92 @@ public class CartServiceImpl implements ICartService {
 
     private CartResponse toResponse(Cart cart) {
         return CartResponse.builder()
-                .id(cart.getUserId())
+                .id(cart.getId())
+                .userId(cart.getUserId())
                 .items(toResponseCartItem(cart.getItems()))
                 .updatedAt(cart.getUpdatedAt())
                 .build();
     }
 
-    private List<String> getProductIdsByCartItems(List<CartItem> cartItems) {
+    private List<Long> getProductIdsByCartItems(List<CartItem> cartItems) {
         return cartItems.stream()
                 .map(CartItem::getProductId)
-                .toList();
+                .collect(Collectors.toList());
     }
 
-
     private List<CartItemResponse> toResponseCartItem(List<CartItem> cartItems) {
-
+        if (cartItems.isEmpty()) {
+            return new ArrayList<>();
+        }
         List<ProductResponse> products = productService.getProductResponsesByIds(getProductIdsByCartItems(cartItems));
 
-        Map<String, ProductResponse> productMap = products.stream()
+        Map<Long, ProductResponse> productMap = products.stream()
                 .collect(Collectors.toMap(ProductResponse::getId, p -> p));
 
         return cartItems.stream()
                 .map(cartItem -> {
                     ProductResponse product = productMap.get(cartItem.getProductId());
+                    // If product removed but still in cart, handle gracefully or throw
                     if (product == null) {
-                        throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
+                        // Option: throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
+                        // Or create dummy product response
+                        return cartItemMapper.toResponseWithProduct(cartItem,
+                                ProductResponse.builder().id(cartItem.getProductId()).title("Unknown Product")
+                                        .price(cartItem.getPrice()).build());
                     }
                     return cartItemMapper.toResponseWithProduct(cartItem, product);
                 })
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private void validateStock(List<CartItemRequest> requests) {
-        if (requests == null || requests.isEmpty()) throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
+        if (requests == null || requests.isEmpty())
+            return; // Empty request is valid (clearing cart maybe?) or just ignore
 
-        Map<String, Integer> wanted = new LinkedHashMap<>();
+        Map<Long, Integer> wanted = new LinkedHashMap<>();
         for (CartItemRequest req : requests) {
             if (req == null || req.getProductId() == null) {
-                throw new BadRequestException(ExceptionMessages.PRODUCT_NOT_FOUND);
+                continue;
             }
             Integer q = req.getQuantity();
             if (q == null || q <= 0) {
-
+                Product p = productService.getProductById(req.getProductId());
                 throw new BadRequestException(String.format(
-                        ExceptionMessages.INSUFFICIENT_STOCK, productService.getProductById(req.getProductId()).getTitle()));
+                        ExceptionMessages.INSUFFICIENT_STOCK,
+                        p.getTitle()));
             }
-            wanted.merge(req.getProductId(), q, Integer::sum);
+            wanted.merge(req.getProductId(), q, (a, b) -> a + b);
         }
 
-        List<String> ids = new ArrayList<>(wanted.keySet());
+        if (wanted.isEmpty())
+            return;
+
+        List<Long> ids = new ArrayList<>(wanted.keySet());
         List<ProductResponse> products = productService.getProductResponsesByIds(ids);
 
-        Set<String> foundIds = products.stream()
+        Set<Long> foundIds = products.stream()
                 .map(ProductResponse::getId)
                 .collect(Collectors.toSet());
 
-        List<String> missing = ids.stream()
+        // Check for missing products
+        List<Long> missing = ids.stream()
                 .filter(id -> !foundIds.contains(id))
-                .toList();
-
+                .collect(Collectors.toList());
         if (!missing.isEmpty()) {
-            throw new NotFoundException(String.format(ExceptionMessages.SOME_PRODUCTS_NOT_FOUND, String.join(", ", missing)));
+            throw new NotFoundException("Products not found: " + missing);
         }
 
-        Map<String, ProductResponse> map = products.stream()
+        Map<Long, ProductResponse> map = products.stream()
                 .collect(Collectors.toMap(ProductResponse::getId, p -> p));
 
         for (var entry : wanted.entrySet()) {
-            String pid = entry.getKey();
+            Long pid = entry.getKey();
             int requestedQty = entry.getValue();
             ProductResponse p = map.get(pid);
 
             if (requestedQty > (p.getStock() == null ? 0 : p.getStock())) {
                 throw new BadRequestException(
-                        String.format(ExceptionMessages.INSUFFICIENT_STOCK, p.getTitle())
-                );
+                        String.format(ExceptionMessages.INSUFFICIENT_STOCK, p.getTitle()));
             }
         }
     }

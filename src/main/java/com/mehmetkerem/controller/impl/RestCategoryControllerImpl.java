@@ -4,8 +4,8 @@ import com.mehmetkerem.controller.IRestCategoryController;
 import com.mehmetkerem.dto.request.CategoryRequest;
 import com.mehmetkerem.dto.response.CategoryResponse;
 import com.mehmetkerem.service.ICategoryService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.mehmetkerem.util.ResultData;
+import com.mehmetkerem.util.ResultHelper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,31 +22,32 @@ public class RestCategoryControllerImpl implements IRestCategoryController {
 
     @PostMapping("/save")
     @Override
-    public ResponseEntity<CategoryResponse> saveCategory(@RequestBody CategoryRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveCategory(request));
+    public ResultData<CategoryResponse> saveCategory(@RequestBody CategoryRequest request) {
+        return ResultHelper.success(categoryService.saveCategory(request));
     }
 
     @DeleteMapping("{id}")
     @Override
-    public ResponseEntity<String> deleteCategory(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.deleteCategory(id));
+    public ResultData<String> deleteCategory(@PathVariable("id") Long id) {
+        return ResultHelper.success(categoryService.deleteCategory(id));
     }
 
     @GetMapping("{id}")
     @Override
-    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable("id") String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategoryResponseById(id));
+    public ResultData<CategoryResponse> getCategoryById(@PathVariable("id") Long id) {
+        return ResultHelper.success(categoryService.getCategoryResponseById(id));
     }
 
     @PutMapping("{id}")
     @Override
-    public ResponseEntity<CategoryResponse> updateCategory(@PathVariable("id") String id, @RequestBody CategoryRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(id, request));
+    public ResultData<CategoryResponse> updateCategory(@PathVariable("id") Long id,
+            @RequestBody CategoryRequest request) {
+        return ResultHelper.success(categoryService.updateCategory(id, request));
     }
 
     @GetMapping("/find-all")
     @Override
-    public ResponseEntity<List<CategoryResponse>> findAllCategories() {
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findAllCategories());
+    public ResultData<List<CategoryResponse>> findAllCategories() {
+        return ResultHelper.success(categoryService.findAllCategories());
     }
 }

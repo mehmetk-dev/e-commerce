@@ -10,13 +10,13 @@ public interface IReviewService {
 
     ReviewResponse saveReview(ReviewRequest request);
 
-    String deleteReview(String id);
+    String deleteReview(Long id);
 
-    ReviewResponse updateReview(String id, ReviewRequest request);
+    ReviewResponse updateReview(Long id, ReviewRequest request);
 
-    ReviewResponse getReviewResponseById(String id);
+    ReviewResponse getReviewResponseById(Long id);
 
-    Review getReviewById(String id);
+    Review getReviewById(Long id);
 
     List<ReviewResponse> findAllReviews();
 }

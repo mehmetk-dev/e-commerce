@@ -6,11 +6,8 @@ import com.mehmetkerem.dto.response.PaymentResponse;
 import com.mehmetkerem.model.Payment;
 import org.mapstruct.*;
 
-@Mapper(
-        componentModel = "spring",
-        uses = {OrderMapper.class},
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
-)
+@Mapper(componentModel = "spring", uses = {
+        OrderMapper.class }, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PaymentMapper {
 
     @Mapping(target = "id", ignore = true)

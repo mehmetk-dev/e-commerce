@@ -1,7 +1,6 @@
 package com.mehmetkerem.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mehmetkerem.model.Product;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -10,6 +9,8 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CartItemResponse {
 
+    private Long id;
+
     private ProductResponse product;
 
     private int quantity;
@@ -17,5 +18,4 @@ public class CartItemResponse {
     private BigDecimal price;
 
     private BigDecimal total;
-
 }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReviewResponse {
-    private String id;
+    private Long id;
     private ProductResponse product;
     private UserResponse user;
     private String comment;

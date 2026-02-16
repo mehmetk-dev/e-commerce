@@ -16,9 +16,8 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CartResponse {
 
-    private String id;
+    private Long id;
+    private Long userId;
     private List<CartItemResponse> items;
     private LocalDateTime updatedAt;
-
-
 }
