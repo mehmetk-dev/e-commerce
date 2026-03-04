@@ -5,6 +5,7 @@ import com.mehmetkerem.dto.response.CategoryResponse;
 import com.mehmetkerem.model.Category;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ICategoryService {
     CategoryResponse saveCategory(CategoryRequest request);
@@ -18,4 +19,6 @@ public interface ICategoryService {
     Category getCategoryById(Long id);
 
     List<CategoryResponse> findAllCategories();
+
+    Map<Long, CategoryResponse> getCategoryResponsesByIds(List<Long> ids);
 }

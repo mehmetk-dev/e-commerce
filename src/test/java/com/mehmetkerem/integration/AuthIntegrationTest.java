@@ -48,8 +48,6 @@ public class AuthIntegrationTest {
         registerRequest.setEmail("integration@test.com");
         registerRequest.setName("Integration User");
         registerRequest.setPassword("password123");
-        registerRequest.setRole(Role.USER);
-
         mockMvc.perform(post("/v1/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(registerRequest)))
@@ -80,6 +78,29 @@ public class AuthIntegrationTest {
         mockMvc.perform(post("/v1/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isUnauthorized()); // Security handling often returns 401
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void shouldNotAllowAdminRegistration() throws Exception {
+        // RegisterRequest artık role field'ı içermiyor (güvenlik amaçlı kaldırıldı).
+        // JSON body'ye elle role eklenerek saldırı simüle ediliyor.
+        String maliciousJson = "{\"email\":\"hacker@test.com\",\"name\":\"Hacker User\","
+                + "\"password\":\"password123\",\"role\":\"ADMIN\"}";
+
+        mockMvc.perform(post("/v1/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(maliciousJson))
+                .andExpect(status().isOk());
+
+        // Check DB directly — kullanıcı ADMIN olarak kaydedilmemiş olmalı
+        var userOpt = userRepository.findByEmail("hacker@test.com");
+        if (userOpt.isEmpty()) {
+            throw new AssertionError("Kullanıcı veritabanında bulunamadı!");
+        }
+
+        if (userOpt.get().getRole() == Role.ADMIN) {
+            throw new AssertionError("Security Vulnerability: User was able to register as ADMIN!");
+        }
     }
 }

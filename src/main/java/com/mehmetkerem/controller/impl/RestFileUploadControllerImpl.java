@@ -6,12 +6,13 @@ import com.mehmetkerem.service.IFileStorageService;
 import com.mehmetkerem.util.ResultData;
 import com.mehmetkerem.util.ResultHelper;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -31,6 +32,39 @@ public class RestFileUploadControllerImpl implements IRestFileUploadController {
     @Override
     @PostMapping("/upload")
     public ResultData<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        validateImage(file);
+        String cloudinaryUrl = storageService.save(file);
+        return ResultHelper.success(cloudinaryUrl);
+    }
+
+    @Override
+    @PostMapping("/upload-multiple")
+    public ResultData<List<String>> uploadMultiple(
+            @RequestParam("files") List<MultipartFile> files) {
+
+        if (files == null || files.isEmpty()) {
+            throw new BadRequestException("En az bir dosya gerekli.");
+        }
+        if (files.size() > 10) {
+            throw new BadRequestException("Tek seferde en fazla 10 dosya yüklenebilir.");
+        }
+
+        List<String> urls = new ArrayList<>();
+        for (MultipartFile file : files) {
+            validateImage(file);
+            urls.add(storageService.save(file));
+        }
+        return ResultHelper.success(urls);
+    }
+
+    @Override
+    @GetMapping("/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+        return ResponseEntity.status(HttpStatus.GONE).build();
+    }
+
+    private void validateImage(MultipartFile file) {
         if (file.isEmpty()) {
             throw new BadRequestException("Dosya boş olamaz.");
         }
@@ -38,23 +72,5 @@ public class RestFileUploadControllerImpl implements IRestFileUploadController {
         if (contentType == null || !ALLOWED_CONTENT_TYPES.contains(contentType.toLowerCase())) {
             throw new BadRequestException("Sadece resim dosyaları yüklenebilir (JPEG, PNG, GIF, WebP).");
         }
-        String filename = storageService.save(file);
-
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/v1/files/")
-                .path(filename)
-                .toUriString();
-
-        return ResultHelper.success(fileDownloadUri);
-    }
-
-    @Override
-    @GetMapping("/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
-        Resource file = storageService.load(filename);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-                .body(file);
     }
 }

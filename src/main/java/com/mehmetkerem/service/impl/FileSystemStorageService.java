@@ -2,6 +2,8 @@ package com.mehmetkerem.service.impl;
 
 import com.mehmetkerem.exception.BaseException;
 import com.mehmetkerem.service.IFileStorageService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,14 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
-@SuppressWarnings("null")
+@Slf4j
 public class FileSystemStorageService implements IFileStorageService {
 
-    private final Path root = Paths.get("uploads");
+    private final Path root;
+
+    public FileSystemStorageService(@Value("${app.upload.dir:uploads}") String uploadDir) {
+        this.root = Paths.get(uploadDir);
+    }
 
     @Override
     public void init() {
@@ -85,6 +91,23 @@ public class FileSystemStorageService implements IFileStorageService {
             return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
         } catch (IOException e) {
             throw new BaseException("Could not load the files!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public void deleteFile(String fileUrl) {
+        if (fileUrl == null || fileUrl.isBlank())
+            return;
+        try {
+            // fileUrl is assumed to be filename or full URL ending with filename
+            String filename = fileUrl;
+            if (fileUrl.contains("/")) {
+                filename = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+            }
+            Path file = root.resolve(filename);
+            Files.deleteIfExists(file);
+        } catch (IOException e) {
+            log.error("Dosya silinemedi: {}", fileUrl, e);
         }
     }
 }

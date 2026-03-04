@@ -18,12 +18,16 @@ import java.util.Map;
 public class ProductResponse {
     private Long id;
     private String title;
+    private String slug; // SEO-friendly URL: "antika-vazo-1800ler-42"
     private String description;
     private BigDecimal price;
     private Integer stock;
     private CategoryResponse category;
     private List<String> imageUrls;
     private Map<String, Object> attributes;
+    private Double averageRating;
+    private Integer reviewCount;
+    private Integer viewCount;
 
     public ProductResponse(Long id, String title, BigDecimal price) {
         this.id = id;

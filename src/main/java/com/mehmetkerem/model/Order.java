@@ -14,7 +14,12 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "orders")
+@Table(name = "orders", indexes = {
+        @Index(name = "idx_order_user_id", columnList = "user_id"),
+        @Index(name = "idx_order_status", columnList = "order_status"),
+        @Index(name = "idx_order_payment_status", columnList = "payment_status"),
+        @Index(name = "idx_order_date", columnList = "order_date")
+})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -38,7 +43,7 @@ public class Order {
     @JoinColumn(name = "order_id")
     private List<OrderItem> orderItems;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "shipping_address_id")
     private Address shippingAddress;
 
@@ -55,6 +60,9 @@ public class Order {
     @Column(name = "carrier_name")
     private String carrierName;
 
+    @Column(name = "note", columnDefinition = "TEXT")
+    private String note;
+
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
@@ -63,5 +71,11 @@ public class Order {
         if (orderDate == null) {
             orderDate = LocalDateTime.now();
         }
+        lastUpdated = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdated = LocalDateTime.now();
     }
 }

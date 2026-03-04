@@ -18,5 +18,10 @@ public interface ISupportTicketService {
 
     List<SupportTicketResponse> getAllTickets();
 
+    org.springframework.data.domain.Page<SupportTicketResponse> getAllTicketsForAdmin(
+            com.mehmetkerem.enums.TicketStatus status, org.springframework.data.domain.Pageable pageable);
+
+    void deleteForAdmin(Long ticketId);
+
     SupportTicketResponse addReply(Long ticketId, TicketReplyRequest request);
 }

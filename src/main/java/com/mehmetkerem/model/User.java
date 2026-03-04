@@ -51,6 +51,17 @@ public class User implements UserDetails {
 
     private String imageUrl;
 
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean active = true;
+
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean banned = false;
+
+    @Column(name = "deactivated_at")
+    private LocalDateTime deactivatedAt;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -91,7 +102,7 @@ public class User implements UserDetails {
     @Override
     @JsonIgnore
     public boolean isAccountNonLocked() {
-        return true;
+        return !banned;
     }
 
     @Override
@@ -103,6 +114,6 @@ public class User implements UserDetails {
     @Override
     @JsonIgnore
     public boolean isEnabled() {
-        return true;
+        return active;
     }
 }

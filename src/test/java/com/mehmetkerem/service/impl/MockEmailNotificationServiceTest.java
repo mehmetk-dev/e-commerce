@@ -18,7 +18,7 @@ class MockEmailNotificationServiceTest {
     @Test
     @DisplayName("sendStockAlert - exception fırlatmaz")
     void sendStockAlert_ShouldNotThrow() {
-        assertDoesNotThrow(() -> service.sendStockAlert("Ürün Adı"));
+        assertDoesNotThrow(() -> service.sendStockAlert("Ürün Adı", 3));
     }
 
     @Test

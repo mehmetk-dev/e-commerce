@@ -17,7 +17,7 @@ public class SupportTicketResponse {
     private String subject;
     private String message;
     private TicketStatus status;
-    private String adminReply;
+    private java.util.List<String> adminReplies;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

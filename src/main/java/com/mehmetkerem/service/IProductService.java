@@ -34,4 +34,16 @@ public interface IProductService {
             Double minRating, Pageable pageable);
 
     Page<ProductResponse> getAllProducts(int page, int size, String sortBy, String direction);
+
+    void updateProductRating(Long productId, double averageRating, int reviewCount);
+
+    List<Product> getProductsByIds(List<Long> productIds);
+
+    List<Product> saveAllProducts(List<Product> products);
+
+    /** SEO slug ile ürün getir. */
+    ProductResponse getProductBySlug(String slug);
+
+    /** Ürün görüntülenme sayacını artır. */
+    void incrementViewCount(Long productId);
 }

@@ -17,8 +17,8 @@ public class MockEmailNotificationService implements INotificationService {
     }
 
     @Override
-    public void sendStockAlert(String productName) {
-        log.warn("⚠️ [MOCK ALERT] Stok Tükeniyor! Ürün: {}", productName);
+    public void sendStockAlert(String productName, int currentStock) {
+        log.warn("⚠️ [MOCK ALERT] Stok Tükeniyor! Ürün: {} — Kalan: {}", productName, currentStock);
     }
 
     @Override
@@ -38,5 +38,11 @@ public class MockEmailNotificationService implements INotificationService {
         log.info(
                 "🚚 [MOCK EMAIL] To: {} | Subject: Kargo Takip | Body: Sipariş {} yola çıktı. Takip No: {} (Kargo: {})",
                 toEmail, orderCode, trackingNumber, carrier);
+    }
+
+    @Override
+    public void sendOrderStatusUpdate(String toEmail, String orderCode, String statusLabel) {
+        log.info("📬 [MOCK EMAIL] To: {} | Subject: Durum Güncelleme | Body: Sipariş {} durumu: {}",
+                toEmail, orderCode, statusLabel);
     }
 }

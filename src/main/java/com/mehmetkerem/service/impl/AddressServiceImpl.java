@@ -11,20 +11,16 @@ import com.mehmetkerem.repository.AddressRepository;
 import com.mehmetkerem.service.IAddressService;
 import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @Service
-@SuppressWarnings("null")
+@RequiredArgsConstructor
 public class AddressServiceImpl implements IAddressService {
 
     private final AddressMapper addressMapper;
     private final AddressRepository addressRepository;
-
-    public AddressServiceImpl(AddressMapper addressMapper, AddressRepository addressRepository) {
-        this.addressMapper = addressMapper;
-        this.addressRepository = addressRepository;
-    }
 
     @Override
     public Address getAddressById(Long id) {

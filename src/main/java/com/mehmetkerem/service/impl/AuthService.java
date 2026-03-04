@@ -17,6 +17,7 @@ import com.mehmetkerem.repository.PasswordResetTokenRepository;
 import com.mehmetkerem.repository.UserRepository;
 import com.mehmetkerem.service.INotificationService;
 import com.mehmetkerem.service.IUserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,8 +28,8 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-@SuppressWarnings("null")
-public class AuthService {
+@RequiredArgsConstructor
+public class AuthService implements com.mehmetkerem.service.IAuthService {
 
     private final AuthenticationManager authManager;
     private final UserRepository userRepository;
@@ -42,31 +43,18 @@ public class AuthService {
     @Value("${app.base-url:http://localhost:8080}")
     private String baseUrl;
 
-    public AuthService(AuthenticationManager authManager, UserRepository userRepository, PasswordEncoder encoder,
-            JwtService jwtService, IUserService userService,
-            PasswordResetTokenRepository passwordResetTokenRepository,
-            INotificationService notificationService,
-            RefreshTokenService refreshTokenService) {
-        this.authManager = authManager;
-        this.userRepository = userRepository;
-        this.encoder = encoder;
-        this.jwtService = jwtService;
-        this.userService = userService;
-        this.passwordResetTokenRepository = passwordResetTokenRepository;
-        this.notificationService = notificationService;
-        this.refreshTokenService = refreshTokenService;
-    }
-
+    @Override
     public Map<String, String> register(RegisterRequest req) {
-        if (userRepository.existsByEmail(req.getEmail())) {
-            throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS, req.getEmail()));
+        String email = req.getEmail().trim().toLowerCase();
+        if (userRepository.existsByEmail(email)) {
+            throw new BadRequestException(String.format(ExceptionMessages.EMAIL_ALL_READY_EXISTS, email));
         }
 
         var user = User.builder()
-                .email(req.getEmail())
+                .email(email)
                 .name(req.getName())
                 .passwordHash(encoder.encode(req.getPassword()))
-                .role(req.getRole() == null ? Role.USER : req.getRole())
+                .role(Role.USER) // Güvenlik: Her zaman USER rolü ile başlar.
                 .build();
         userRepository.save(user);
 
@@ -77,9 +65,13 @@ public class AuthService {
         return Map.of("token", token);
     }
 
+    @Override
     public LoginResponse login(LoginRequest req) {
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
-        var user = userRepository.findByEmail(req.getEmail()).orElseThrow();
+        String email = req.getEmail().trim().toLowerCase();
+        authManager.authenticate(new UsernamePasswordAuthenticationToken(email, req.getPassword()));
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(
+                        () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, email, "kullanıcı")));
         String token = jwtService.generateToken(user);
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user.getId());
 
@@ -90,6 +82,7 @@ public class AuthService {
                 .build();
     }
 
+    @Override
     public LoginResponse refreshToken(TokenRefreshRequest request) {
         String requestRefreshToken = request.getRefreshToken();
 
@@ -101,11 +94,13 @@ public class AuthService {
                     return LoginResponse.builder()
                             .accessToken(token)
                             .refreshToken(requestRefreshToken)
+                            .user(userService.getUserResponseById(user.getId()))
                             .build();
                 })
                 .orElseThrow(() -> new BadRequestException("Refresh token is not in database!"));
     }
 
+    @Override
     public void forgotPassword(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException("Kullanıcı bulunamadı: " + email));
@@ -117,6 +112,7 @@ public class AuthService {
         notificationService.sendPasswordResetLink(email, link);
     }
 
+    @Override
     public void resetPassword(PasswordResetRequest request) {
         String validationResult = userService.validatePasswordResetToken(request.getToken());
 
@@ -132,6 +128,7 @@ public class AuthService {
         passwordResetTokenRepository.delete(passToken);
     }
 
+    @Override
     public void changePassword(Long userId, String oldPassword, String newPassword) {
         User user = userService.getUserById(userId);
 
@@ -142,5 +139,31 @@ public class AuthService {
         }
 
         userService.changeUserPassword(user, newPassword);
+    }
+
+    @Override
+    public com.mehmetkerem.dto.response.UserResponse updateProfile(Long userId,
+            com.mehmetkerem.dto.request.ProfileUpdateRequest request) {
+        User user = userService.getUserById(userId);
+
+        String newName = request.getName() != null ? request.getName().trim() : "";
+        String oldName = user.getName() != null ? user.getName().trim() : "";
+
+        if (newName.equalsIgnoreCase(oldName)) {
+            throw new BadRequestException("Yeni isim eskisiyle aynı olamaz.");
+        }
+
+        if (newName.isEmpty()) {
+            throw new BadRequestException("İsim alanı boş bırakılamaz.");
+        }
+
+        user.setName(newName);
+        userRepository.save(user);
+        return userService.getUserResponseById(userId);
+    }
+
+    @Override
+    public com.mehmetkerem.dto.response.UserResponse getMe(Long userId) {
+        return userService.getUserResponseById(userId);
     }
 }

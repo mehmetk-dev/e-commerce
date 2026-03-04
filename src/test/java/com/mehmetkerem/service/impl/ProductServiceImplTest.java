@@ -8,6 +8,7 @@ import com.mehmetkerem.mapper.ProductMapper;
 import com.mehmetkerem.model.Product;
 import com.mehmetkerem.repository.ProductRepository;
 import com.mehmetkerem.service.ICategoryService;
+import com.mehmetkerem.service.IFileStorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
@@ -41,6 +43,9 @@ class ProductServiceImplTest {
 
     @Mock
     private ICategoryService categoryService;
+
+    @Mock
+    private IFileStorageService fileStorageService;
 
     @InjectMocks
     private ProductServiceImpl productService;
@@ -129,8 +134,10 @@ class ProductServiceImplTest {
     }
 
     @Test
-    @DisplayName("deleteProduct - ürün silinir")
+    @DisplayName("deleteProduct - ürün ve resimleri silinir")
     void deleteProduct_WhenExists_ShouldDelete() {
+        // Ürüne resim ekle
+        product.setImageUrls(List.of("http://resim1.jpg", "http://resim2.jpg"));
         when(productRepository.findById(1L)).thenReturn(Optional.of(product));
         doNothing().when(productRepository).delete(product);
 
@@ -138,6 +145,8 @@ class ProductServiceImplTest {
 
         assertTrue(result.contains("1"));
         assertTrue(result.contains("ürün"));
+        // 2 adet resim url'i olduğu için deleteFile 2 kez çağrılmalı
+        verify(fileStorageService, times(2)).deleteFile(anyString());
         verify(productRepository).delete(product);
     }
 
@@ -159,7 +168,8 @@ class ProductServiceImplTest {
     @DisplayName("findAllProducts - tüm ürünler listelenir")
     void findAllProducts_ShouldReturnAllProducts() {
         when(productRepository.findAll()).thenReturn(List.of(product));
-        when(categoryService.getCategoryResponseById(1L)).thenReturn(categoryResponse);
+        // Batch fetch kullanıldığı için getCategoryResponsesByIds mocklanmalı
+        when(categoryService.getCategoryResponsesByIds(anyList())).thenReturn(java.util.Map.of(1L, categoryResponse));
         when(productMapper.toResponseWithCategory(product, categoryResponse)).thenReturn(productResponse);
 
         List<ProductResponse> result = productService.findAllProducts();

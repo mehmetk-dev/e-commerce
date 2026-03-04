@@ -10,4 +10,6 @@ import java.util.List;
 public interface OrderReturnRepository extends JpaRepository<OrderReturn, Long> {
 
     List<OrderReturn> findByUserIdOrderByCreatedAtDesc(Long userId);
+
+    boolean existsByOrderIdAndUserIdAndStatus(Long orderId, Long userId, com.mehmetkerem.enums.ReturnStatus status);
 }

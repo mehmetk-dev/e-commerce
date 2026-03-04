@@ -35,4 +35,10 @@ public interface IRestProductController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "asc") String direction);
+
+    /** SEO slug ile ürün getir. */
+    ResultData<ProductResponse> getProductBySlug(String slug);
+
+    /** Ürün görüntülenme sayacını artır. */
+    ResultData<String> incrementViewCount(Long id);
 }

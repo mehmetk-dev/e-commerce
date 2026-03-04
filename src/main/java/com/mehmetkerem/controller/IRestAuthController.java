@@ -19,4 +19,9 @@ public interface IRestAuthController {
     ResultData<String> resetPassword(PasswordResetRequest request);
 
     ResultData<String> changePassword(ChangePasswordRequest request, Authentication authentication);
+
+    ResultData<com.mehmetkerem.dto.response.UserResponse> updateProfile(ProfileUpdateRequest request,
+            Authentication authentication);
+
+    ResultData<com.mehmetkerem.dto.response.UserResponse> me(Authentication authentication);
 }

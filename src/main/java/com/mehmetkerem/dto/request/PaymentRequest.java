@@ -25,6 +25,12 @@ public class PaymentRequest {
 
     private String transactionId;
 
+    /**
+     * Ödeme tekrarını önlemek için benzersiz anahtar. Frontend tarafından
+     * oluşturulur.
+     */
+    private String idempotencyKey;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     @PastOrPresent(message = "Ödeme tarihi gelecek bir zaman olamaz.")
     private LocalDateTime paidAt;

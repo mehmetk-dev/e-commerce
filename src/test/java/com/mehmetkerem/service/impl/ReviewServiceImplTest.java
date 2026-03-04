@@ -57,7 +57,6 @@ class ReviewServiceImplTest {
     @BeforeEach
     void setUp() {
         reviewRequest = new ReviewRequest();
-        reviewRequest.setUserId(USER_ID);
         reviewRequest.setProductId(PRODUCT_ID);
         reviewRequest.setComment("Çok güzel ürün");
         reviewRequest.setRating(5.0);
@@ -82,7 +81,7 @@ class ReviewServiceImplTest {
         when(orderRepository.existsByUserIdAndOrderItemsProductId(USER_ID, PRODUCT_ID)).thenReturn(false);
 
         BadRequestException ex = assertThrows(BadRequestException.class,
-                () -> reviewService.saveReview(reviewRequest));
+                () -> reviewService.saveReview(USER_ID, reviewRequest));
 
         assertTrue(ex.getMessage().contains("satın almadığınız"));
         verify(reviewRepository, never()).save(any());
@@ -95,7 +94,7 @@ class ReviewServiceImplTest {
         when(reviewRepository.existsByUserIdAndProductId(USER_ID, PRODUCT_ID)).thenReturn(true);
 
         BadRequestException ex = assertThrows(BadRequestException.class,
-                () -> reviewService.saveReview(reviewRequest));
+                () -> reviewService.saveReview(USER_ID, reviewRequest));
 
         assertTrue(ex.getMessage().contains("zaten yorum"));
         verify(reviewRepository, never()).save(any());
@@ -112,7 +111,7 @@ class ReviewServiceImplTest {
         when(productService.getProductResponseById(PRODUCT_ID)).thenReturn(new ProductResponse());
         when(reviewMapper.toResponseWithDetails(eq(review), any(), any())).thenReturn(reviewResponse);
 
-        ReviewResponse result = reviewService.saveReview(reviewRequest);
+        ReviewResponse result = reviewService.saveReview(USER_ID, reviewRequest);
 
         assertNotNull(result);
         assertEquals(1L, result.getId());
@@ -150,7 +149,7 @@ class ReviewServiceImplTest {
         when(productService.getProductResponseById(PRODUCT_ID)).thenReturn(new ProductResponse());
         when(reviewMapper.toResponseWithDetails(eq(review), any(), any())).thenReturn(reviewResponse);
 
-        ReviewResponse result = reviewService.updateReview(1L, reviewRequest);
+        ReviewResponse result = reviewService.updateReview(USER_ID, 1L, reviewRequest);
 
         assertNotNull(result);
         verify(reviewMapper).update(eq(review), eq(reviewRequest));
@@ -163,7 +162,7 @@ class ReviewServiceImplTest {
         when(reviewRepository.findById(1L)).thenReturn(Optional.of(review));
         doNothing().when(reviewRepository).delete(review);
 
-        String result = reviewService.deleteReview(1L);
+        String result = reviewService.deleteReview(USER_ID, 1L);
 
         assertTrue(result.contains("1"));
         assertTrue(result.contains("yorum"));

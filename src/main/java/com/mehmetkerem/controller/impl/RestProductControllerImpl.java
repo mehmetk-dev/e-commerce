@@ -78,7 +78,8 @@ public class RestProductControllerImpl implements IRestProductController {
         Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
         int cappedSize = Math.min(Math.max(size, 1), 100);
         Pageable pageable = PageRequest.of(page, cappedSize, sort);
-        Page<ProductResponse> productPage = productService.searchProducts(title, categoryId, minPrice, maxPrice, minRating, pageable);
+        Page<ProductResponse> productPage = productService.searchProducts(title, categoryId, minPrice, maxPrice,
+                minRating, pageable);
         return ResultHelper.cursor(productPage);
     }
 
@@ -105,5 +106,18 @@ public class RestProductControllerImpl implements IRestProductController {
         Page<ProductResponse> productPage = productService.getAllProducts(page, cappedSize, sortBy, direction);
 
         return ResultHelper.cursor(productPage);
+    }
+
+    @Override
+    @GetMapping("/slug/{slug}")
+    public ResultData<ProductResponse> getProductBySlug(@PathVariable String slug) {
+        return ResultHelper.success(productService.getProductBySlug(slug));
+    }
+
+    @Override
+    @PostMapping("/{id}/view")
+    public ResultData<String> incrementViewCount(@PathVariable Long id) {
+        productService.incrementViewCount(id);
+        return ResultHelper.success("OK");
     }
 }

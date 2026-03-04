@@ -15,6 +15,7 @@ import com.mehmetkerem.model.Product;
 import com.mehmetkerem.repository.CartRepository;
 import com.mehmetkerem.service.ICartService;
 import com.mehmetkerem.service.IProductService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
@@ -26,28 +27,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@SuppressWarnings("null")
 @Slf4j
+@RequiredArgsConstructor
 public class CartServiceImpl implements ICartService {
 
     private final CartRepository cartRepository;
     private final CartMapper cartMapper;
     private final CartItemMapper cartItemMapper;
-
     private final IProductService productService;
     private final com.mehmetkerem.service.ICouponService couponService;
-
-    public CartServiceImpl(CartRepository cartRepository,
-            CartMapper cartMapper,
-            CartItemMapper cartItemMapper,
-            IProductService productService,
-            com.mehmetkerem.service.ICouponService couponService) {
-        this.cartRepository = cartRepository;
-        this.cartMapper = cartMapper;
-        this.cartItemMapper = cartItemMapper;
-        this.productService = productService;
-        this.couponService = couponService;
-    }
 
     @Transactional
     @Override
@@ -125,14 +113,17 @@ public class CartServiceImpl implements ICartService {
         Cart cart = getCartByUserId(userId);
 
         Product product = productService.getProductById(request.getProductId());
-        validateStock(request.getQuantity(), product);
 
+        // Sepette zaten varsa, toplam miktarı stokla karşılaştır
         Optional<CartItem> existingItem = cart.getItems().stream()
                 .filter(item -> Objects.equals(item.getProductId(), request.getProductId()))
                 .findFirst();
 
+        int totalQuantity = request.getQuantity() + existingItem.map(CartItem::getQuantity).orElse(0);
+        validateStock(totalQuantity, product);
+
         if (existingItem.isPresent()) {
-            existingItem.get().setQuantity(existingItem.get().getQuantity() + request.getQuantity());
+            existingItem.get().setQuantity(totalQuantity);
         } else {
             CartItem newItem = cartItemMapper.toEntity(request);
             newItem.setPrice(product.getPrice());
@@ -235,8 +226,9 @@ public class CartServiceImpl implements ICartService {
             try {
                 return couponService.applyCoupon(cart.getCouponCode(), total);
             } catch (Exception e) {
-                // If coupon invalid now (expired etc), return raw total or handle error
-                // For now, let's log and clear invalid coupon? Or just return raw total.
+                log.warn("Geçersiz kupon temizleniyor. Kupon: {}, Sebep: {}", cart.getCouponCode(), e.getMessage());
+                cart.setCouponCode(null);
+                cartRepository.save(cart);
                 return total;
             }
         }
@@ -276,16 +268,13 @@ public class CartServiceImpl implements ICartService {
         return cartItems.stream()
                 .map(cartItem -> {
                     ProductResponse product = productMap.get(cartItem.getProductId());
-                    // If product removed but still in cart, handle gracefully or throw
+                    // If product removed but still in cart, filter it out
                     if (product == null) {
-                        // Option: throw new NotFoundException(ExceptionMessages.PRODUCT_NOT_FOUND);
-                        // Or create dummy product response
-                        return cartItemMapper.toResponseWithProduct(cartItem,
-                                ProductResponse.builder().id(cartItem.getProductId()).title("Unknown Product")
-                                        .price(cartItem.getPrice()).build());
+                        return null;
                     }
                     return cartItemMapper.toResponseWithProduct(cartItem, product);
                 })
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 

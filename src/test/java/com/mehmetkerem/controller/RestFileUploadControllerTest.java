@@ -24,20 +24,10 @@ class RestFileUploadControllerTest {
     private RestFileUploadControllerImpl controller;
 
     @Test
-    @DisplayName("getFile - Resource ve attachment header döner")
-    void getFile_ShouldReturnResource() {
-        Resource resource = mock(Resource.class);
-        when(resource.getFilename()).thenReturn("file.pdf");
-        when(storageService.load("file.pdf")).thenReturn(resource);
-
-        ResponseEntity<Resource> response = controller.getFile("file.pdf");
-
-        assertTrue(response.getStatusCode().is2xxSuccessful());
-        assertNotNull(response.getBody());
-        String contentDisposition = response.getHeaders().getFirst("Content-Disposition");
-        assertNotNull(contentDisposition);
-        assertTrue(contentDisposition.contains("attachment"));
-        assertTrue(contentDisposition.contains("file.pdf"));
-        verify(storageService).load("file.pdf");
+    @DisplayName("getFile - Cloudinary'ye geçildiği için artık local dosya sunulmaz (410 GONE)")
+    void getFile_ShouldReturnGoneStatus() {
+        ResponseEntity<Resource> response = controller.getFile("test.jpg");
+        assertEquals(410, response.getStatusCode().value());
+        assertNull(response.getBody());
     }
 }

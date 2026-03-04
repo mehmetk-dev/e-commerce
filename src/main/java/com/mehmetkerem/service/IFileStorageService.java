@@ -15,4 +15,6 @@ public interface IFileStorageService {
     void deleteAll();
 
     Stream<Path> loadAll();
+
+    void deleteFile(String fileUrl);
 }

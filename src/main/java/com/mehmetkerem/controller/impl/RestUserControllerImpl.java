@@ -56,4 +56,40 @@ public class RestUserControllerImpl implements IRestUserController {
     public ResultData<List<UserResponse>> findAllUser() {
         return ResultHelper.success(userService.findAllUsers());
     }
+
+    /** KVKK: Kullanıcı kendi hesabını deaktive eder. */
+    @Override
+    @DeleteMapping("/me")
+    public ResultData<String> deactivateMyAccount() {
+        userService.deactivateCurrentAccount();
+        return ResultHelper.success("Hesabınız deaktive edildi.");
+    }
+
+    /** Admin: Kullanıcıyı banla. */
+    @Override
+    @Secured("ROLE_ADMIN")
+    @PutMapping("/{id}/ban")
+    public ResultData<String> banUser(@PathVariable("id") Long id) {
+        userService.banUser(id);
+        return ResultHelper.success("Kullanıcı banlandı.");
+    }
+
+    /** Admin: Kullanıcı banını kaldır. */
+    @Override
+    @Secured("ROLE_ADMIN")
+    @PutMapping("/{id}/unban")
+    public ResultData<String> unbanUser(@PathVariable("id") Long id) {
+        userService.unbanUser(id);
+        return ResultHelper.success("Kullanıcı banı kaldırıldı.");
+    }
+
+    /** Admin: Kullanıcı rolünü değiştir. */
+    @Override
+    @Secured("ROLE_ADMIN")
+    @PutMapping("/{id}/role")
+    public ResultData<String> updateUserRole(@PathVariable("id") Long id,
+            @RequestParam com.mehmetkerem.enums.Role role) {
+        userService.updateUserRole(id, role);
+        return ResultHelper.success("Kullanıcı rolü güncellendi: " + role);
+    }
 }

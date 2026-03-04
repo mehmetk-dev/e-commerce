@@ -8,15 +8,17 @@ import java.util.List;
 
 public interface IReviewService {
 
-    ReviewResponse saveReview(ReviewRequest request);
+    ReviewResponse saveReview(Long userId, ReviewRequest request);
 
-    String deleteReview(Long id);
+    String deleteReview(Long userId, Long id);
 
-    ReviewResponse updateReview(Long id, ReviewRequest request);
+    ReviewResponse updateReview(Long userId, Long id, ReviewRequest request);
 
     ReviewResponse getReviewResponseById(Long id);
 
     Review getReviewById(Long id);
 
     List<ReviewResponse> findAllReviews();
+
+    List<ReviewResponse> getReviewsByProductId(Long productId);
 }

@@ -38,4 +38,6 @@ public class OrderResponse {
     private String trackingNumber;
 
     private String carrierName;
+
+    private String note;
 }

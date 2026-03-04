@@ -13,6 +13,7 @@ import com.mehmetkerem.repository.PaymentRepository;
 import com.mehmetkerem.service.IPaymentService;
 import com.mehmetkerem.service.payment.PaymentStrategy;
 import com.mehmetkerem.util.Messages;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,22 +23,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@SuppressWarnings("null")
 @Slf4j
+@RequiredArgsConstructor
 public class PaymentServiceImpl implements IPaymentService {
 
     private final PaymentRepository paymentRepository;
-    private final UserServiceImpl userService;
-    private final OrderServiceImpl orderService;
+    private final com.mehmetkerem.service.IUserService userService;
+    private final com.mehmetkerem.service.IOrderService orderService;
     private final PaymentStrategy paymentStrategy;
-
-    public PaymentServiceImpl(PaymentRepository paymentRepository, UserServiceImpl userService,
-            OrderServiceImpl orderService, PaymentStrategy paymentStrategy) {
-        this.paymentRepository = paymentRepository;
-        this.userService = userService;
-        this.orderService = orderService;
-        this.paymentStrategy = paymentStrategy;
-    }
 
     @Transactional
     @Override
@@ -48,6 +41,26 @@ public class PaymentServiceImpl implements IPaymentService {
         var order = orderService.getOrderById(orderId);
         if (!order.getUserId().equals(userId)) {
             throw new BadRequestException("Bu sipariş size ait değil.");
+        }
+
+        // Sipariş durumu kontrolü — sadece PENDING siparişlere ödeme yapılabilir
+        if (order.getOrderStatus() != com.mehmetkerem.enums.OrderStatus.PENDING) {
+            throw new BadRequestException(
+                    "Bu siparişe ödeme yapılamaz. Sipariş durumu: " + order.getOrderStatus());
+        }
+
+        // Mükerrer ödeme kontrolü — aynı siparişe daha önce başarılı ödeme yapılmış mı
+        if (order.getPaymentStatus() == PaymentStatus.PAID) {
+            throw new BadRequestException("Bu sipariş için zaten ödeme yapılmış.");
+        }
+
+        // Tutar doğrulama — gönderilen tutar sipariş toplamıyla eşleşmeli
+        if (amount.compareTo(order.getTotalAmount()) != 0) {
+            log.warn("Ödeme tutarı uyuşmazlığı. Beklenen: {}, Gönderilen: {}",
+                    order.getTotalAmount(), amount);
+            throw new BadRequestException(
+                    String.format("Ödeme tutarı sipariş toplamı ile eşleşmiyor. Beklenen: %s, Gönderilen: %s",
+                            order.getTotalAmount(), amount));
         }
 
         boolean isSuccess = paymentStrategy.pay(amount);

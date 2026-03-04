@@ -1,6 +1,7 @@
 package com.mehmetkerem.service.impl;
 
 import com.mehmetkerem.service.INotificationService;
+import com.mehmetkerem.util.EmailTemplates;
 import com.resend.Resend;
 import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -27,38 +29,43 @@ public class ResendNotificationService implements INotificationService {
     }
 
     @Override
+    @Async
     public void sendOrderConfirmation(String toEmail, String orderCode) {
-        String subject = "Sipariş Onayı - " + orderCode;
-        String content = "<h1>Siparişiniz Alındı!</h1><p>Sipariş kodunuz: <strong>" + orderCode + "</strong></p>";
-        sendEmail(toEmail, subject, content);
+        sendEmail(toEmail, "Sipariş Onayı - " + orderCode, EmailTemplates.orderConfirmation(orderCode));
     }
 
     @Override
-    public void sendStockAlert(String productName) {
-        log.info("Stock alert for: {}", productName);
+    @Async
+    public void sendStockAlert(String productName, int currentStock) {
+        log.warn("⚠️ Stok uyarısı: {} — kalan: {}", productName, currentStock);
+        sendEmail(fromEmail, "⚠️ Stok Uyarısı: " + productName,
+                EmailTemplates.stockAlert(productName, currentStock));
     }
 
     @Override
+    @Async
     public void sendPasswordResetLink(String toEmail, String resetUrl) {
-        String subject = "Şifre Sıfırlama İsteği";
-        String content = "<h1>Şifre Sıfırlama</h1><p>Şifrenizi sıfırlama için aşağıdaki linke tıklayın:</p>" +
-                "<a href=\"" + resetUrl + "\">Şifremi Sıfırla</a>";
-        sendEmail(toEmail, subject, content);
+        sendEmail(toEmail, "Şifre Sıfırlama İsteği", EmailTemplates.passwordReset(resetUrl));
     }
 
     @Override
+    @Async
     public void sendWelcomeEmail(String toEmail, String name) {
-        String subject = "Hoş Geldiniz!";
-        String content = "<h1>Hoş Geldin " + name + "!</h1><p>Can Antika dünyasına katıldığınız için teşekkürler.</p>";
-        sendEmail(toEmail, subject, content);
+        sendEmail(toEmail, "Can Antika'ya Hoş Geldiniz!", EmailTemplates.welcome(name));
     }
 
     @Override
+    @Async
     public void sendOrderTrackingEmail(String toEmail, String orderCode, String trackingNumber, String carrier) {
-        String subject = "Siparişiniz Yola Çıktı! - " + orderCode;
-        String content = "<h1>Kargonuz Yolda!</h1><p>Siparişiniz <strong>" + carrier + "</strong> ile gönderildi.</p>" +
-                "<p>Takip Numarası: <strong>" + trackingNumber + "</strong></p>";
-        sendEmail(toEmail, subject, content);
+        sendEmail(toEmail, "Siparişiniz Yola Çıktı! - " + orderCode,
+                EmailTemplates.orderTracking(orderCode, trackingNumber, carrier));
+    }
+
+    @Override
+    @Async
+    public void sendOrderStatusUpdate(String toEmail, String orderCode, String statusLabel) {
+        sendEmail(toEmail, "Sipariş Durumu Güncellendi - " + orderCode,
+                EmailTemplates.orderStatusUpdate(orderCode, statusLabel));
     }
 
     private void sendEmail(String to, String subject, String htmlContent) {
@@ -71,9 +78,9 @@ public class ResendNotificationService implements INotificationService {
 
         try {
             CreateEmailResponse data = resend.emails().send(createEmailOptions);
-            log.info("Email sent successfully: {}", data.getId());
+            log.info("Email sent successfully to {}: {}", to, data.getId());
         } catch (ResendException e) {
-            log.error("Failed to send email via Resend: {}", e.getMessage());
+            log.error("Failed to send email via Resend to {}: {}", to, e.getMessage());
         }
     }
 }

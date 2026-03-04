@@ -9,8 +9,10 @@ import com.mehmetkerem.mapper.ProductMapper;
 import com.mehmetkerem.model.Product;
 import com.mehmetkerem.repository.ProductRepository;
 import com.mehmetkerem.service.ICategoryService;
+import com.mehmetkerem.service.IFileStorageService;
 import com.mehmetkerem.service.IProductService;
 import com.mehmetkerem.util.Messages;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,19 +30,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-@SuppressWarnings("null")
+@RequiredArgsConstructor
 public class ProductServiceImpl implements IProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ICategoryService categoryService;
-
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper,
-            ICategoryService categoryService) {
-        this.productRepository = productRepository;
-        this.productMapper = productMapper;
-        this.categoryService = categoryService;
-    }
+    private final IFileStorageService fileStorageService;
 
     @Override
     @Transactional
@@ -53,7 +49,20 @@ public class ProductServiceImpl implements IProductService {
     @CacheEvict(cacheNames = { "products:list", "products:byId" }, allEntries = true)
     @Override
     public String deleteProduct(Long id) {
-        productRepository.delete(getProductById(id));
+        Product product = getProductById(id);
+
+        // Delete images from Cloudinary (or local storage)
+        if (product.getImageUrls() != null && !product.getImageUrls().isEmpty()) {
+            product.getImageUrls().forEach(url -> {
+                try {
+                    fileStorageService.deleteFile(url);
+                } catch (Exception e) {
+                    log.warn("Resim silinirken hata oluştu: url={}, error={}", url, e.getMessage());
+                }
+            });
+        }
+
+        productRepository.delete(product);
         return String.format(Messages.DELETE_VALUE, id, "ürün");
     }
 
@@ -82,42 +91,60 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public List<ProductResponse> findAllProducts() {
-        return productRepository.findAll().stream()
-                .map(product -> {
-                    CategoryResponse categoryResponse = categoryService
-                            .getCategoryResponseById(product.getCategoryId());
-                    return productMapper.toResponseWithCategory(product, categoryResponse);
-                })
+        List<Product> products = productRepository.findAll();
+
+        // Batch fetch categories — single query instead of N
+        List<Long> categoryIds = products.stream()
+                .map(Product::getCategoryId)
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
+
+        java.util.Map<Long, com.mehmetkerem.dto.response.CategoryResponse> categoryMap = categoryIds.isEmpty()
+                ? java.util.Collections.emptyMap()
+                : categoryService.getCategoryResponsesByIds(categoryIds);
+
+        return products.stream()
+                .map(product -> productMapper.toResponseWithCategory(
+                        product, categoryMap.get(product.getCategoryId())))
                 .toList();
     }
 
     @Override
     public List<ProductResponse> getProductResponsesByIds(List<Long> productIds) {
-        return getProductsByIds(productIds).stream().map(this::mapProductWithCategory).toList();
+        return mapProductsWithCategories(getProductsByIds(productIds));
     }
 
+    @Override
     public List<Product> getProductsByIds(List<Long> productIds) {
         return productRepository.findByIdIn(productIds);
     }
 
+    @Override
     public List<Product> saveAllProducts(List<Product> products) {
         return productRepository.saveAll(products);
     }
 
     @Override
+    @Transactional
+    @CacheEvict(cacheNames = { "products:list", "products:byId" }, allEntries = true)
+    public void updateProductRating(Long productId, double averageRating, int reviewCount) {
+        Product product = getProductById(productId);
+        product.setAverageRating(averageRating);
+        product.setReviewCount(reviewCount);
+        productRepository.save(product);
+    }
+
+    @Override
     public List<ProductResponse> getProductsByTitle(String title) {
         List<Product> products = productRepository.findByTitleContainingIgnoreCase(title);
-
-        return products.stream().map(this::mapProductWithCategory).toList();
+        return mapProductsWithCategories(products);
     }
 
     @Override
     public List<ProductResponse> getProductsByCategory(Long categoryId) {
         List<Product> products = productRepository.findByCategoryId(categoryId);
-
-        return products.stream()
-                .map(this::mapProductWithCategory)
-                .toList();
+        return mapProductsWithCategories(products);
     }
 
     @Override
@@ -144,11 +171,52 @@ public class ProductServiceImpl implements IProductService {
         return productRepository.findAll(pageable).map(productMapper::toResponse);
     }
 
+    /**
+     * Birden fazla ürünü batch olarak kategorileriyle eşleştirir.
+     * N+1 sorunu yerine tek sorguda tüm kategorileri çeker.
+     */
+    private List<ProductResponse> mapProductsWithCategories(List<Product> products) {
+        if (products.isEmpty()) {
+            return List.of();
+        }
+
+        List<Long> categoryIds = products.stream()
+                .map(Product::getCategoryId)
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
+
+        java.util.Map<Long, CategoryResponse> categoryMap = categoryIds.isEmpty()
+                ? java.util.Collections.emptyMap()
+                : categoryService.getCategoryResponsesByIds(categoryIds);
+
+        return products.stream()
+                .map(product -> productMapper.toResponseWithCategory(
+                        product, categoryMap.get(product.getCategoryId())))
+                .toList();
+    }
+
     private ProductResponse mapProductWithCategory(Product product) {
         CategoryResponse categoryResponse = null;
         if (product.getCategoryId() != null) {
             categoryResponse = categoryService.getCategoryResponseById(product.getCategoryId());
         }
         return productMapper.toResponseWithCategory(product, categoryResponse);
+    }
+
+    @Override
+    public ProductResponse getProductBySlug(String slug) {
+        Product product = productRepository.findBySlug(slug)
+                .orElseThrow(() -> new com.mehmetkerem.exception.NotFoundException(
+                        "Ürün bulunamadı: " + slug));
+        return mapProductWithCategory(product);
+    }
+
+    @Transactional
+    @Override
+    public void incrementViewCount(Long productId) {
+        Product product = getProductById(productId);
+        product.setViewCount(product.getViewCount() + 1);
+        productRepository.save(product);
     }
 }

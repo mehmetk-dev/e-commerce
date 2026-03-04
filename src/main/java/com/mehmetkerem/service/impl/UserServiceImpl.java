@@ -11,6 +11,7 @@ import com.mehmetkerem.repository.UserRepository;
 import com.mehmetkerem.service.IUserService;
 import com.mehmetkerem.service.IAddressService;
 import com.mehmetkerem.util.Messages;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,26 +24,16 @@ import com.mehmetkerem.repository.PasswordResetTokenRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
-@SuppressWarnings("null")
+@RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
+
+    private static final int PASSWORD_RESET_TOKEN_EXPIRY_HOURS = 24;
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final IAddressService addressService;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final PasswordEncoder passwordEncoder;
-
-    public UserServiceImpl(UserMapper userMapper,
-            UserRepository userRepository,
-            IAddressService addressService,
-            PasswordResetTokenRepository passwordResetTokenRepository,
-            PasswordEncoder passwordEncoder) {
-        this.userMapper = userMapper;
-        this.userRepository = userRepository;
-        this.addressService = addressService;
-        this.passwordResetTokenRepository = passwordResetTokenRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     private User createUser(UserRequest request) {
         return userMapper.toEntity(request);
@@ -121,7 +112,7 @@ public class UserServiceImpl implements IUserService {
         PasswordResetToken myToken = PasswordResetToken.builder()
                 .token(token)
                 .user(user)
-                .expiryDate(LocalDateTime.now().plusHours(24))
+                .expiryDate(LocalDateTime.now().plusHours(PASSWORD_RESET_TOKEN_EXPIRY_HOURS))
                 .build();
         passwordResetTokenRepository.save(myToken);
     }
@@ -146,6 +137,52 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void changeUserPassword(User user, String password) {
         user.setPasswordHash(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void deactivateAccount(Long userId) {
+        User user = getUserById(userId);
+        user.setActive(false);
+        user.setDeactivatedAt(LocalDateTime.now());
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void deactivateCurrentAccount() {
+        Long currentUserId = com.mehmetkerem.util.SecurityUtils.getCurrentUserId();
+        if (currentUserId == null) {
+            throw new BadRequestException("Oturum gerekli.");
+        }
+        deactivateAccount(currentUserId);
+    }
+
+    @Transactional
+    @Override
+    public void banUser(Long userId) {
+        User user = getUserById(userId);
+        if (user.getRole() == com.mehmetkerem.enums.Role.ADMIN) {
+            throw new BadRequestException("Admin kullanıcılar banlanamaz.");
+        }
+        user.setBanned(true);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void unbanUser(Long userId) {
+        User user = getUserById(userId);
+        user.setBanned(false);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void updateUserRole(Long userId, com.mehmetkerem.enums.Role newRole) {
+        User user = getUserById(userId);
+        user.setRole(newRole);
         userRepository.save(user);
     }
 }

@@ -17,4 +17,6 @@ public interface IRestReviewController {
     ResultData<String> deleteReview(Long id);
 
     ResultData<ReviewResponse> getReviewById(Long id);
+
+    ResultData<List<ReviewResponse>> getReviewsByProductId(Long productId);
 }

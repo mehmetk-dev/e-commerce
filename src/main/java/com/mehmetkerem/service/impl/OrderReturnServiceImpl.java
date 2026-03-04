@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@SuppressWarnings("null")
 public class OrderReturnServiceImpl implements IOrderReturnService {
 
     private final OrderReturnRepository orderReturnRepository;
@@ -34,8 +33,8 @@ public class OrderReturnServiceImpl implements IOrderReturnService {
         if (!order.getUserId().equals(userId)) {
             throw new BadRequestException("Bu sipariş size ait değil.");
         }
-        boolean hasPending = orderReturnRepository.findByUserIdOrderByCreatedAtDesc(userId).stream()
-                .anyMatch(r -> r.getOrderId().equals(request.getOrderId()) && r.getStatus() == ReturnStatus.PENDING);
+        boolean hasPending = orderReturnRepository.existsByOrderIdAndUserIdAndStatus(
+                request.getOrderId(), userId, ReturnStatus.PENDING);
         if (hasPending) {
             throw new BadRequestException("Bu sipariş için zaten bekleyen bir iade talebiniz var.");
         }
@@ -94,7 +93,8 @@ public class OrderReturnServiceImpl implements IOrderReturnService {
 
     private OrderReturn getById(Long id) {
         return orderReturnRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "iade talebi")));
+                .orElseThrow(
+                        () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "iade talebi")));
     }
 
     private OrderReturnResponse toResponse(OrderReturn r) {

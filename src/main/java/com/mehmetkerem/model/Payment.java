@@ -13,7 +13,10 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "payments")
+@Table(name = "payments", indexes = {
+        @Index(name = "idx_payment_order_id", columnList = "order_id"),
+        @Index(name = "idx_payment_user_id", columnList = "user_id")
+})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -42,6 +45,9 @@ public class Payment {
 
     @Column(name = "transaction_id")
     private String transactionId;
+
+    @Column(name = "idempotency_key", unique = true)
+    private String idempotencyKey;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

@@ -1,0 +1,3670 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.mehmetkerem:ecommerce >----------------------
+[INFO] Building E-Commerce 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.2:run (default-cli) > test-compile @ ecommerce >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ecommerce ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ ecommerce ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ecommerce ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ ecommerce ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot:3.2.2:run (default-cli) < test-compile @ ecommerce <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.2:run (default-cli) @ ecommerce ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.2)
+
+2026-02-17T22:18:15.787+03:00  INFO 2392 --- [E-Commerce] [           main] com.mehmetkerem.ECommerceApplication     : Starting ECommerceApplication using Java 17.0.12 with PID 2392 (C:\Users\Mehme\.gemini\antigravity\scratch\can-antika\e-commerce\target\classes started by Mehme in C:\Users\Mehme\.gemini\antigravity\scratch\can-antika\e-commerce)
+2026-02-17T22:18:15.789+03:00  INFO 2392 --- [E-Commerce] [           main] com.mehmetkerem.ECommerceApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-02-17T22:18:16.526+03:00  INFO 2392 --- [E-Commerce] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-17T22:18:16.628+03:00  INFO 2392 --- [E-Commerce] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 97 ms. Found 15 JPA repository interfaces.
+2026-02-17T22:18:17.187+03:00  INFO 2392 --- [E-Commerce] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-02-17T22:18:17.196+03:00  INFO 2392 --- [E-Commerce] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-17T22:18:17.196+03:00  INFO 2392 --- [E-Commerce] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2026-02-17T22:18:17.255+03:00  INFO 2392 --- [E-Commerce] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-17T22:18:17.255+03:00  INFO 2392 --- [E-Commerce] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1428 ms
+2026-02-17T22:18:17.374+03:00  INFO 2392 --- [E-Commerce] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-17T22:18:17.417+03:00  INFO 2392 --- [E-Commerce] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-02-17T22:18:17.443+03:00  INFO 2392 --- [E-Commerce] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-17T22:18:17.621+03:00  INFO 2392 --- [E-Commerce] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-17T22:18:17.648+03:00  INFO 2392 --- [E-Commerce] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-17T22:18:17.794+03:00  INFO 2392 --- [E-Commerce] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6851b296
+2026-02-17T22:18:17.796+03:00  INFO 2392 --- [E-Commerce] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-17T22:18:17.822+03:00  WARN 2392 --- [E-Commerce] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-17T22:18:18.816+03:00  INFO 2392 --- [E-Commerce] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-17T22:18:18.955+03:00  INFO 2392 --- [E-Commerce] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-17T22:18:19.411+03:00  INFO 2392 --- [E-Commerce] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-17T22:18:20.392+03:00  WARN 2392 --- [E-Commerce] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-17T22:18:20.762+03:00  INFO 2392 --- [E-Commerce] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@edf68f5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f94df5, org.springframework.security.web.context.SecurityContextHolderFilter@4c55d3ce, org.springframework.security.web.header.HeaderWriterFilter@58ef1543, org.springframework.web.filter.CorsFilter@56972302, org.springframework.security.web.authentication.logout.LogoutFilter@73eb57e6, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@1eb21f22, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@7ec53f8f, com.mehmetkerem.jwt.JwtAuthFilter@627ad446, com.mehmetkerem.config.RateLimitFilter@5b8572df, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@32c8df0b, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4a244aa3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6bbcb69f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@31360632, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3f491bd2, org.springframework.security.web.session.SessionManagementFilter@4be7661, org.springframework.security.web.access.ExceptionTranslationFilter@37d92db4, org.springframework.security.web.access.intercept.AuthorizationFilter@70b2de98]
+2026-02-17T22:18:21.158+03:00  INFO 2392 --- [E-Commerce] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-02-17T22:18:21.168+03:00  INFO 2392 --- [E-Commerce] [           main] com.mehmetkerem.ECommerceApplication     : Started ECommerceApplication in 5.722 seconds (process running for 6.015)
+2026-02-17T22:20:01.277+03:00  INFO 2392 --- [E-Commerce] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-17T22:20:01.277+03:00  INFO 2392 --- [E-Commerce] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-17T22:20:01.279+03:00  INFO 2392 --- [E-Commerce] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and lower(p1_0.title) like ? escape '' 
+        and 1=1 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and lower(p1_0.title) like ? escape '' 
+        and 1=1 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and lower(p1_0.title) like ? escape '' 
+        and 1=1 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and lower(p1_0.title) like ? escape '' 
+        and 1=1 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, image_url, name, password_hash, auth_provider, provider_id, user_role, updated_at) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-02-17T22:21:04.022+03:00 ERROR 2392 --- [E-Commerce] [         task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(java.lang.String,java.lang.String)
+
+java.lang.RuntimeException: Failed to send email: 401 {"statusCode":401,"name":"validation_error","message":"API key is invalid"}
+	at com.resend.services.emails.Emails.send(Emails.java:39) ~[resend-java-3.0.0.jar:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendEmail(ResendNotificationService.java:80) ~[classes/:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(ResendNotificationService.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113) ~[spring-aop-6.1.3.jar:6.1.3]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, image_url, name, password_hash, auth_provider, provider_id, user_role, updated_at) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-02-17T22:21:57.947+03:00 ERROR 2392 --- [E-Commerce] [         task-2] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(java.lang.String,java.lang.String)
+
+java.lang.RuntimeException: Failed to send email: 401 {"statusCode":401,"name":"validation_error","message":"API key is invalid"}
+	at com.resend.services.emails.Emails.send(Emails.java:39) ~[resend-java-3.0.0.jar:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendEmail(ResendNotificationService.java:80) ~[classes/:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(ResendNotificationService.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113) ~[spring-aop-6.1.3.jar:6.1.3]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.expiry_date,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.user_id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.address_line,
+        a1_0.city,
+        a1_0.country,
+        a1_0.district,
+        a1_0.postal_code,
+        a1_0.title,
+        a1_0.user_id 
+    from
+        addresses a1_0 
+    where
+        a1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    insert 
+    into
+        carts
+        (coupon_code, updated_at, user_id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        wl1_0.id,
+        wl1_0.user_id 
+    from
+        wishlists wl1_0 
+    left join
+        users u1_0 
+            on u1_0.id=wl1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    insert 
+    into
+        wishlists
+        (user_id) 
+    values
+        (?)
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        wl1_0.id,
+        wl1_0.user_id 
+    from
+        wishlists wl1_0 
+    left join
+        users u1_0 
+            on u1_0.id=wl1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        i1_0.wish_list_id,
+        i1_0.id,
+        i1_0.added_time,
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        wishlist_items i1_0 
+    left join
+        products p1_0 
+            on p1_0.id=i1_0.product_id 
+            and (p1_0.deleted=false) 
+    where
+        i1_0.wish_list_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.carrier_name,
+        o1_0.last_updated,
+        o1_0.order_date,
+        o1_0.order_status,
+        o1_0.payment_status,
+        o1_0.shipping_address_id,
+        o1_0.total_amount,
+        o1_0.tracking_number,
+        o1_0.user_id 
+    from
+        orders o1_0 
+    where
+        o1_0.user_id=? 
+    order by
+        o1_0.order_date desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.carrier_name,
+        o1_0.last_updated,
+        o1_0.order_date,
+        o1_0.order_status,
+        o1_0.payment_status,
+        o1_0.shipping_address_id,
+        o1_0.total_amount,
+        o1_0.tracking_number,
+        o1_0.user_id 
+    from
+        orders o1_0 
+    where
+        o1_0.user_id=? 
+    order by
+        o1_0.order_date desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.address_line,
+        a1_0.city,
+        a1_0.country,
+        a1_0.district,
+        a1_0.postal_code,
+        a1_0.title,
+        a1_0.user_id 
+    from
+        addresses a1_0 
+    where
+        a1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.address_line,
+        a1_0.city,
+        a1_0.country,
+        a1_0.district,
+        a1_0.postal_code,
+        a1_0.title,
+        a1_0.user_id 
+    from
+        addresses a1_0 
+    where
+        a1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    insert 
+    into
+        addresses
+        (address_line, city, country, district, postal_code, title, user_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        st1_0.id,
+        st1_0.admin_reply,
+        st1_0.created_at,
+        st1_0.message,
+        st1_0.status,
+        st1_0.subject,
+        st1_0.updated_at,
+        st1_0.user_id 
+    from
+        support_tickets st1_0 
+    where
+        st1_0.user_id=? 
+    order by
+        st1_0.created_at desc
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        st1_0.id,
+        st1_0.admin_reply,
+        st1_0.created_at,
+        st1_0.message,
+        st1_0.status,
+        st1_0.subject,
+        st1_0.updated_at,
+        st1_0.user_id 
+    from
+        support_tickets st1_0 
+    where
+        st1_0.user_id=? 
+    order by
+        st1_0.created_at desc
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    insert 
+    into
+        support_tickets
+        (admin_reply, created_at, message, status, subject, updated_at, user_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.address_line,
+        a1_0.city,
+        a1_0.country,
+        a1_0.district,
+        a1_0.postal_code,
+        a1_0.title,
+        a1_0.user_id 
+    from
+        addresses a1_0 
+    where
+        a1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.carrier_name,
+        o1_0.last_updated,
+        o1_0.order_date,
+        o1_0.order_status,
+        o1_0.payment_status,
+        o1_0.shipping_address_id,
+        o1_0.total_amount,
+        o1_0.tracking_number,
+        o1_0.user_id 
+    from
+        orders o1_0 
+    where
+        o1_0.user_id=? 
+    order by
+        o1_0.order_date desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.carrier_name,
+        o1_0.last_updated,
+        o1_0.order_date,
+        o1_0.order_status,
+        o1_0.payment_status,
+        o1_0.shipping_address_id,
+        o1_0.total_amount,
+        o1_0.tracking_number,
+        o1_0.user_id 
+    from
+        orders o1_0 
+    where
+        o1_0.user_id=? 
+    order by
+        o1_0.order_date desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        wl1_0.id,
+        wl1_0.user_id 
+    from
+        wishlists wl1_0 
+    left join
+        users u1_0 
+            on u1_0.id=wl1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        i1_0.wish_list_id,
+        i1_0.id,
+        i1_0.added_time,
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        wishlist_items i1_0 
+    left join
+        products p1_0 
+            on p1_0.id=i1_0.product_id 
+            and (p1_0.deleted=false) 
+    where
+        i1_0.wish_list_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        wl1_0.id,
+        wl1_0.user_id 
+    from
+        wishlists wl1_0 
+    left join
+        users u1_0 
+            on u1_0.id=wl1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        i1_0.wish_list_id,
+        i1_0.id,
+        i1_0.added_time,
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        wishlist_items i1_0 
+    left join
+        products p1_0 
+            on p1_0.id=i1_0.product_id 
+            and (p1_0.deleted=false) 
+    where
+        i1_0.wish_list_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.coupon_code,
+        c1_0.updated_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.price,
+        i1_0.product_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+    order by
+        p1_0.id desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        count(p1_0.id) 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        c1_0.id=? 
+        and (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+    order by
+        p1_0.id desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        count(p1_0.id) 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        c1_0.id=? 
+        and (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-17T22:26:29.479+03:00  WARN 2392 --- [E-Commerce] [nio-8080-exec-5] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-17T22:26:34.661+03:00  WARN 2392 --- [E-Commerce] [nio-8080-exec-7] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-17T22:27:27.222+03:00  WARN 2392 --- [E-Commerce] [nio-8080-exec-3] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, image_url, name, password_hash, auth_provider, provider_id, user_role, updated_at) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-02-17T22:28:08.573+03:00 ERROR 2392 --- [E-Commerce] [         task-3] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(java.lang.String,java.lang.String)
+
+java.lang.RuntimeException: Failed to send email: 401 {"statusCode":401,"name":"validation_error","message":"API key is invalid"}
+	at com.resend.services.emails.Emails.send(Emails.java:39) ~[resend-java-3.0.0.jar:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendEmail(ResendNotificationService.java:80) ~[classes/:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(ResendNotificationService.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113) ~[spring-aop-6.1.3.jar:6.1.3]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.expiry_date,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.user_id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.address_line,
+        a1_0.city,
+        a1_0.country,
+        a1_0.district,
+        a1_0.postal_code,
+        a1_0.title,
+        a1_0.user_id 
+    from
+        addresses a1_0 
+    where
+        a1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.expiry_date,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.user_id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+2026-02-17T22:30:15.300+03:00  WARN 2392 --- [E-Commerce] [nio-8080-exec-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 23505
+2026-02-17T22:30:15.300+03:00 ERROR 2392 --- [E-Commerce] [nio-8080-exec-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut
+2026-02-17T22:30:15.323+03:00 ERROR 2392 --- [E-Commerce] [nio-8080-exec-4] c.m.handler.GlobalExceptionHandler       : Beklenmeyen hata olu■tu: 
+
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut] [insert into refresh_tokens (expiry_date,token,user_id) values (?,?,?)]; SQL [insert into refresh_tokens (expiry_date,token,user_id) values (?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290) ~[spring-orm-6.1.3.jar:6.1.3]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.3.jar:6.1.3]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550) ~[spring-orm-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:220) ~[spring-aop-6.1.3.jar:6.1.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy159.save(Unknown Source) ~[na:na]
+	at com.mehmetkerem.service.impl.RefreshTokenService.createRefreshToken(RefreshTokenService.java:46) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.3.jar:6.1.3]
+	at com.mehmetkerem.service.impl.RefreshTokenService$$SpringCGLIB$$0.createRefreshToken(<generated>) ~[classes/:na]
+	at com.mehmetkerem.service.impl.AuthService.login(AuthService.java:84) ~[classes/:na]
+	at com.mehmetkerem.controller.impl.RestAuthControllerImpl.login(RestAuthControllerImpl.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.18.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.18.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter.doFilterInternal(DefaultLogoutPageGeneratingFilter.java:58) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:189) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:175) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at com.mehmetkerem.config.RateLimitFilter.doFilterInternal(RateLimitFilter.java:59) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at com.mehmetkerem.jwt.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:30) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181) ~[spring-security-oauth2-client-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225) ~[spring-security-config-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut] [insert into refresh_tokens (expiry_date,token,user_id) values (?,?,?)]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:97) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:100) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:175) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:113) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2868) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:670) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:272) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:386) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:300) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:219) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:134) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:774) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:758) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at jdk.internal.reflect.GeneratedMethodAccessor64.invoke(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:364) ~[spring-orm-6.1.3.jar:6.1.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy142.persist(Unknown Source) ~[na:na]
+	at jdk.internal.reflect.GeneratedMethodAccessor64.invoke(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:319) ~[spring-orm-6.1.3.jar:6.1.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy142.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:618) ~[spring-data-jpa-3.2.2.jar:3.2.2]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.3.jar:6.1.3]
+	... 146 common frames omitted
+Caused by: org.postgresql.util.PSQLException: HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2401) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:368) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152) ~[postgresql-42.6.0.jar:42.6.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	... 200 common frames omitted
+
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+    order by
+        p1_0.id desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        count(p1_0.id) 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.deleted,
+        c1_0.description,
+        c1_0.name 
+    from
+        categories c1_0 
+    where
+        c1_0.id=? 
+        and (
+            c1_0.deleted=false
+        )
+Hibernate: 
+    select
+        iu1_0.product_id,
+        iu1_0.image_url 
+    from
+        product_images iu1_0 
+    where
+        iu1_0.product_id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.attributes,
+        p1_0.average_rating,
+        p1_0.category_id,
+        p1_0.deleted,
+        p1_0.description,
+        p1_0.price,
+        p1_0.review_count,
+        p1_0.stock,
+        p1_0.title,
+        p1_0.version 
+    from
+        products p1_0 
+    where
+        (
+            p1_0.deleted=false
+        ) 
+        and 1=1 
+        and p1_0.category_id=? 
+        and 1=1 
+        and 1=1 
+    order by
+        p1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, image_url, name, password_hash, auth_provider, provider_id, user_role, updated_at) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.expiry_date,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.user_id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.address_line,
+        a1_0.city,
+        a1_0.country,
+        a1_0.district,
+        a1_0.postal_code,
+        a1_0.title,
+        a1_0.user_id 
+    from
+        addresses a1_0 
+    where
+        a1_0.user_id=?
+2026-02-17T22:31:17.818+03:00 ERROR 2392 --- [E-Commerce] [         task-4] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(java.lang.String,java.lang.String)
+
+java.lang.RuntimeException: Failed to send email: 401 {"statusCode":401,"name":"validation_error","message":"API key is invalid"}
+	at com.resend.services.emails.Emails.send(Emails.java:39) ~[resend-java-3.0.0.jar:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendEmail(ResendNotificationService.java:80) ~[classes/:na]
+	at com.mehmetkerem.service.impl.ResendNotificationService.sendWelcomeEmail(ResendNotificationService.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113) ~[spring-aop-6.1.3.jar:6.1.3]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.image_url,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.auth_provider,
+        u1_0.provider_id,
+        u1_0.user_role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.expiry_date,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.user_id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+2026-02-17T22:31:56.962+03:00  WARN 2392 --- [E-Commerce] [nio-8080-exec-8] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 23505
+2026-02-17T22:31:56.962+03:00 ERROR 2392 --- [E-Commerce] [nio-8080-exec-8] o.h.engine.jdbc.spi.SqlExceptionHelper   : HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut
+2026-02-17T22:31:56.962+03:00 ERROR 2392 --- [E-Commerce] [nio-8080-exec-8] c.m.handler.GlobalExceptionHandler       : Beklenmeyen hata olu■tu: 
+
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut] [insert into refresh_tokens (expiry_date,token,user_id) values (?,?,?)]; SQL [insert into refresh_tokens (expiry_date,token,user_id) values (?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290) ~[spring-orm-6.1.3.jar:6.1.3]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.3.jar:6.1.3]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550) ~[spring-orm-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:220) ~[spring-aop-6.1.3.jar:6.1.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy159.save(Unknown Source) ~[na:na]
+	at com.mehmetkerem.service.impl.RefreshTokenService.createRefreshToken(RefreshTokenService.java:46) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.3.jar:6.1.3]
+	at com.mehmetkerem.service.impl.RefreshTokenService$$SpringCGLIB$$0.createRefreshToken(<generated>) ~[classes/:na]
+	at com.mehmetkerem.service.impl.AuthService.login(AuthService.java:84) ~[classes/:na]
+	at com.mehmetkerem.controller.impl.RestAuthControllerImpl.login(RestAuthControllerImpl.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.18.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.18.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter.doFilterInternal(DefaultLogoutPageGeneratingFilter.java:58) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:189) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:175) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at com.mehmetkerem.config.RateLimitFilter.doFilterInternal(RateLimitFilter.java:59) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at com.mehmetkerem.jwt.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:30) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181) ~[spring-security-oauth2-client-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225) ~[spring-security-config-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.3.jar:6.1.3]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.18.jar:10.1.18]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut] [insert into refresh_tokens (expiry_date,token,user_id) values (?,?,?)]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:97) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:100) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:175) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:113) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2868) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:670) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:272) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:386) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:300) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:219) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:134) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:774) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:758) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	at jdk.internal.reflect.GeneratedMethodAccessor64.invoke(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:364) ~[spring-orm-6.1.3.jar:6.1.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy142.persist(Unknown Source) ~[na:na]
+	at jdk.internal.reflect.GeneratedMethodAccessor64.invoke(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:319) ~[spring-orm-6.1.3.jar:6.1.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy142.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:618) ~[spring-data-jpa-3.2.2.jar:3.2.2]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.2.2.jar:3.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.3.jar:6.1.3]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.3.jar:6.1.3]
+	... 146 common frames omitted
+Caused by: org.postgresql.util.PSQLException: HATA: tekrar eden kay²t, "uk_7tdcd6ab5wsgoudnvj7xf1b7l" tekil k²s²tlamas²n² ihlal etmektedir
+  Ayr²nt²: "(user_id)=(4)" anahtar² zaten mevcut
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2401) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:368) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152) ~[postgresql-42.6.0.jar:42.6.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194) ~[hibernate-core-6.4.1.Final.jar:6.4.1.Final]
+	... 200 common frames omitted
+

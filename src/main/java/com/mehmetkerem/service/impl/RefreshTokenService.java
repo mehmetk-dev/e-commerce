@@ -5,6 +5,7 @@ import com.mehmetkerem.exception.NotFoundException;
 import com.mehmetkerem.model.RefreshToken;
 import com.mehmetkerem.repository.RefreshTokenRepository;
 import com.mehmetkerem.repository.UserRepository;
+import com.mehmetkerem.service.IRefreshTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@SuppressWarnings("null")
-public class RefreshTokenService {
+public class RefreshTokenService implements IRefreshTokenService {
 
     @Value("${jwt.refreshExpirationMs:604800000}") // Default 7 gün
     private Long refreshTokenDurationMs;
@@ -25,10 +25,12 @@ public class RefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final UserRepository userRepository;
 
+    @Override
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);
     }
 
+    @Override
     @Transactional
     public RefreshToken createRefreshToken(Long userId) {
         // Eski token varsa sil
@@ -36,7 +38,10 @@ public class RefreshTokenService {
                 .orElseThrow(() -> new NotFoundException("User not found with id: " + userId));
 
         Optional<RefreshToken> existingToken = refreshTokenRepository.findByUser(user);
-        existingToken.ifPresent(refreshTokenRepository::delete);
+        existingToken.ifPresent(token -> {
+            refreshTokenRepository.delete(token);
+            refreshTokenRepository.flush();
+        });
 
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setUser(user);
@@ -47,6 +52,7 @@ public class RefreshTokenService {
         return refreshToken;
     }
 
+    @Override
     public RefreshToken verifyExpiration(RefreshToken token) {
         if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.delete(token);
@@ -55,6 +61,7 @@ public class RefreshTokenService {
         return token;
     }
 
+    @Override
     @Transactional
     public int deleteByUserId(Long userId) {
         return refreshTokenRepository.deleteByUser(userRepository.findById(userId)

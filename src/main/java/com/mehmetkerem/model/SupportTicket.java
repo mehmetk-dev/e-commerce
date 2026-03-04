@@ -33,8 +33,14 @@ public class SupportTicket {
     @Builder.Default
     private TicketStatus status = TicketStatus.OPEN;
 
-    @Column(name = "admin_reply", columnDefinition = "TEXT")
-    private String adminReply;
+    @ElementCollection
+    @CollectionTable(name = "support_ticket_replies", joinColumns = @JoinColumn(name = "ticket_id"))
+    @Column(name = "reply", columnDefinition = "TEXT")
+    private java.util.List<String> adminReplies;
+
+    @Column(name = "deleted_by_admin", nullable = false)
+    @Builder.Default
+    private boolean deletedByAdmin = false;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

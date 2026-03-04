@@ -48,6 +48,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
 
         <!-- Lombok -->
         <dependency>
@@ -123,6 +127,20 @@
             <groupId>com.resend</groupId>
             <artifactId>resend-java</artifactId>
             <version>3.0.0</version>
+        </dependency>
+
+        <!-- Cloudinary -->
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.39.0</version>
+        </dependency>
+
+        <!-- OpenPDF (iText fork - LGPL) for Invoice PDF -->
+        <dependency>
+            <groupId>com.github.librepdf</groupId>
+            <artifactId>openpdf</artifactId>
+            <version>1.3.35</version>
         </dependency>
 
     </dependencies>

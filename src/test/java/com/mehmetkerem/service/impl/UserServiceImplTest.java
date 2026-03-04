@@ -60,8 +60,6 @@ class UserServiceImplTest {
         userRequest.setName("Test User");
         userRequest.setEmail("test@test.com");
         userRequest.setPassword("password123");
-        userRequest.setRole(Role.USER);
-
         user = User.builder()
                 .id(1L)
                 .name("Test User")

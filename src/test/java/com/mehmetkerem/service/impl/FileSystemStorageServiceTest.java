@@ -10,7 +10,6 @@ import org.junit.jupiter.api.io.TempDir;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.Resource;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -32,8 +31,7 @@ class FileSystemStorageServiceTest {
     @BeforeEach
     void setUp() {
         root = tempDir.resolve("uploads");
-        storageService = new FileSystemStorageService();
-        ReflectionTestUtils.setField(storageService, "root", root);
+        storageService = new FileSystemStorageService(root.toString());
     }
 
     @AfterEach
@@ -41,7 +39,8 @@ class FileSystemStorageServiceTest {
         if (storageService != null) {
             try {
                 storageService.deleteAll();
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
     }
 

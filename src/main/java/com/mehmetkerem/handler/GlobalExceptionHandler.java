@@ -27,6 +27,20 @@ public class GlobalExceptionHandler {
                 HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ResponseEntity<Result> handleAccessDenied(
+            org.springframework.security.access.AccessDeniedException ex) {
+        return new ResponseEntity<>(ResultHelper.error("Bu işlemi yapmaya yetkiniz yok.", HttpStatus.FORBIDDEN),
+                HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(org.springframework.security.authentication.InsufficientAuthenticationException.class)
+    public ResponseEntity<Result> handleInsufficientAuth(
+            org.springframework.security.authentication.InsufficientAuthenticationException ex) {
+        return new ResponseEntity<>(ResultHelper.error("Oturum açmanız gerekiyor.", HttpStatus.UNAUTHORIZED),
+                HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<Result> handleBaseException(BaseException ex) {
         return new ResponseEntity<>(ResultHelper.error(ex.getMessage(), ex.getStatus()), ex.getStatus());

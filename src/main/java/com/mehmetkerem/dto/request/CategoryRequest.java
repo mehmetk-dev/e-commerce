@@ -8,4 +8,6 @@ public class CategoryRequest {
 
     @NotNull
     private String name;
+
+    private String description;
 }

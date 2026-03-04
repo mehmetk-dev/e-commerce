@@ -38,7 +38,6 @@ class RestUserControllerTest {
         userRequest.setName("Test");
         userRequest.setEmail("test@test.com");
         userRequest.setPassword("password123");
-        userRequest.setRole(com.mehmetkerem.enums.Role.USER);
         userResponse = new UserResponse();
         userResponse.setId(1L);
         userResponse.setEmail("test@test.com");

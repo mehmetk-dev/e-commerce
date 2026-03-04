@@ -55,7 +55,13 @@ class OrderServiceImplTest {
     private AddressMapper addressMapper;
 
     @Mock
-    private INotificationService notificationService;
+    private com.mehmetkerem.service.INotificationService notificationService;
+
+    @Mock
+    private InAppNotificationService inAppNotificationService;
+
+    @Mock
+    private org.springframework.transaction.support.TransactionTemplate transactionTemplate;
 
     @InjectMocks
     private OrderServiceImpl orderService;
@@ -119,6 +125,12 @@ class OrderServiceImplTest {
         Cart emptyCart = Cart.builder().id(1L).userId(USER_ID).items(new ArrayList<>()).build();
         when(cartService.getCartByUserId(USER_ID)).thenReturn(emptyCart);
 
+        // TransactionTemplate mock
+        when(transactionTemplate.execute(any())).thenAnswer(invocation -> {
+            org.springframework.transaction.support.TransactionCallback<?> callback = invocation.getArgument(0);
+            return callback.doInTransaction(null);
+        });
+
         BadRequestException ex = assertThrows(BadRequestException.class,
                 () -> orderService.saveOrder(USER_ID, orderRequest));
 
@@ -159,6 +171,13 @@ class OrderServiceImplTest {
         AddressResponse addressResponse = new AddressResponse();
         when(addressMapper.toResponse(address)).thenReturn(addressResponse);
 
+        // TransactionTemplate'in execute metodunun içeriği doğrudan çalıştırmasını
+        // sağla
+        when(transactionTemplate.execute(any())).thenAnswer(invocation -> {
+            org.springframework.transaction.support.TransactionCallback<?> callback = invocation.getArgument(0);
+            return callback.doInTransaction(null);
+        });
+
         OrderResponse result = orderService.saveOrder(USER_ID, orderRequest);
 
         assertNotNull(result);
@@ -187,6 +206,12 @@ class OrderServiceImplTest {
         });
         product.setStock(1);
         when(productService.getProductsByIds(List.of(PRODUCT_ID))).thenReturn(List.of(product));
+
+        // TransactionTemplate mock
+        when(transactionTemplate.execute(any())).thenAnswer(invocation -> {
+            org.springframework.transaction.support.TransactionCallback<?> callback = invocation.getArgument(0);
+            return callback.doInTransaction(null);
+        });
 
         BadRequestException ex = assertThrows(BadRequestException.class,
                 () -> orderService.saveOrder(USER_ID, orderRequest));

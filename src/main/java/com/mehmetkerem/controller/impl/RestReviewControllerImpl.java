@@ -6,6 +6,7 @@ import com.mehmetkerem.dto.response.ReviewResponse;
 import com.mehmetkerem.service.IReviewService;
 import com.mehmetkerem.util.ResultData;
 import com.mehmetkerem.util.ResultHelper;
+import com.mehmetkerem.util.SecurityUtils;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,8 @@ public class RestReviewControllerImpl implements IRestReviewController {
     @PostMapping("/save")
     @Override
     public ResultData<ReviewResponse> saveReview(@Valid @RequestBody ReviewRequest request) {
-        return ResultHelper.success(reviewService.saveReview(request));
+        Long userId = SecurityUtils.getCurrentUserId();
+        return ResultHelper.success(reviewService.saveReview(userId, request));
     }
 
     @GetMapping("/find-all")
@@ -37,18 +39,26 @@ public class RestReviewControllerImpl implements IRestReviewController {
     @Override
     public ResultData<ReviewResponse> updateReview(@PathVariable("id") Long id,
             @RequestBody ReviewRequest request) {
-        return ResultHelper.success(reviewService.updateReview(id, request));
+        Long userId = SecurityUtils.getCurrentUserId();
+        return ResultHelper.success(reviewService.updateReview(userId, id, request));
     }
 
     @DeleteMapping("/{id}")
     @Override
     public ResultData<String> deleteReview(@PathVariable("id") Long id) {
-        return ResultHelper.success(reviewService.deleteReview(id));
+        Long userId = SecurityUtils.getCurrentUserId();
+        return ResultHelper.success(reviewService.deleteReview(userId, id));
     }
 
     @GetMapping("/{id}")
     @Override
     public ResultData<ReviewResponse> getReviewById(@PathVariable("id") Long id) {
         return ResultHelper.success(reviewService.getReviewResponseById(id));
+    }
+
+    @GetMapping("/product/{productId}")
+    @Override
+    public ResultData<List<ReviewResponse>> getReviewsByProductId(@PathVariable("productId") Long productId) {
+        return ResultHelper.success(reviewService.getReviewsByProductId(productId));
     }
 }

@@ -52,7 +52,8 @@ class RestOrderControllerTest {
     @Test
     @DisplayName("saveOrder - ResultData success ve sipariş döner")
     void saveOrder_ShouldReturnSuccessResultData() {
-        when(orderService.saveOrder(eq(SecurityTestUtils.DEFAULT_USER_ID), any(OrderRequest.class))).thenReturn(orderResponse);
+        when(orderService.saveOrder(eq(SecurityTestUtils.DEFAULT_USER_ID), any(OrderRequest.class)))
+                .thenReturn(orderResponse);
 
         ResultData<OrderResponse> result = controller.saveOrder(orderRequest);
 
@@ -67,8 +68,8 @@ class RestOrderControllerTest {
     void getAllOrders_ShouldReturnPagedList() {
         when(orderService.getAllOrders(any(Pageable.class))).thenReturn(new PageImpl<>(List.of(orderResponse)));
 
-        ResultData<com.mehmetkerem.dto.response.CursorResponse<OrderResponse>> result =
-                controller.getAllOrders(0, 20, "orderDate", "desc");
+        ResultData<com.mehmetkerem.dto.response.CursorResponse<OrderResponse>> result = controller.getAllOrders(0, 20,
+                "orderDate", "desc");
 
         assertTrue(result.isStatus());
         assertNotNull(result.getData().getItems());
@@ -79,15 +80,15 @@ class RestOrderControllerTest {
     @Test
     @DisplayName("getMyOrders - kullanıcının siparişleri sayfalı döner")
     void getMyOrders_ShouldReturnUserOrdersPaged() {
-        when(orderService.getOrdersByUser(eq(SecurityTestUtils.DEFAULT_USER_ID), any(Pageable.class)))
+        when(orderService.getOrdersByUserId(eq(SecurityTestUtils.DEFAULT_USER_ID), any(Pageable.class)))
                 .thenReturn(new PageImpl<>(List.of(orderResponse)));
 
-        ResultData<com.mehmetkerem.dto.response.CursorResponse<OrderResponse>> result =
-                controller.getMyOrders(0, 20, "orderDate", "desc");
+        ResultData<com.mehmetkerem.dto.response.CursorResponse<OrderResponse>> result = controller.getMyOrders(0, 20,
+                "orderDate", "desc");
 
         assertTrue(result.isStatus());
         assertEquals(1, result.getData().getItems().size());
-        verify(orderService).getOrdersByUser(eq(SecurityTestUtils.DEFAULT_USER_ID), any(Pageable.class));
+        verify(orderService).getOrdersByUserId(eq(SecurityTestUtils.DEFAULT_USER_ID), any(Pageable.class));
     }
 
     @Test

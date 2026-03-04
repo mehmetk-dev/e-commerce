@@ -24,7 +24,6 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@SuppressWarnings("null")
 @Slf4j
 public class WishlistServiceImpl implements IWishlistService {
 

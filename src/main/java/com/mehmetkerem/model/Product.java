@@ -28,6 +28,9 @@ public class Product {
 
     private String title;
 
+    @Column(unique = true)
+    private String slug;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 
@@ -52,11 +55,44 @@ public class Product {
     private Long version;
 
     @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default false")
     private boolean deleted = false;
 
     @Builder.Default
+    @Column(nullable = false, columnDefinition = "double precision default 0.0")
     private Double averageRating = 0.0;
 
     @Builder.Default
+    @Column(nullable = false, columnDefinition = "integer default 0")
     private int reviewCount = 0;
+
+    @Builder.Default
+    @Column(name = "view_count", nullable = false, columnDefinition = "integer default 0")
+    private int viewCount = 0;
+
+    @PrePersist
+    protected void onPrePersist() {
+        if (slug == null || slug.isBlank()) {
+            slug = generateSlug(title);
+        }
+    }
+
+    @PreUpdate
+    protected void onPreUpdate() {
+        if (slug == null || slug.isBlank()) {
+            slug = generateSlug(title);
+        }
+    }
+
+    private String generateSlug(String text) {
+        if (text == null)
+            return null;
+        return text.toLowerCase(java.util.Locale.forLanguageTag("tr"))
+                .replace("ı", "i").replace("ğ", "g").replace("ü", "u")
+                .replace("ş", "s").replace("ö", "o").replace("ç", "c")
+                .replaceAll("[^a-z0-9\\s-]", "")
+                .replaceAll("[\\s]+", "-")
+                .replaceAll("-+", "-")
+                .replaceAll("^-|-$", "");
+    }
 }

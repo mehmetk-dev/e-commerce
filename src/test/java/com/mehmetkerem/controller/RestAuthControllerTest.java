@@ -40,7 +40,6 @@ class RestAuthControllerTest {
         registerRequest.setEmail("test@test.com");
         registerRequest.setName("Test");
         registerRequest.setPassword("password123");
-        registerRequest.setRole(com.mehmetkerem.enums.Role.USER);
         loginRequest = new LoginRequest();
         loginRequest.setEmail("test@test.com");
         loginRequest.setPassword("password123");

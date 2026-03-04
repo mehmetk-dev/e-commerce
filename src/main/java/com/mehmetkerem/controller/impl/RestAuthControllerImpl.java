@@ -4,7 +4,7 @@ import com.mehmetkerem.controller.IRestAuthController;
 import com.mehmetkerem.dto.request.*;
 import com.mehmetkerem.dto.response.LoginResponse;
 import com.mehmetkerem.model.User;
-import com.mehmetkerem.service.impl.AuthService;
+import com.mehmetkerem.service.IAuthService;
 import com.mehmetkerem.util.ResultData;
 import com.mehmetkerem.util.ResultHelper;
 import jakarta.validation.Valid;
@@ -19,7 +19,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class RestAuthControllerImpl implements IRestAuthController {
 
-    private final AuthService authService;
+    private final IAuthService authService;
 
     @Override
     @PostMapping("/register")
@@ -60,5 +60,21 @@ public class RestAuthControllerImpl implements IRestAuthController {
         User user = (User) authentication.getPrincipal();
         authService.changePassword(user.getId(), request.getOldPassword(), request.getNewPassword());
         return ResultHelper.success("Şifreniz güncellendi.");
+    }
+
+    @Override
+    @PutMapping("/profile")
+    public ResultData<com.mehmetkerem.dto.response.UserResponse> updateProfile(
+            @RequestBody @Valid ProfileUpdateRequest request,
+            Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResultHelper.success(authService.updateProfile(user.getId(), request));
+    }
+
+    @Override
+    @GetMapping("/me")
+    public ResultData<com.mehmetkerem.dto.response.UserResponse> me(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResultHelper.success(authService.getMe(user.getId()));
     }
 }

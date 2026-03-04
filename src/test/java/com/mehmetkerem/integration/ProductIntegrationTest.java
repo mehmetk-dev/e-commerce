@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -47,6 +48,9 @@ public class ProductIntegrationTest {
         private UserRepository userRepository;
 
         @Autowired
+        private PasswordEncoder passwordEncoder;
+
+        @Autowired
         private ObjectMapper objectMapper;
 
         private String adminToken;
@@ -57,16 +61,14 @@ public class ProductIntegrationTest {
                 categoryRepository.deleteAll();
                 userRepository.deleteAll();
 
-                // Admin kullanıcısı oluştur ve token al
-                RegisterRequest register = new RegisterRequest();
-                register.setEmail("admin@test.com");
-                register.setName("Admin");
-                register.setPassword("admin123");
-                register.setRole(Role.ADMIN);
-
-                mockMvc.perform(post("/v1/auth/register")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(register)));
+                // Admin kullanıcısı oluştur (Direct DB save)
+                com.mehmetkerem.model.User admin = com.mehmetkerem.model.User.builder()
+                                .email("admin@test.com")
+                                .name("Admin")
+                                .passwordHash(passwordEncoder.encode("admin123"))
+                                .role(Role.ADMIN)
+                                .build();
+                userRepository.save(admin);
 
                 LoginRequest login = new LoginRequest();
                 login.setEmail("admin@test.com");
@@ -92,10 +94,11 @@ public class ProductIntegrationTest {
                                 .header("Authorization", "Bearer " + adminToken)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(catReq)))
-                                .andExpect(status().isCreated())
+                                .andExpect(status().isOk())
                                 .andReturn();
 
-                Long categoryId = objectMapper.readTree(catResult.getResponse().getContentAsString()).path("id")
+                Long categoryId = objectMapper.readTree(catResult.getResponse().getContentAsString()).path("data")
+                                .path("id")
                                 .asLong();
 
                 // 2. Create Product
@@ -111,14 +114,14 @@ public class ProductIntegrationTest {
                                 .header("Authorization", "Bearer " + adminToken)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(productReq)))
-                                .andExpect(status().isCreated())
-                                .andExpect(jsonPath("$.title", is("Köstekli Saat")));
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$.data.title", is("Köstekli Saat")));
 
                 // 3. List Products
                 mockMvc.perform(get("/v1/product/find-all")
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isOk())
-                                .andExpect(jsonPath("$[0].title", is("Köstekli Saat")));
+                                .andExpect(jsonPath("$.data[0].title", is("Köstekli Saat")));
         }
 
         @Test
@@ -129,9 +132,10 @@ public class ProductIntegrationTest {
                                 .header("Authorization", "Bearer " + adminToken)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(catReq)))
-                                .andExpect(status().isCreated())
+                                .andExpect(status().isOk())
                                 .andReturn();
-                Long catId = objectMapper.readTree(catRes.getResponse().getContentAsString()).path("id").asLong();
+                Long catId = objectMapper.readTree(catRes.getResponse().getContentAsString()).path("data").path("id")
+                                .asLong();
 
                 ProductRequest createReq = new ProductRequest();
                 createReq.setTitle("Eski Saat");
@@ -144,9 +148,10 @@ public class ProductIntegrationTest {
                                 .header("Authorization", "Bearer " + adminToken)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(createReq)))
-                                .andExpect(status().isCreated())
+                                .andExpect(status().isOk())
                                 .andReturn();
-                Long prodId = objectMapper.readTree(createRes.getResponse().getContentAsString()).path("id").asLong();
+                Long prodId = objectMapper.readTree(createRes.getResponse().getContentAsString()).path("data")
+                                .path("id").asLong();
 
                 ProductRequest updateReq = new ProductRequest();
                 updateReq.setTitle("Güncel Antika Saat");
@@ -161,7 +166,7 @@ public class ProductIntegrationTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(updateReq)))
                                 .andExpect(status().isOk())
-                                .andExpect(jsonPath("$.title", is("Güncel Antika Saat")));
+                                .andExpect(jsonPath("$.data.title", is("Güncel Antika Saat")));
 
                 mockMvc.perform(delete("/v1/product/" + prodId)
                                 .header("Authorization", "Bearer " + adminToken))

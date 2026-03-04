@@ -12,6 +12,8 @@ import com.mehmetkerem.repository.SupportTicketRepository;
 import com.mehmetkerem.service.ISupportTicketService;
 import com.mehmetkerem.service.IUserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +22,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@SuppressWarnings("null")
+@Slf4j
 public class SupportTicketServiceImpl implements ISupportTicketService {
 
     private final SupportTicketRepository supportTicketRepository;
     private final IUserService userService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional
@@ -67,20 +70,51 @@ public class SupportTicketServiceImpl implements ISupportTicketService {
     }
 
     @Override
+    public org.springframework.data.domain.Page<SupportTicketResponse> getAllTicketsForAdmin(
+            com.mehmetkerem.enums.TicketStatus status, org.springframework.data.domain.Pageable pageable) {
+        org.springframework.data.domain.Page<SupportTicket> ticketPage;
+        if (status != null) {
+            ticketPage = supportTicketRepository.findByDeletedByAdminFalseAndStatus(status, pageable);
+        } else {
+            ticketPage = supportTicketRepository.findByDeletedByAdminFalse(pageable);
+        }
+        return ticketPage.map(this::toResponse);
+    }
+
+    @Override
+    @Transactional
+    public void deleteForAdmin(Long ticketId) {
+        SupportTicket ticket = getById(ticketId);
+        ticket.setDeletedByAdmin(true);
+        supportTicketRepository.save(ticket);
+    }
+
+    @Override
     @Transactional
     public SupportTicketResponse addReply(Long ticketId, TicketReplyRequest request) {
         SupportTicket ticket = getById(ticketId);
         ticket.setStatus(request.getStatus());
+
         if (request.getAdminReply() != null && !request.getAdminReply().isBlank()) {
-            ticket.setAdminReply(request.getAdminReply());
+            if (ticket.getAdminReplies() == null) {
+                ticket.setAdminReplies(new java.util.ArrayList<>());
+            }
+            ticket.getAdminReplies().add(request.getAdminReply());
         }
+
         ticket = supportTicketRepository.save(ticket);
+
+        // Bildirim transaction commit sonrası yapılacak (Kural 6: Transaction dışında
+        // dış servis çağrısı)
+        eventPublisher.publishEvent(new TicketReplyEvent(ticket.getUserId(), ticket.getSubject(), ticket.getId()));
+
         return toResponse(ticket);
     }
 
     private SupportTicket getById(Long id) {
         return supportTicketRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "destek talebi")));
+                .orElseThrow(
+                        () -> new NotFoundException(String.format(ExceptionMessages.NOT_FOUND, id, "destek talebi")));
     }
 
     private SupportTicketResponse toResponse(SupportTicket t) {
@@ -93,9 +127,15 @@ public class SupportTicketServiceImpl implements ISupportTicketService {
                 .subject(t.getSubject())
                 .message(t.getMessage())
                 .status(t.getStatus())
-                .adminReply(t.getAdminReply())
+                .adminReplies(t.getAdminReplies())
                 .createdAt(t.getCreatedAt())
                 .updatedAt(t.getUpdatedAt())
                 .build();
+    }
+
+    /**
+     * Transaction commit sonrası bildirim göndermek için kullanılan event record'u.
+     */
+    public record TicketReplyEvent(Long userId, String subject, Long ticketId) {
     }
 }

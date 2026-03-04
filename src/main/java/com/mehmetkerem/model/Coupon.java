@@ -33,4 +33,11 @@ public class Coupon {
     private BigDecimal minCartAmount;
 
     private boolean isActive;
+
+    // Maksimum kullanım sayısı (null veya 0 ise sınırsız)
+    private Integer usageLimit;
+
+    // Mevcut kullanım sayısı
+    @Builder.Default
+    private int usageCount = 0;
 }

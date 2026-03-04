@@ -67,8 +67,6 @@ class AuthServiceTest {
         request.setEmail("test@test.com");
         request.setName("Test User");
         request.setPassword("password");
-        request.setRole(Role.USER);
-
         when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
         when(encoder.encode(request.getPassword())).thenReturn("encodedPassword");
         when(jwtService.generateToken(any())).thenReturn("testToken");
@@ -87,8 +85,6 @@ class AuthServiceTest {
         request.setEmail("existing@test.com");
         request.setName("User");
         request.setPassword("password");
-        request.setRole(Role.USER);
-
         when(userRepository.existsByEmail("existing@test.com")).thenReturn(true);
 
         assertThrows(BadRequestException.class, () -> authService.register(request));

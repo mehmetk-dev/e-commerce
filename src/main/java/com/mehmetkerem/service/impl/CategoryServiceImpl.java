@@ -11,20 +11,18 @@ import com.mehmetkerem.repository.CategoryRepository;
 import com.mehmetkerem.service.ICategoryService;
 import com.mehmetkerem.util.Messages;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
-@SuppressWarnings("null")
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements ICategoryService {
 
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
-
-    public CategoryServiceImpl(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
-        this.categoryRepository = categoryRepository;
-        this.categoryMapper = categoryMapper;
-    }
 
     @Override
     public CategoryResponse saveCategory(CategoryRequest request) {
@@ -68,5 +66,11 @@ public class CategoryServiceImpl implements ICategoryService {
         return categories.stream()
                 .map(categoryMapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public Map<Long, CategoryResponse> getCategoryResponsesByIds(List<Long> ids) {
+        return categoryRepository.findAllById(ids).stream()
+                .collect(Collectors.toMap(Category::getId, categoryMapper::toResponse));
     }
 }

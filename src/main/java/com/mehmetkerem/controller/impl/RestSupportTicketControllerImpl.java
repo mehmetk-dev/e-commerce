@@ -5,6 +5,7 @@ import com.mehmetkerem.dto.request.SupportTicketRequest;
 import com.mehmetkerem.dto.request.TicketReplyRequest;
 import com.mehmetkerem.dto.response.SupportTicketResponse;
 import com.mehmetkerem.service.ISupportTicketService;
+import com.mehmetkerem.dto.response.CursorResponse;
 import com.mehmetkerem.util.ResultData;
 import com.mehmetkerem.util.ResultHelper;
 import com.mehmetkerem.util.SecurityUtils;
@@ -12,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,11 +58,29 @@ public class RestSupportTicketControllerImpl implements IRestSupportTicketContro
         return ResultHelper.success(supportTicketService.getAllTickets());
     }
 
+    @GetMapping("/all-paged")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResultData<CursorResponse<SupportTicketResponse>> getAllTicketsPaged(
+            @RequestParam(required = false) com.mehmetkerem.enums.TicketStatus status,
+            @org.springframework.web.bind.annotation.RequestParam(defaultValue = "0") int page,
+            @org.springframework.web.bind.annotation.RequestParam(defaultValue = "10") int size) {
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size,
+                Sort.by(Sort.Direction.DESC, "createdAt"));
+        return ResultHelper.cursor(supportTicketService.getAllTicketsForAdmin(status, pageable));
+    }
+
+    @DeleteMapping("/{ticketId}/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResultData<Void> deleteForAdmin(@PathVariable Long ticketId) {
+        supportTicketService.deleteForAdmin(ticketId);
+        return ResultHelper.success(null);
+    }
+
     @Override
     @PutMapping("/{ticketId}/reply")
     @PreAuthorize("hasRole('ADMIN')")
     public ResultData<SupportTicketResponse> addReply(@PathVariable Long ticketId,
-                                                      @Valid @RequestBody TicketReplyRequest request) {
+            @Valid @RequestBody TicketReplyRequest request) {
         return ResultHelper.success(supportTicketService.addReply(ticketId, request));
     }
 }

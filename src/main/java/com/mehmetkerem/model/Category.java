@@ -24,6 +24,9 @@ public class Category {
 
     private String name;
 
+    private String description;
+
     @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default false")
     private boolean deleted = false;
 }
